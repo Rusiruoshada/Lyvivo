@@ -4,7 +4,7 @@ import { Avatar, Badge, Button, Space } from 'antd';
 
 const ButtonGroup = Button.Group;
 
-const App: React.FC = () => {
+const CartBadge: React.FC = () => {
   const [count, setCount] = useState(0);
 
   const increase = () => {
@@ -35,4 +35,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default CartBadge;
