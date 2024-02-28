@@ -6,7 +6,6 @@ const ButtonGroup = Button.Group;
 
 const App: React.FC = () => {
   const [count, setCount] = useState(0);
-  const [show, setShow] = useState(true);
 
   const increase = () => {
     setCount(count + 1);
@@ -31,12 +30,6 @@ const App: React.FC = () => {
           <Button onClick={decline} icon={<MinusOutlined />} />
           <Button onClick={increase} icon={<PlusOutlined />} />
         </ButtonGroup>
-      </Space>
-      <Space size="large">
-        <Badge dot={show}>
-          <Avatar shape="square" size="large" />
-        </Badge>
-        <Switch onChange={onChange} checked={show} />
       </Space>
     </Space>
   );
