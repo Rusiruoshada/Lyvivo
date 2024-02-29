@@ -10,10 +10,10 @@ function BasicExample() {
   return (
     <Navbar
       expand='lg'
-      className='mx-0 sm:mx-2 md:mx-6 lg:mx-10'
+      className='mx-0 sm:mx-2 md:mx-3 lg:mx-10'
       style={{display:'flex', justifyContent:'end',backgroundColor:'#fff'}}
     >
-      <Container className='flex gap-2' style={{justifyContent:'end'}}>
+      <Container className='flex gap-2 ' style={{justifyContent:'end'}}>
         <Nav.Item className='flex items-center gap-1'>
           <MdLocalPhone />
           +94 XX XXX XXXX
@@ -35,7 +35,7 @@ function BasicExample() {
               >
                 Register
               </Button>{' '}
-              /<Button type='link'>Login</Button>
+              /<Button style={{color:'var(--primaryColor)'}} type='link'>Login</Button>
             </Nav.Item>
           </Nav>
         </Navbar.Collapse>
