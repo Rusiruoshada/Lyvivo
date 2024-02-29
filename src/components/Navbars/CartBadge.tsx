@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, {useState } from 'react';
 import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
-import { Avatar, Badge, Button, Space } from 'antd';
+import {Badge, Button, Space } from 'antd';
+import { BsCart3 } from 'react-icons/bs';
 
 const ButtonGroup = Button.Group;
 
 const CartBadge: React.FC = () => {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
 
   const increase = () => {
     setCount(count + 1);
@@ -23,13 +24,9 @@ const CartBadge: React.FC = () => {
   return (
     <Space direction="vertical">
       <Space size="large">
-        <Badge count={count}>
-          <Avatar shape="square" size="large" />
+        <Badge count={count} color='var(--primaryColor)'>
+            <BsCart3 className='text-[var(--primaryColor)] font-bold text-2xl' />
         </Badge>
-        <ButtonGroup>
-          <Button onClick={decline} icon={<MinusOutlined />} />
-          <Button onClick={increase} icon={<PlusOutlined />} />
-        </ButtonGroup>
       </Space>
     </Space>
   );
