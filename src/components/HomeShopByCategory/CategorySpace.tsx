@@ -1,28 +1,31 @@
 import React from 'react';
 import { Card } from 'antd';
-
-interface categoryListTypes {
-    
-}
+import categories from './exportCategoryObject.tsx';
+import CategoryCard from './CategoryCards.tsx';
 
 const gridStyle: React.CSSProperties = {
-  width: '25%',
+  width: '15%',
   textAlign: 'center',
 };
 
-const categoryList = ['All',{category:'Grocery',listItems:{}}]
-
 const CategorySpace: React.FC = () => (
-  <Card title="Card Title">
-    <Card.Grid style={gridStyle}>Content</Card.Grid>
-    <Card.Grid hoverable={false} style={gridStyle}>
-      Content
-    </Card.Grid>
-    <Card.Grid style={gridStyle}>Content</Card.Grid>
-    <Card.Grid style={gridStyle}>Content</Card.Grid>
-    <Card.Grid style={gridStyle}>Content</Card.Grid>
-    <Card.Grid style={gridStyle}>Content</Card.Grid>
-    <Card.Grid style={gridStyle}>Content</Card.Grid>
+  <Card
+    title={
+      <h3 className='mb-10 font-bold text-[var(--primaryColor)]'>
+        Shop by Category
+      </h3>
+    }
+    className='my-10 p-10 text-center border-none'
+  >
+    {categories.map((categoryItem) => (
+      <Card.Grid style={gridStyle} className='p-0 m-auto'>
+        <CategoryCard
+          categoryName={categoryItem.categoryName}
+          categoryImgPath={categoryItem.imgPath}
+          categorySubNames={categoryItem.subCategories}
+        />
+      </Card.Grid>
+    ))}
   </Card>
 );
 
