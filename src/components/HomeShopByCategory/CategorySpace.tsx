@@ -20,11 +20,9 @@ const CategorySpace: React.FC = () => (
     {categories.map((categoryItem) => (
       <Card.Grid style={gridStyle} className='p-0 m-auto'>
         <CategoryCard
-          categoryName={categoryItem.categoryName}
-          categoryImgPath={categoryItem.imgPath}
-          categorySubNames={categoryItem.subCategories}
+          category={categories}
         />
-      </Card.Grid>
+      </Card.Grid >
     ))}
   </Card>
 );
