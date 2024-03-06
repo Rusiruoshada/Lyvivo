@@ -1,22 +1,25 @@
-import React from 'react';
 import { Cascader } from 'antd';
+import React from 'react';
+import Dropdown from 'react-bootstrap/Dropdown';
+import {categories1} from '../HomeShopByCategory/exportCategoryObject.tsx'
 
 interface DropDownProps {
-    dropDown: {
-        categoryName: string;
-    subCategories: string[];
-    imgPath: string
-      };
-} 
-
-
+  categoryName: string;
+}
 
 const onChange = (value: string[]) => {
   console.log(value);
 };
 
-const DropDown: React.FC<DropDownProps> = ({dropDown}) => (
-  <Cascader defaultValue={['zhejiang']} options={dropDown}  />
-);
-
+const DropDown: React.FC<DropDownProps> = ({ categoryName }) => {
+  return (
+    <Cascader
+    options={categories1}
+    expandTrigger="hover"
+    style={{border:'none',width:'100%'}}
+  >
+    <p>{categoryName}</p>
+    </Cascader>
+  );
+};
 export default DropDown;
