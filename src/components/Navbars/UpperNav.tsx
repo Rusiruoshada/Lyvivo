@@ -6,7 +6,7 @@ import { Button } from 'antd';
 import { TbTruckDelivery } from 'react-icons/tb';
 import { MdLocalPhone } from 'react-icons/md';
 
-function BasicExample() {
+const BasicExample: React.FC  =()=> {
   return (
     <Navbar
       expand='lg'
