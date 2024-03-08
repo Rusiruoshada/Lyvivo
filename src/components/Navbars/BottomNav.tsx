@@ -4,68 +4,72 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import CartBadge from './CartBadge.tsx';
+import SearchBar from '../SearchBar/SearchBar.tsx';
+import DropDown from '../UI/DropDown.tsx';
 
-const BottomNav = () => {
-  const navLinks = {
+interface navLinks {
+  dropDown: string[];
+  navLinks: string[];
+}
+
+const BottomNav: React.FC = () => {
+  const navLinks: navLinks = {
     dropDown: ['All', 'Grocery', 'Pharmacy', 'Food', 'Electronic'],
     navLinks: ['Home', 'FAQ', 'About Us', 'Contact Us'],
   };
 
   return (
-    <Navbar
-      collapseOnSelect
-      expand='lg'
-      className='sticky top-0 z-10 bg-white shadow-md drop-shadow-sm'
-    >
-      <Container>
-        <Navbar.Brand
-          href='/'
-          style={{
-            fontWeight: '700',
-            color: 'var(--primaryColor)',
-            fontSize: '2rem',
-          }}
-        >
-          Lyvivo
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls='responsive-navbar-nav' />
-        <Navbar.Collapse
-          id='responsive-navbar-nav'
-          className='flex justify-end'
-        >
-          <Nav className='flex justify-end'>
-            <NavDropdown
-              title='Categories'
-              id='collapsible-nav-dropdown'
-              className='border rounded-md px-3'
+      <Navbar
+        collapseOnSelect
+        expand='lg'
+        className='sticky top-0 bottom-auto left-0 right-0 z-10 bg-white shadow-md drop-shadow-sm'
+        sticky='top'
+      >
+        <Container>
+          <Navbar.Brand
+            href='/'
+            style={{
+              fontWeight: '700',
+              color: 'var(--primaryColor)',
+              fontSize: '2rem',
+            }}
+          >
+            Lyvivo
+          </Navbar.Brand>
+          <div className='flex gap-3 relative'>
+            <Navbar.Toggle aria-controls='responsive-navbar-nav' />
+            <Navbar.Collapse
+              id='responsive-navbar-nav'
+              className=' flex justify-end absolute lg:relative top-[3rem] lg:top-0 right-3 lg:right-0 left-auto bg-white lg:bg-transparent shadow-md lg:shadow-none lg:p-0  '
+              style={{ padding: '1rem' }}
             >
-              {navLinks.dropDown.map((dropDownItem) => (
-                <NavDropdown.Item
-                  key={dropDownItem}
-                  onClick={() => alert({ dropDownItem })}
-                >
-                  {dropDownItem}
-                </NavDropdown.Item>
-              ))}
-            </NavDropdown>
+              <Nav className='flex justify-end '>
 
-            {navLinks.navLinks.map((link) =>(<Nav.Link
-              style={{}}
-              className='hover:font-medium hover:text-[var(--primary)] hover:border  text-gray-400  transition-all duration-500'
-              href={'/'+ link.toLowerCase()}
-            >
-              {link}
-            </Nav.Link>))}
-            
-          </Nav>
-        </Navbar.Collapse>
-        <Nav>
-          <Nav.Link href='#deets'>
-            <CartBadge />
-          </Nav.Link>
-        </Nav>
-      </Container>
-    </Navbar>
+                  <DropDown />
+                {navLinks.navLinks.map((link) => (
+                  <Nav.Link
+                    className='hover:font-medium hover:text-[var(--primaryColor)] hover:border  text-gray-400  transition-all duration-500'
+                    href={'/' + link.toLowerCase()}
+                    key={link}
+                  >
+                    {link}
+                  </Nav.Link>
+                ))}
+              </Nav>
+            </Navbar.Collapse>
+            <Nav>
+              <Nav.Link
+                href='#deets'
+                style={{ display: 'flex', alignItems: 'center' }}
+              >
+                <CartBadge />
+              </Nav.Link>
+            </Nav>
+          </div>
+        </Container>
+        <SearchBar />
+      </Navbar>
+
   );
 };
 
