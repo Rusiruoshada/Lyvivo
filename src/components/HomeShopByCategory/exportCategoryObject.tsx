@@ -1,88 +1,5 @@
-interface Category {
-    categoryName: string;
-    subCategories: string[];
-    imgPath: string
-  }
-
-const categories: Category[] = [
-    {categoryName:'All',subCategories: [],imgPath:'/images/category Images/cosmetics.png'},
-    {
-      categoryName: 'Grocery',
-      subCategories: [
-        'Fruits & Vegetables',
-        'Dairy Products',
-        'Meat & Poultry',
-        'Bakery & Bread',
-        'Canned Goods',
-        'Beverages',
-        'Snacks & Confectionery',
-        'Condiments & Sauces',
-        'Frozen Foods',
-        'Grains, Pasta & Rice',
-        'Breakfast Foods',
-        'Organic & Natural Products',
-        'International Foods'
-      ],
-      imgPath: '/images/category Images/shopping.png'
-
-    },
-    {
-      categoryName: 'Pharmacy',
-      subCategories: [
-        'Prescription Medications',
-        'Over-the-counter Medications',
-        'Vitamins & Supplements',
-        'First Aid Supplies',
-        'Personal Care Products',
-        'Baby Care Products',
-        'Feminine Hygiene Products',
-        'Health Monitoring Devices',
-        'Medical Equipment',
-        'Homeopathic Remedies'
-      ],
-      imgPath:'/images/category Images/stethoscope.png'
-    },
-    {
-      categoryName: 'Food',
-      subCategories: [
-        'Restaurants & Cafes',
-        'Fast Food',
-        'Fine Dining',
-        'Ethnic Cuisine',
-        'Desserts & Sweets',
-        'Beverages',
-        'Healthy & Organic Food Options',
-        'Meal Kits & Delivery Services',
-        'Specialty Foods'
-      ],
-      imgPath:'/images/category Images/pizza.png'
-    },
-    {
-      categoryName: 'Electronics',
-      subCategories: [
-        'Computers & Laptops',
-        'Smartphones & Tablets',
-        'Televisions & Home Entertainment Systems',
-        'Cameras & Photography Equipment',
-        'Audio Equipment',
-        'Gaming Consoles & Accessories',
-        'Home Appliances',
-        'Kitchen Appliances',
-        'Wearable Technology',
-        'Accessories'
-      ],
-      imgPath:'/images/category Images/keyboard.png'
-    }
-  ];
 
 
-  export default categories;
-
-
-  //--------------------------------------------------
-
-
- 
   interface Category1 {
     value: string;
     label: string;
@@ -296,4 +213,4 @@ const categories1: Category1[] = [
   
 
 
-  export  {categories1};
+  export  default categories1;
