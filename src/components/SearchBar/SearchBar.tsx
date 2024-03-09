@@ -20,9 +20,7 @@ const SearchBar: React.FC = () => (
       size='large'
       onSearch={onSearch}
       style={{
-        width: '60%',
         position: 'absolute',
-        top: '80px',
         bottom: 'auto',
         right: '0px',
         left: '0px',
@@ -32,7 +30,7 @@ const SearchBar: React.FC = () => (
         borderRadius: '8px',
         color: '#ffffff',
       }}
-      
+      className='w-[95%] sm:w-[95%] md:w-[80%] lg:w-[65%] top-[70px] sm:top-[70px] md:top-[65px] lg:top-[65px]'
     />
   </Space>
 );
