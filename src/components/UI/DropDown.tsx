@@ -18,6 +18,7 @@ const DropDown: React.FC = () => {
         width: 'auto',
         cursor: 'pointer',
         height: 'auto',
+        zIndex:20,
       }}
       onChange={onChange}
       placeholder={<div className='text-gray-600'>Categories</div>}
