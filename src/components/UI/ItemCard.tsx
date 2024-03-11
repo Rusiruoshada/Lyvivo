@@ -8,7 +8,8 @@ const { Meta } = Card;
 const ItemCard: React.FC = () => (
   <Card
     style={{ width: 300 }}
-    cover={<img className='aspect-square ' alt='example' src='./images/Pic923056.jpg' />}
+    cover={<img className='aspect-square' alt='example' src='./images/Pic923056.jpg' />}
+    className='scale-75 hover:shadow-md tran'
     actions={[
       <Button
         style={{
@@ -17,7 +18,8 @@ const ItemCard: React.FC = () => (
           borderColor: 'var(--primaryColor)',
           
         }}
-        className='hover:bg-[var(--primaryColor)] hover:color-white '
+        className='bg-[var(--primaryColor)] text-white text-2xl flex items-center justify-center'
+        size='large'
         icon=<BsCart2 />
       >
         Add to Cart
