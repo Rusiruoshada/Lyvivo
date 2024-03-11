@@ -8,7 +8,7 @@ const { Meta } = Card;
 const ItemCard: React.FC = () => (
   <Card
     style={{ width: 300 }}
-    cover={<img alt='example' src='./images/Pic923056.jpg' />}
+    cover={<img className='aspect-square ' alt='example' src='./images/Pic923056.jpg' />}
     actions={[
       <Button
         style={{
@@ -24,7 +24,8 @@ const ItemCard: React.FC = () => (
       </Button>,
     ]}
   >
-    <Badge status='success' className='border-2 px-2 rounded aspect-square' />
+    <Badge status='success' className='border-2 px-2 rounded aspect-square mb-2' size='default' />
+
     <Meta title='Card title' description='This is the description' />
   </Card>
 );
