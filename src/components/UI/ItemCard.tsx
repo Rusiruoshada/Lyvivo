@@ -1,6 +1,8 @@
 import React from 'react';
-import { Button, Card } from 'antd';
+import { Button, Card,Badge } from 'antd';
 import { BsCart2 } from 'react-icons/bs';
+
+
 const { Meta } = Card;
 
 const ItemCard: React.FC = () => (
@@ -22,6 +24,7 @@ const ItemCard: React.FC = () => (
       </Button>,
     ]}
   >
+    <Badge status='success' className='border-2 px-2 rounded aspect-square' />
     <Meta title='Card title' description='This is the description' />
   </Card>
 );
