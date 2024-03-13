@@ -1,13 +1,13 @@
 
 
-  interface Category1 {
+  interface Category {
     value: string;
     label: string;
     children: {value: string; label: string;}[];
     imgPath: string
   }
 
-const categories1: Category1[] = [
+const categories: Category[] = [
   {
     value: 'All',
     label: 'All',
@@ -213,4 +213,4 @@ const categories1: Category1[] = [
   
 
 
-  export  default categories1;
+  export  default categories;
