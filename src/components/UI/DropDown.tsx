@@ -1,21 +1,23 @@
 import { Cascader } from 'antd';
 import React from 'react';
 
-
 interface CategoryProps {
-  value: string;
-  label: string;
-  children?: {value: string; label: string;}[];
-  imgPath: string;
+  categories: {
+    value: string;
+    label: string;
+    children?: { value: string; label: string }[];
+    imgPath: string;
+  }[];
+  displayRender?: (labels: string[]) => React.ReactNode;
+  placeholderName: string;
+  className?:string;
 }
 
 const onChange: any = (value: string[]) => {
   console.log(value);
 };
 
-const displayRender = (labels: string[]) => labels[labels.length - 1];
-
-const DropDown: React.FC<CategoryProps> = ({categories}) => {
+const DropDown: React.FC<CategoryProps> = ({ categories, displayRender,placeholderName,className }) => {
   return (
     <Cascader
       options={categories}
@@ -28,8 +30,9 @@ const DropDown: React.FC<CategoryProps> = ({categories}) => {
         zIndex: 20,
       }}
       onChange={onChange}
-      placeholder={<div className='text-gray-600'>Categories</div>}
+      placeholder={<div className='text-gray-600'>{placeholderName}</div>}
       displayRender={displayRender}
+      className={className}
     ></Cascader>
   );
 };
