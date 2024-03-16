@@ -3,7 +3,6 @@ import UpperNav from './Navbars/UpperNav.tsx'
 import BottomNav from './Navbars/BottomNav.tsx';
 import ImageSlider from './Carousel/Carousel.tsx';
 import CategorySpace from './HomeShopByCategory/CategorySpace.tsx'
-
 const ClientApp: React.FC  = () => {
 
   return (
@@ -12,6 +11,7 @@ const ClientApp: React.FC  = () => {
         <BottomNav />
         <ImageSlider />
         <CategorySpace />
+        
     </>
   )
 }
