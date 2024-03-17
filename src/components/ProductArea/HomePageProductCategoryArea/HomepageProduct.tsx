@@ -1,19 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ItemCard from '../../UI/ItemCard.tsx';
 import { Button } from 'antd';
 
 const HomepageProduct = () => {
-  return (
-    <div className='product-carousel relative overflow-hidden p-6'>
-      <Button className='pre-btn rounded absolute flex top-60 bttom-auto justify-center items-center border-0 '>
-        &lt;
-      </Button>
-      <Button className='next-btn rounded absolute right-0 flex top-60 bttom-auto justify-center items-center border-0'>
-        &gt;
-      </Button>
+  const [current, setCurrent] = useState(0);
 
-      <div className='product-container px-2.5 flex scroll-smooth overflow-hidden'>
-        <ItemCard />
+  const count = 2;
+
+  const onPrev = () => {
+    setCurrent((current) => (current === 0 ? count - 1 : current - 1));
+  };
+  const onNext = () => {
+    setCurrent((current) => (current === count - 1 ? 0 : current + 1));
+  };
+
+  return (
+    <div className='product-carousel overflow-hidden relative  p-6'>
+
+        <Button className='pre-btn rounded border-1 absolute  flex top-60  justify-center items-center z-20' onClick={onPrev}>
+          &lt;
+        </Button>
+
+        <Button className='next-btn rounded  border-1 absolute  flex top-60  justify-center items-center z-20 right-0' onClick={onNext}>
+          &gt;
+        </Button>
+
+
+      <div
+        className='product-container grid grid-flow-col scroll-smooth transition-transform ease-out duration-500'
+        style={{ transform: `translateX(-${current * 100}%)` }}
+      >
         <ItemCard />
         <ItemCard />
         <ItemCard />
