@@ -5,7 +5,7 @@ import { Button } from 'antd';
 const HomepageProduct = () => {
   const [current, setCurrent] = useState(0);
 
-  const count = 2;
+  const count = 8;
 
   const onPrev = () => {
     setCurrent((current) => (current === 0 ? count - 1 : current - 1));
@@ -27,8 +27,8 @@ const HomepageProduct = () => {
 
 
       <div
-        className='product-container grid grid-flow-col scroll-smooth transition-transform ease-out duration-500'
-        style={{ transform: `translateX(-${current * 100}%)` }}
+        className='product-container grid grid-flow-col scroll-smooth transition-transform ease-out duration-500 justify-between'
+        style={{ transform: `translateX(-${current * 20}%)` }}
       >
         <ItemCard />
         <ItemCard />
