@@ -11,12 +11,13 @@ const ItemCard: React.FC = () => {
   const cardDescription: string = '(Inclusive of all taxes)';
   const cardPrice: string = parseFloat('32.00').toFixed(2);
   const badgeRibbonText: string = 'In Stock';
+  const badgeColor = 'var(--secondaryColor)'
 
   return (
     <Card
       style={{ width: 300 }}
       cover={
-        <Badge.Ribbon text={badgeRibbonText} color='green'>
+        <Badge.Ribbon text={badgeRibbonText} color={badgeColor}>
           <img
             className='aspect-square '
             alt='example'
