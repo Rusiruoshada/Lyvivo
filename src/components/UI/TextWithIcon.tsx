@@ -1,4 +1,4 @@
-import { Avatar, Card, Divider, Space } from 'antd';
+import { Avatar, Card, Space } from 'antd';
 import React from 'react';
 import { MdOutlineLocalOffer } from 'react-icons/md';
 import { TbTruckDelivery } from 'react-icons/tb';
