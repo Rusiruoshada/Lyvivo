@@ -43,7 +43,7 @@ const TextWithIcon = () => {
     <Space
       direction='horizontal'
       align='start'
-      className='grid justify-center grid-cols-1 sm:grid-cols-1  md:grid-cols-2 lg:grid-cols-4 sm:my-1 lg:my-4 sm:mx-0 md:mx-6 lg:mx-6'
+      className='grid justify-center sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 sm:my-1 lg:my-4 sm:mx-0 md:mx-6 lg:mx-6 '
     >
       {details.map((detailItem) => (
         <Card
