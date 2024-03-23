@@ -2,6 +2,9 @@ import React from 'react';
 import ItemCard from '../../UI/ItemCard.tsx';
 import { useDragScroll } from '../../../hooks/useDragScroll.ts';
 
+interface HomepageProductProps {
+  
+}
 
 const HomepageProduct = () => {
 
