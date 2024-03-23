@@ -4,6 +4,15 @@ import { BsCart2 } from 'react-icons/bs';
 import DropDown from './DropDown.tsx';
 import categories from '../HomeShopByCategory/exportCategoryObject.tsx';
 
+interface ItemCardProps {
+  cardTitle: string;
+  cardDescription: string
+  cardPrice: string
+  badgeRibbonText?: string
+  badgeColor?:string
+  saving?:string 
+}
+
 const { Meta } = Card;
 
 const ItemCard: React.FC = () => {
@@ -13,7 +22,7 @@ const ItemCard: React.FC = () => {
   const badgeRibbonText: string = 'In Stock';
   const badgeColor:string = 'var(--secondaryColor)'
   const saving:string = 'Save Rs.120.00';
-  
+
   return (
     <Card
       style={{ width: 300 }}
