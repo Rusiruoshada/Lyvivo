@@ -34,6 +34,42 @@ const HomepageProduct: React.FC<HomepageProductProps> = ({ productTitle }) => {
           saving={saving}
           categories={categories}
         />
+        <ItemCard
+          cardTitle={cardTitle}
+          cardDescription={cardDescription}
+          cardPrice={cardPrice}
+          badgeRibbonText={badgeRibbonText}
+          badgeColor={badgeColor}
+          saving={saving}
+          categories={categories}
+        />
+        <ItemCard
+          cardTitle={cardTitle}
+          cardDescription={cardDescription}
+          cardPrice={cardPrice}
+          badgeRibbonText={badgeRibbonText}
+          badgeColor={badgeColor}
+          saving={saving}
+          categories={categories}
+        />
+        <ItemCard
+          cardTitle={cardTitle}
+          cardDescription={cardDescription}
+          cardPrice={cardPrice}
+          badgeRibbonText={badgeRibbonText}
+          badgeColor={badgeColor}
+          saving={saving}
+          categories={categories}
+        />
+        <ItemCard
+          cardTitle={cardTitle}
+          cardDescription={cardDescription}
+          cardPrice={cardPrice}
+          badgeRibbonText={badgeRibbonText}
+          badgeColor={badgeColor}
+          saving={saving}
+          categories={categories}
+        />
 
       </div>
     </div>
