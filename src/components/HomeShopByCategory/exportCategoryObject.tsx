@@ -4,7 +4,7 @@
     value: string;
     label: string;
     children: {value: string; label: string;}[];
-    imgPath: string
+    imgPath: string;
   }
 
 const categories: Category[] = [
