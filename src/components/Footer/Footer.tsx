@@ -1,23 +1,15 @@
 import React from 'react';
-import {
-  FaInstagram,
-  FaDribbble,
-  FaXTwitter,
-  FaYoutube,
-} from 'react-icons/fa6';
+import UpperFooter from './UpperFooter.tsx';
+import MiddleFooter from './MiddleFooter.tsx';
+import BottomFooter from './BottomFooter.tsx';
 
 const Footer: React.FC = () => {
-  const socialLinks = [
-    { label: 'YouTube', icon: FaYoutube },
-    { label: 'Instagram', icon: FaInstagram },
-    { label: 'Twitter', icon: FaXTwitter },
-    { label: 'Dribbble', icon: FaDribbble },
-  ];
-
 
   return (
-    <div className=''>
-
+    <div className='sm:py-5 md:py-10 lg:py-10  sm:px-1 md:px-10 lg:px-10 bg-[--footerBgColor] text-white flex flex-col '>
+        <UpperFooter />
+        <MiddleFooter />
+        <BottomFooter />
     </div>
   );
 };
