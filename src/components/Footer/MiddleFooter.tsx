@@ -2,8 +2,10 @@ import React from 'react'
 
 const MiddleFooter = () => {
   return (
-    <div>MiddleFooter</div>
+    <div className=''>
+
+    </div>
   )
 }
 
-export default MiddleFooter
+export default MiddleFooter;
