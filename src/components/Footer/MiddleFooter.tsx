@@ -8,36 +8,36 @@ const links = [
     key: '1',
     label: 'Quick Links',
     children: [
-      <Text>Home</Text>,
-      <Text>Catalogue & Deals</Text>,
-      <Text>Track my order</Text>,
+      <Text className='text-white hover:text-[var(--accentColor)] ' >Home</Text>,
+      <Text className='text-white hover:text-[var(--accentColor)] ' >Catalogue & Deals</Text>,
+      <Text className='text-white hover:text-[var(--accentColor)] ' >Track my order</Text>,
     ],
   },
   {
     key: '2',
     label: 'Categories',
     children: [
-      <Text>Grocery</Text>,
-      <Text>Pharmacy</Text>,
-      <Text>Food</Text>,
-      <Text>Electronics</Text>,
+      <Text className='text-white hover:text-[var(--accentColor)] ' >Grocery</Text>,
+      <Text className='text-white hover:text-[var(--accentColor)] ' >Pharmacy</Text>,
+      <Text className='text-white hover:text-[var(--accentColor)] ' >Food</Text>,
+      <Text className='text-white hover:text-[var(--accentColor)] ' >Electronics</Text>,
     ],
   },
   {
     key: '3',
     label: 'Quick Links',
     children: [
-      <Text>Privacy Policy</Text>,
-      <Text>FAQ</Text>,
-      <Text>Terms and Conditions</Text>,
+      <Text className='text-white hover:text-[var(--accentColor)] ' >Privacy Policy</Text>,
+      <Text className='text-white hover:text-[var(--accentColor)] ' >FAQ</Text>,
+      <Text className='text-white hover:text-[var(--accentColor)] ' >Terms and Conditions</Text>,
     ],
   },
   {
     key: '4',
     label: 'Customer Service',
     children: [
-      <Text>Contact us</Text>,
-      <Text>About us</Text>,
+      <Text className='text-white hover:text-[var(--accentColor)] ' >Contact us</Text>,
+      <Text className='text-white hover:text-[var(--accentColor)] ' >About us</Text>,
     ],
   },
 ];
