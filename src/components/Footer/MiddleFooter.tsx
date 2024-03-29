@@ -7,7 +7,9 @@ const links = [
   { 
     key: '1', 
     label: 'Quick Links', 
-    children: [<Text>Home</Text>, <Text>Catalogue & Deals</Text>, <Text></Text>] 
+    children: [<Text>Home</Text>, 
+      <Text>Catalogue & Deals</Text>, 
+      <Text>Track my order</Text>] 
   },
 ];
 
