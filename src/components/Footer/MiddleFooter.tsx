@@ -4,12 +4,41 @@ import { FaPhone } from 'react-icons/fa';
 
 const { Text, Title } = Typography;
 const links = [
-  { 
-    key: '1', 
-    label: 'Quick Links', 
-    children: [<Text>Home</Text>, 
-      <Text>Catalogue & Deals</Text>, 
-      <Text>Track my order</Text>] 
+  {
+    key: '1',
+    label: 'Quick Links',
+    children: [
+      <Text>Home</Text>,
+      <Text>Catalogue & Deals</Text>,
+      <Text>Track my order</Text>,
+    ],
+  },
+  {
+    key: '2',
+    label: 'Categories',
+    children: [
+      <Text>Grocery</Text>,
+      <Text>Pharmacy</Text>,
+      <Text>Food</Text>,
+      <Text>Electronics</Text>,
+    ],
+  },
+  {
+    key: '3',
+    label: 'Quick Links',
+    children: [
+      <Text>Privacy Policy</Text>,
+      <Text>FAQ</Text>,
+      <Text>Terms and Conditions</Text>,
+    ],
+  },
+  {
+    key: '4',
+    label: 'Customer Service',
+    children: [
+      <Text>Contact us</Text>,
+      <Text>About us</Text>,
+    ],
   },
 ];
 
@@ -32,40 +61,13 @@ const MiddleFooter = () => {
       </div>
       <div className='col-span-2'>
         <div className='grid grid-cols-4'>
-          <div className='flex flex-col'>
-            <Title level={5}>Quick Links</Title>
+          {links.map(link =>(<div className='flex flex-col' key={link.key}>
+            <Title level={5} className='text-white'>{link.label}</Title>
             <div className='flex flex-col'>
-              <p></p>
-              <p></p>
-              <p></p>
-              <p></p>
+              {link.children}
             </div>
-          </div>
-          <div className='flex flex-col'>
-            <Title level={5}>Categories</Title>
-            <div className='flex flex-col'>
-              <p></p>
-              <p></p>
-              <p></p>
-              <p></p>
-            </div>
-          </div>
-          <div className='flex flex-col'>
-            <Title level={5}>Useful Links</Title>
-            <div className='flex flex-col'>
-              <p></p>
-              <p></p>
-              <p></p>
-              <p></p>
-            </div>
-          </div>
-          <div className='flex flex-col'>
-            <Title level={5}>Customer Service</Title>
-            <div className='flex flex-col'>
-              <p></p>
-              <p></p>
-            </div>
-          </div>
+          </div>))}
+          
         </div>
       </div>
     </div>
