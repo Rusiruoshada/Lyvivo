@@ -8,7 +8,7 @@ const links = [
     key: '1',
     label: 'Quick Links',
     children: [
-      <Text className='text-white hover:text-[var(--accentColor)] hover:translate-x-1 ease-in-out duration-500hover:translate-x-1 ease-in-out duration-500 ' >Home</Text>,
+      <Text className='text-white hover:text-[var(--accentColor)] hover:translate-x-1 ease-in-out duration-500hover:translate-x-1 ease-in-out duration-500 '>Home</Text>,
       <Text className='text-white hover:text-[var(--accentColor)] hover:translate-x-1 ease-in-out duration-500' >Catalogue & Deals</Text>,
       <Text className='text-white hover:text-[var(--accentColor)] hover:translate-x-1 ease-in-out duration-500' >Track my order</Text>,
     ],
