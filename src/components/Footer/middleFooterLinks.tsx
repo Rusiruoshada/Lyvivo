@@ -31,7 +31,7 @@ const links:MiddleFooterLinks[] = [
     },
     {
       key: '3',
-      label: 'Quick Links',
+      label: 'Useful Links',
       children: [
         <Text className='text-white hover:text-[var(--accentColor)] hover:translate-x-1 ease-in-out duration-500' >Privacy Policy</Text>,
         <Text className='text-white hover:text-[var(--accentColor)] hover:translate-x-1 ease-in-out duration-500' >FAQ</Text>,
