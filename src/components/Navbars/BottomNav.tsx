@@ -5,11 +5,14 @@ import Navbar from 'react-bootstrap/Navbar';
 import CartBadge from './CartBadge.tsx';
 import SearchBar from '../SearchBar/SearchBar.tsx';
 import DropDown from '../UI/DropDown.tsx';
+import categories from '../HomeShopByCategory/exportCategoryObject.tsx';
 
 interface navLinks {
   dropDown: string[];
   navLinks: string[];
 }
+
+const displayRender = (labels: string[]) => labels[labels.length - 1];
 
 const BottomNav: React.FC = () => {
   const navLinks: navLinks = {
@@ -43,7 +46,7 @@ const BottomNav: React.FC = () => {
             style={{ padding: '0.5rem', zIndex: 10 }}
           >
             <Nav className='flex justify-end '>
-              <DropDown />
+              <DropDown categories={categories} displayRender={displayRender} placeholderName='Categories' />
               {navLinks.navLinks.map((link) => (
                 <Nav.Link
                   className='hover:font-medium hover:text-[var(--primaryColor)] hover:border  text-gray-400  transition-all duration-500'
