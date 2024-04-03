@@ -19,7 +19,7 @@ const HomepageProduct: React.FC<HomepageProductProps> = ({ productTitle }) => {
   const [ref] = useDragScroll();
 
   return (
-    <div className='product-carousel overflow-hidden relative  p-6'>
+    <div className='product-carousel overflow-hidden relative  py-6 px-10 '>
       <h4>{productTitle}</h4>
       <div
         className='product-container grid grid-flow-col scroll-smooth transition-transform ease-out duration-500 justify-between overflow-x-scroll '
