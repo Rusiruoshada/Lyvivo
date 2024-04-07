@@ -10,14 +10,20 @@ interface CategoryProps {
   }[];
   displayRender?: (labels: string[]) => React.ReactNode;
   placeholderName: string;
-  className?:string;
+  className?: string;
 }
 
 const onChange: any = (value: string[]) => {
   console.log(value);
+  alert(value)
 };
 
-const DropDown: React.FC<CategoryProps> = ({ categories, displayRender,placeholderName,className }) => {
+const DropDown: React.FC<CategoryProps> = ({
+  categories,
+  displayRender,
+  placeholderName,
+  className,
+}) => {
   return (
     <Cascader
       options={categories}
