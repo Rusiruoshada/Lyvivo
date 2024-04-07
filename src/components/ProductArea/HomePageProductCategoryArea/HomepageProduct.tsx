@@ -3,7 +3,6 @@ import ItemCard from '../../UI/ItemCard.tsx';
 import { useDragScroll } from '../../../hooks/useDragScroll.ts';
 import categories from '../../HomeShopByCategory/exportCategoryObject.tsx';
 
-
 interface HomepageProductProps {
   productTitle: string;
 }
@@ -14,6 +13,7 @@ const cardPrice: string = parseFloat('32.00').toFixed(2);
 const badgeRibbonText: string = 'In Stock';
 const badgeColor: string = 'var(--secondaryColor)';
 const saving: string = 'Save Rs.120.00';
+
 
 const HomepageProduct: React.FC<HomepageProductProps> = ({ productTitle }) => {
   const [ref] = useDragScroll();
