@@ -30,6 +30,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
   categories
 }) => {
   return (
+
     <Card
       style={{ width: 300 }}
       cover={
@@ -48,7 +49,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
           </Badge.Ribbon>
         </Badge.Ribbon>
       }
-      className='scale-75 hover:shadow-lg hover:scale-[0.76] border-2'
+      className='scale-75 hover:shadow-lg hover:scale-[0.76] border-2 '
       actions={[
         <Button
           style={{
