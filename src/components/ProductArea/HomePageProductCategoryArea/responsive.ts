@@ -1,5 +1,19 @@
 interface ResponsiveTypes {
-  
+  desktop:{
+    breakpoint: {max:number, min:number}
+    items: number,
+    slidesToSlide: number
+  },
+  tablet:{
+    breakpoint: {max:number, min:number}
+    items: number,
+    slidesToSlide: number
+  },
+  mobile:{
+    breakpoint: {max:number, min:number}
+    items: number,
+    slidesToSlide: number
+  },
 }
 
 const responsive = {
