@@ -1,9 +1,9 @@
 import React from 'react';
 import ItemCard from '../../UI/ItemCard.tsx';
-import { useDragScroll } from '../../../hooks/useDragScroll.ts';
 import categories from '../../HomeShopByCategory/exportCategoryObject.tsx';
 import Carousel from 'react-multi-carousel';
 import responsive from './responsive.ts';
+import "react-multi-carousel/lib/styles.css";
 
 interface HomepageProductProps {
   productTitle: string;
@@ -18,7 +18,6 @@ const saving: string = 'Save Rs.120.00';
 
 
 const HomepageProduct: React.FC<HomepageProductProps> = ({ productTitle }) => {
-  const [ref] = useDragScroll();
 
   return (
     // <div className='product-carousel overflow-hidden relative  py-6 '>
@@ -75,28 +74,33 @@ const HomepageProduct: React.FC<HomepageProductProps> = ({ productTitle }) => {
 
     //   </div>
     // </div>
+
     <div className="parent">
+      <h4 className='px-10'>{productTitle}</h4>
       <Carousel
         responsive={responsive}
-        autoPlay={true}
+        autoPlay={false}
         swipeable={true}
         draggable={true}
-        showDots={true}
+        showDots={false}
         infinite={true}
-        partialVisible={false}
-        dotListClass="custom-dot-list-style"
+        partialVisible={true}containerClass="carousel-container"
+        itemClass="carousel-item-padding-40-px "
+        className=''
+
       >
         {[1,2,3,4,5].map((imageUrl, index) => (
-            <ItemCard 
-              cardTitle={cardTitle}
-              cardDescription={cardDescription}
-              cardPrice={cardPrice}
-              badgeRibbonText={badgeRibbonText}
-              key={index} 
-              categories={categories} 
-            />
-          )
-        )}
+          <ItemCard
+            cardTitle={cardTitle}
+            cardDescription={cardDescription}
+            cardPrice={cardPrice}
+            badgeRibbonText={badgeRibbonText}
+            badgeColor={badgeColor}
+            saving={saving}
+            categories={categories}
+        />
+        ))}
+            
       </Carousel>
     </div>
   );
