@@ -84,10 +84,10 @@ const HomepageProduct: React.FC<HomepageProductProps> = ({ productTitle }) => {
         draggable={true}
         showDots={false}
         infinite={true}
-        partialVisible={true}containerClass="carousel-container"
+        partialVisible={false}
+        centerMode={false}
+        containerClass="carousel-container"
         itemClass="carousel-item-padding-40-px "
-        className=''
-
       >
         {[1,2,3,4,5].map((imageUrl, index) => (
           <ItemCard
@@ -98,7 +98,7 @@ const HomepageProduct: React.FC<HomepageProductProps> = ({ productTitle }) => {
             badgeColor={badgeColor}
             saving={saving}
             categories={categories}
-        />
+          />
         ))}
             
       </Carousel>
