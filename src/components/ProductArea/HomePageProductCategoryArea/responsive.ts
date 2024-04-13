@@ -3,23 +3,29 @@ interface ResponsiveTypes {
     breakpoint: {max:number, min:number},
     items: number,
     slidesToSlide: number,
-    
+    partialVisibilityGutter?: number,
+  },
+  laptop:{
+    breakpoint: {max:number, min:number},
+    items: number,
+    slidesToSlide: number,
+    partialVisibilityGutter?: number,
   },
   tablet:{
     breakpoint: {max:number, min:number},
     items: number,
     slidesToSlide: number,
-    
+    partialVisibilityGutter?: number,
   },
   mobile:{
     breakpoint: {max:number, min:number},
     items: number,
     slidesToSlide: number,
-    
+    partialVisibilityGutter?: number,
   },
 }
 
-const responsive = {
+const responsive:ResponsiveTypes = {
   desktop: {
     breakpoint: { max: 3000, min: 1025 },
     items: 4,
