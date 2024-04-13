@@ -84,10 +84,7 @@ const HomepageProduct: React.FC<HomepageProductProps> = ({ productTitle }) => {
         draggable={true}
         showDots={false}
         infinite={true}
-        partialVisible={false}
-        centerMode={false}
-        containerClass="carousel-container"
-        itemClass="carousel-item-padding-40-px "
+        partialVisible={true}      
       >
         {[1,2,3,4,5].map((imageUrl, index) => (
           <ItemCard
