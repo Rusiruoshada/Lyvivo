@@ -1,17 +1,19 @@
 import React from 'react'
-import UpperNav from './Navbars/UpperNav.tsx'
-import BottomNav from './Navbars/BottomNav.tsx';
+
 import ImageSlider from './Carousel/Carousel.tsx';
 import CategorySpace from './HomeShopByCategory/CategorySpace.tsx'
+import TextWithIcon from './UI/TextWithIcon.tsx';
+import ProductSpace from './ProductArea/ProductSpace.tsx';
+
 const ClientApp: React.FC  = () => {
 
   return (
     <>
-        <UpperNav /> 
-        <BottomNav />
+
         <ImageSlider />
+        <TextWithIcon />
         <CategorySpace />
-        
+        <ProductSpace />
     </>
   )
 }
