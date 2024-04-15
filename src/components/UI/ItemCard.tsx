@@ -49,7 +49,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
           </Badge.Ribbon>
         </Badge.Ribbon>
       }
-      className='scale-75 hover:shadow-lg hover:scale-[0.76] border-2 '
+      className='scale-[0.80] hover:shadow-lg hover:pscale-[0.81] border-2'
       actions={[
         <Button
           style={{
