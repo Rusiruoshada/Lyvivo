@@ -1,26 +1,8 @@
 interface ResponsiveTypes {
-  desktop:{
+  [key: string]:{
     breakpoint: {max:number, min:number},
     items: number,
-    slidesToSlide: number,
-    partialVisibilityGutter?: number,
-  },
-  laptop:{
-    breakpoint: {max:number, min:number},
-    items: number,
-    slidesToSlide: number,
-    partialVisibilityGutter?: number,
-  },
-  tablet:{
-    breakpoint: {max:number, min:number},
-    items: number,
-    slidesToSlide: number,
-    partialVisibilityGutter?: number,
-  },
-  mobile:{
-    breakpoint: {max:number, min:number},
-    items: number,
-    slidesToSlide: number,
+    slidesToSlide?: number,
     partialVisibilityGutter?: number,
   },
 }
@@ -45,7 +27,7 @@ const responsive:ResponsiveTypes = {
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
-    items: 2,
+    items: 1,
     slidesToSlide: 1, // optional, default to 1.
     partialVisibilityGutter: -100,
     
