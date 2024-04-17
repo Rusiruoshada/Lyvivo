@@ -20,60 +20,6 @@ const saving: string = 'Save Rs.120.00';
 const HomepageProduct: React.FC<HomepageProductProps> = ({ productTitle }) => {
 
   return (
-    // <div className='product-carousel overflow-hidden relative  py-6 '>
-    //   <h4>{productTitle}</h4>
-    //   <div
-    //     className='product-container grid grid-flow-col scroll-smooth transition-transform ease-out duration-500 justify-between overflow-x-scroll '
-    //     ref={ref}
-    //   >
-    //     <ItemCard
-    //       cardTitle={cardTitle}
-    //       cardDescription={cardDescription}
-    //       cardPrice={cardPrice}
-    //       badgeRibbonText={badgeRibbonText}
-    //       badgeColor={badgeColor}
-    //       saving={saving}
-    //       categories={categories}
-    //     />
-    //     <ItemCard
-    //       cardTitle={cardTitle}
-    //       cardDescription={cardDescription}
-    //       cardPrice={cardPrice}
-    //       badgeRibbonText={badgeRibbonText}
-    //       badgeColor={badgeColor}
-    //       saving={saving}
-    //       categories={categories}
-    //     />
-    //     <ItemCard
-    //       cardTitle={cardTitle}
-    //       cardDescription={cardDescription}
-    //       cardPrice={cardPrice}
-    //       badgeRibbonText={badgeRibbonText}
-    //       badgeColor={badgeColor}
-    //       saving={saving}
-    //       categories={categories}
-    //     />
-    //     <ItemCard
-    //       cardTitle={cardTitle}
-    //       cardDescription={cardDescription}
-    //       cardPrice={cardPrice}
-    //       badgeRibbonText={badgeRibbonText}
-    //       badgeColor={badgeColor}
-    //       saving={saving}
-    //       categories={categories}
-    //     />
-    //     <ItemCard
-    //       cardTitle={cardTitle}
-    //       cardDescription={cardDescription}
-    //       cardPrice={cardPrice}
-    //       badgeRibbonText={badgeRibbonText}
-    //       badgeColor={badgeColor}
-    //       saving={saving}
-    //       categories={categories}
-    //     />
-
-    //   </div>
-    // </div>
 
     <div className="parent">
       <h4 className='px-10'>{productTitle}</h4>
@@ -84,7 +30,8 @@ const HomepageProduct: React.FC<HomepageProductProps> = ({ productTitle }) => {
         draggable={true}
         showDots={false}
         infinite={true}
-        partialVisible={true}      
+        partialVisible={true}
+        itemClass=''      
       >
         {[1,2,3,4,5].map((imageUrl, index) => (
           <ItemCard
