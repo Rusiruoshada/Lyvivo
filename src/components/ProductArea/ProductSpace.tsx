@@ -1,12 +1,16 @@
 import React from 'react';
-import HomepageProduct from './HomePageProductCategoryArea/HomepageProduct.tsx';
 
-const ProductSpace:React.FC = () => {
+
+interface ProductSpaceProps {
+  element: any[];
+}
+
+const ProductSpace:React.FC<ProductSpaceProps> = ({element}) => {
   return (
     <div>
-      <HomepageProduct productTitle='Best Savings' />
-      <HomepageProduct productTitle='Groceries' />
-      <HomepageProduct productTitle='Lyvivo Products' />
+      {element.map((productCarousel) => (
+        productCarousel
+      ))}
     </div>
   );
 };
