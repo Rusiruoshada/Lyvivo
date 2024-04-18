@@ -6,4 +6,4 @@ const SingleProductPage = () => {
   )           
 }
 
-export default SingleProductPage
+export default SingleProductPage;
