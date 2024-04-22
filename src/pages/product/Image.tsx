@@ -3,25 +3,25 @@ import React, { useState } from 'react';
 const Images = () => {
   const [isLightbox, setLightbox] = useState(false);
   const [selectedImage, setSelectedImage] = useState(
-    'images/Pic923056.jpg'
+    '/images/Pic923056.jpg'
   );
 
   const images = [
     {
-      thumbnail: './images/Pic923056.jpg',
-      fullsize: './images/Pic923056.jpg',
+      thumbnail: '/images/Pic923056.jpg',
+      fullsize: '/images/Pic923056.jpg',
     },
     {
-      thumbnail: './images/Pic923056.jpg',
-      fullsize: './images/Pic923056.jpg',
+      thumbnail: '/images/Pic923056.jpg',
+      fullsize: '/images/Pic923056.jpg',
     },
     {
-      thumbnail: 'images/Pic923056.jpg',
-      fullsize: 'images/Pic923056.jpg',
+      thumbnail: '/images/Pic923056.jpg',
+      fullsize: '/images/Pic923056.jpg',
     },
     {
-      thumbnail: 'images/Pic923056.jpg',
-      fullsize: 'images/Pic923056.jpg',
+      thumbnail: '/images/Pic923056.jpg',
+      fullsize: '/images/Pic923056.jpg',
     },
   ];
 
@@ -67,7 +67,7 @@ const Images = () => {
             <button key={imageIndex} className='focus:opacity-60'>
               <img
                 className='rounded-md hover:opacity-70'
-                src={`images/image-product-${imageIndex + 1}-thumbnail.jpg`}
+                src={`/images/${image.thumbnail}`}
                 alt={`${imageIndex + 1}`}
                 onClick={() => {
                   fullSizeClick(image.fullsize);
