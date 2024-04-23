@@ -1,24 +1,27 @@
-import logo from './logo.svg';
+import { Provider } from 'react-redux';
 import './App.css';
+import ClientApp from './components/ClientApp.tsx';
+import store from './store/index.ts';
+import Navbar from './components/Navbars/Navbar.tsx';
+import Footer from './components/Footer/Footer.tsx';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import SingleProductPage from './pages/product/[id].tsx';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Provider store={store}>
+        <Navbar />
+        <BrowserRouter>
+          <Routes>
+            <Route path='/' element={<ClientApp />} />
+            <Route path={`/product/:id`} element={<SingleProductPage />} />
+            <Route path='*'  />
+          </Routes>
+        </BrowserRouter>
+        <Footer />
+      </Provider>
+    </>
   );
 }
 
