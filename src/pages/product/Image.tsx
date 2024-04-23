@@ -8,20 +8,24 @@ const Images = () => {
 
   const images = [
     {
-      thumbnail: '/images/Pic923056.jpg',
+      thumbnail: '/Pic923056.jpg',
       fullsize: '/images/Pic923056.jpg',
+      alt:'1'
     },
     {
-      thumbnail: '/images/Pic923056.jpg',
+      thumbnail: '/Pic923056.jpg',
       fullsize: '/images/Pic923056.jpg',
+      alt:'2'
     },
     {
-      thumbnail: '/images/Pic923056.jpg',
+      thumbnail: '/Pic923056.jpg',
       fullsize: '/images/Pic923056.jpg',
+      alt:'3'
     },
     {
-      thumbnail: '/images/Pic923056.jpg',
+      thumbnail: '/Pic923056.jpg',
       fullsize: '/images/Pic923056.jpg',
+      alt:'4'
     },
   ];
 
@@ -58,7 +62,7 @@ const Images = () => {
           src={selectedImage}
           onClick={handleClick}
           className='rounded-lg w-10/12 max-sm:w-screen max-sm:h-3/4 max-sm:rounded-none'
-          alt=''
+          alt={images[1].alt}
         />
       )}
       <div className='grid grid-cols-4 gap-3 pt-4 w-10/12 max-sm:hidden'>
