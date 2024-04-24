@@ -56,12 +56,12 @@ const Images = () => {
   }
 
   return (
-    <div className='grid grid-cols-1 w-1/2 max-lg:w-10/12 max-sm:h-3/4 max-sm:w-screen max-sm:mb-[-140px]'>
+    <div className='grid grid-cols-1 w-1/2 max-lg:w-8/12 max-sm:h-3/4 max-sm:w-screen max-sm:mb-[-140px]'>
       {selectedImage && (
         <img
           src={selectedImage}
           onClick={handleClick}
-          className='rounded-lg w-10/12 max-sm:w-screen max-sm:h-3/4 max-sm:rounded-none'
+          className='rounded-lg w-8/12 max-sm:w-screen max-sm:h-3/4 max-sm:rounded-none'
           alt={images[1].alt}
         />
       )}
