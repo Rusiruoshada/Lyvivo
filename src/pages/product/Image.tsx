@@ -23,8 +23,8 @@ const Images = () => {
       alt:'3'
     },
     {
-      thumbnail: '/slide3.png',
-      fullsize: '/images/slide3.png',
+      thumbnail: '/slide3.jpg',
+      fullsize: '/images/slide3.jpg',
       alt:'4'
     },
   ];
