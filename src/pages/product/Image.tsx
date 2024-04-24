@@ -13,18 +13,18 @@ const Images = () => {
       alt:'1'
     },
     {
-      thumbnail: '/Pic923056.jpg',
-      fullsize: '/images/Pic923056.jpg',
+      thumbnail: '/slide1.png',
+      fullsize: '/images/slide1.png',
       alt:'2'
     },
     {
-      thumbnail: '/Pic923056.jpg',
-      fullsize: '/images/Pic923056.jpg',
+      thumbnail: '/slide2.png',
+      fullsize: '/images/slide2.png',
       alt:'3'
     },
     {
-      thumbnail: '/Pic923056.jpg',
-      fullsize: '/images/Pic923056.jpg',
+      thumbnail: '/slide3.png',
+      fullsize: '/images/slide3.png',
       alt:'4'
     },
   ];
