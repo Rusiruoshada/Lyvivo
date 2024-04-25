@@ -65,7 +65,7 @@ const Images = () => {
           alt={images[1].alt}
         />
       )}
-      <div className='grid grid-cols-4 gap-3 pt-4 w-10/12 max-sm:hidden'>
+      <div className='grid grid-cols-4 gap-3 pt-4 w-8/12 max-sm:hidden'>
         {images.map((image, imageIndex) => {
           return (
             <button key={imageIndex} className='focus:opacity-60'>
