@@ -5,7 +5,7 @@ const SingleProductPage = () => {
   return (
     <div>
         <Images />
-  </div>
+    </div>
 )};
 
 export default SingleProductPage;
