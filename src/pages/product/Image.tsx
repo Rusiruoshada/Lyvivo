@@ -1,55 +1,42 @@
 import React, { useState } from 'react';
 
-const Images = () => {
+interface ImageProps {
+    images: {
+        thumbnail: string,
+        fullSize: string, 
+        alt: string
+    }[]
+}
+
+const Images: React.FC<ImageProps> = ({images}) => {
+
   const [isLightbox, setLightbox] = useState(false);
   const [selectedImage, setSelectedImage] = useState(
     '/images/Pic923056.jpg'
   );
 
-  const images = [
-    {
-      thumbnail: '/Pic923056.jpg',
-      fullsize: '/images/Pic923056.jpg',
-      alt:'1'
-    },
-    {
-      thumbnail: '/slide1.png',
-      fullsize: '/images/slide1.png',
-      alt:'2'
-    },
-    {
-      thumbnail: '/slide2.png',
-      fullsize: '/images/slide2.png',
-      alt:'3'
-    },
-    {
-      thumbnail: '/slide3.jpg',
-      fullsize: '/images/slide3.jpg',
-      alt:'4'
-    },
-  ];
 
-  function handleClick() {
+  const handleClick = () =>{
     setLightbox(!isLightbox);
   }
 
-  function handleOverlayClick(event) {
+  const handleOverlayClick = (event) => {
     if (event.target === event.currentTarget) {
       setLightbox(!isLightbox);
     }
   }
 
-  function fullSizeClick(image) {
+  const fullSizeClick = (image) => {
     setSelectedImage(image);
   }
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  function nextImage() {
+  const nextImage  = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
   }
 
-  function prevImage() {
+  const prevImage  = () => {
     setCurrentIndex(
       (prevIndex) => (prevIndex - 1 + images.length) % images.length
     );
@@ -74,7 +61,7 @@ const Images = () => {
                 src={`/images/${image.thumbnail}`}
                 alt={`${imageIndex + 1}`}
                 onClick={() => {
-                  fullSizeClick(image.fullsize);
+                  fullSizeClick(image.fullSize);
                   setCurrentIndex(imageIndex);
                 }}
               />
@@ -111,7 +98,7 @@ const Images = () => {
           </svg>
           <img
             className='rounded-lg max-sm:mt-12 max-sm:h-2/3'
-            src={images[currentIndex].fullsize}
+            src={images[currentIndex].fullSize}
             alt={`${currentIndex + 1}`}
             width={550}
           />
