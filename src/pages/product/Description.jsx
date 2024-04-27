@@ -5,6 +5,7 @@ import { FaMinus, FaPlus } from 'react-icons/fa';
 
 const Description = () => {
   const price = 125;
+
   function add() {
     // setCount((prevCount) => prevCount + 1);
     alert('Add another product');
@@ -28,7 +29,7 @@ const Description = () => {
   }
 
   return (
-    <div className='w-1/2 max-lg:w-4/5'>
+    <div className='w-full sm:w-full md:w-4/5  lg:w-1/2'>
       <h2 className='text-orange font-bold text-sm'>SNEAKER COMPANY</h2>
       <h1 className='text-5xl mt-4 mb-8 max-sm:text-3xl'>
         Fall Limited Edition Sneakers
@@ -53,7 +54,10 @@ const Description = () => {
           className='flex items-center justify-between px-3 py-3 rounded-lg w-1/2 max-sm:w-full gap-2'
           style={{ backgroundColor: '#00000011' }}
         >
-          <FaMinus className='cursor-pointer w-4 text-3xl' onClick={minus} />
+          <FaMinus
+            className='cursor-pointer w-4 text-3xl hover:bg-red-300 '
+            onClick={minus}
+          />
 
           <div className='font-bold text-text-md'>{1}</div>
 
@@ -62,8 +66,8 @@ const Description = () => {
         <Button
           onClick={addToChart}
           className='hover:opacity-70 flex items-center justify-center gap-1 !bg-[var(--primaryColor)] w-full py-4 rounded-lg max-sm:w-full'
-          icon={<BsCart2 className='text-white' />}
-          style={{ backgroundColor: 'var(--primaryColor)' }}
+          icon={<BsCart2 className='text-white font-bold ' />}
+          style={{ backgroundColor: 'var(--primaryColor)', border: 'none' }}
           size='large'
         >
           <span className='text-white font-bold'>Add to cart</span>
