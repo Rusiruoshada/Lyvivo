@@ -1,11 +1,24 @@
 import { Button } from 'antd';
-import React, { useContext } from 'react';
+import React from 'react';
 import { BsCart2 } from 'react-icons/bs';
 import { FaMinus, FaPlus } from 'react-icons/fa';
 
-const Description:React.FC = () => {
-  const price = 125;
+interface DescriptionProps {
+  title?: string;
+  productName: string;
+  description?: string;
+  originalPrice: number;
+  savingPrice?: number;
+  percentage?: number;
+}
 
+const Description: React.FC<DescriptionProps> = ({
+  title = undefined,
+  productName,
+  description = undefined,
+  originalPrice,  
+  percentage = undefined,
+}) => {
   function add() {
     // setCount((prevCount) => prevCount + 1);
     alert('Add another product');
@@ -28,37 +41,40 @@ const Description:React.FC = () => {
     alert('Product has been added to cart');
   }
 
+  const savingPrice = originalPrice + originalPrice * percentage%
+
   return (
     <div className='w-full sm:w-full md:w-4/5  lg:w-1/2 lg:pr-10'>
-      {false && <h2 className='text-[var(--secondaryColor)] font-bold text-sm'>SNEAKER COMPANY</h2>}  {/* use only for electronic d */}
-      <h1 className='text-5xl mt-4 mb-8 max-sm:text-3xl'>
-          Mangosteen
-      </h1>
-      
-      <p>
-        These low-profile sneakers are you perfect casual wear companion.
-        Featuring a durable rubber outer sole. {`They'll`} withstand everything
-        the weather can offer.
-      </p>
+      {title && (
+        <h2 className='text-[var(--secondaryColor)] font-bold text-sm'>
+          {title}
+        </h2>
+      )}{' '}
+      {/* use only for electronic d */}
+      <h1 className='text-5xl mt-4 mb-8 max-sm:text-3xl'>{productName}</h1>
+      {description && <p>{description}</p>}
       <div className='flex flex-col items-start gap-4 mt-4 mb-5 max-sm:flex-row max-sm:justify-between max-sm:mb-7 max-sm:items-center'>
         <div className='flex items-center gap-4'>
-          <span className='font-bold text-4xl'>$125.00</span>
-          <span className='text-orange bg-pale-orange-500 py-1 px-2 rounded-sm'>
-            50%
+          <span className='font-bold text-4xl'>
+            Rs.
+            {savingPrice === undefined ? originalPrice : savingPrice}
           </span>
+          {percentage && (
+            <span className='text-orange bg-pale-orange-500 py-1 px-2 rounded-sm'>
+              {percentage}%
+            </span>
+          )}
         </div>
-        <p className='line-through font-bold'>$250.00</p>
+        {originalPrice && (
+          <p className='line-through font-bold'>Rs. {originalPrice}</p>
+        )}
       </div>
-
       <div className='flex items-center justify-center gap-5 max-lg:flex-col lg:items-start max-sm:clear-right'>
         <div
           className='flex items-center justify-between px-3 py-2 rounded-lg w-1/2 max-sm:w-full gap-2'
           style={{ backgroundColor: '#00000011' }}
         >
-          <FaMinus
-            className='cursor-pointer w-4 text-3xl'
-            onClick={minus}
-          />
+          <FaMinus className='cursor-pointer w-4 text-3xl' onClick={minus} />
 
           <div className='font-bold text-md'>{1}</div>
 
