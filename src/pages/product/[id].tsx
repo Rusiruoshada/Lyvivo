@@ -1,6 +1,6 @@
 import React from 'react';
-import Images from './Image.tsx';
-import Description from './Description.jsx';
+import Images from '../../components/ProductDetails/Image.tsx';
+import Description from '../../components/ProductDetails/Description.tsx';
 
 interface ImageType {
     thumbnail: string,
@@ -33,7 +33,7 @@ const images:ImageType[] = [
 
 const SingleProductPage = () => {
   return (
-    <div className="flex items-center gap-16 px-10 py-20 max-lg:flex-col max-sm:py-0 max-sm:px-0 mb-10">
+    <div className="flex items-center gap-16 px-10 py-20 max-lg:flex-col max-sm:py-0 max-sm:px-4 mb-10">
         <Images images={images} />
         <Description />
     </div>
