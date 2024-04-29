@@ -41,7 +41,7 @@ const Description: React.FC<DescriptionProps> = ({
     alert('Product has been added to cart');
   }
 
-  const savingPrice = originalPrice + originalPrice * percentage%
+  const savingPrice = originalPrice + originalPrice 
 
   return (
     <div className='w-full sm:w-full md:w-4/5  lg:w-1/2 lg:pr-10'>
