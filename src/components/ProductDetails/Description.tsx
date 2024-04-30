@@ -1,5 +1,5 @@
 import { Button } from 'antd';
-import React from 'react';
+import React, {useState} from 'react';
 import { BsCart2 } from 'react-icons/bs';
 import { FaMinus, FaPlus } from 'react-icons/fa';
 
@@ -12,13 +12,17 @@ interface DescriptionProps {
   percentage?: number;
 }
 
+
 const Description: React.FC<DescriptionProps> = ({
   title = undefined,
   productName,
   description = undefined,
   originalPrice,  
-  percentage = undefined,
+  percentage=0 ,
 }) => {
+
+const [count, setCount] = useState(1);
+
   function add() {
     // setCount((prevCount) => prevCount + 1);
     alert('Add another product');
@@ -41,7 +45,7 @@ const Description: React.FC<DescriptionProps> = ({
     alert('Product has been added to cart');
   }
 
-  const savingPrice = originalPrice + originalPrice 
+  const savingPrice = originalPrice - originalPrice * percentage/100;
 
   return (
     <div className='w-full sm:w-full md:w-4/5  lg:w-1/2 lg:pr-10'>
@@ -57,9 +61,9 @@ const Description: React.FC<DescriptionProps> = ({
         <div className='flex items-center gap-4'>
           <span className='font-bold text-4xl'>
             Rs.
-            {savingPrice === undefined ? originalPrice : savingPrice}
+            {savingPrice > 0 ? savingPrice : originalPrice}
           </span>
-          {percentage && (
+          {percentage > 0 && (
             <span className='text-orange bg-pale-orange-500 py-1 px-2 rounded-sm'>
               {percentage}%
             </span>
