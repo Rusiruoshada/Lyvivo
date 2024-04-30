@@ -24,18 +24,18 @@ const Description: React.FC<DescriptionProps> = ({
 const [count, setCount] = useState(1);
 
   function add() {
-    // setCount((prevCount) => prevCount + 1);
+    setCount((prevCount) => prevCount + 1);
     alert('Add another product');
   }
 
   function minus() {
-    // setCount((prevCount) => {
-    //   if (prevCount <= 0) {
-    //     return 0;
-    //   } else {
-    //     return prevCount - 1;
-    //   }
-    // });
+    setCount((prevCount) => {
+      if (prevCount <= 0) {
+        return 0;
+      } else {
+        return prevCount - 1;
+      }
+    });
     alert('remove product');
   }
 
@@ -80,7 +80,7 @@ const [count, setCount] = useState(1);
         >
           <FaMinus className='cursor-pointer w-4 text-3xl' onClick={minus} />
 
-          <div className='font-bold text-md'>{1}</div>
+          <div className='font-bold text-md'>{count}</div>
 
           <FaPlus className='cursor-pointer w-4 text-3xl' onClick={add} />
         </div>
