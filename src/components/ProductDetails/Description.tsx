@@ -22,10 +22,11 @@ const Description: React.FC<DescriptionProps> = ({
   size
 }) => {
   const [count, setCount] = useState(1);
-  const [totalPrice, setTotalPrice] = useState(originalPrice)
+  // const [totalPrice, setTotalPrice] = useState(originalPrice)
 
   const add = () => {
     setCount((prevCount) => prevCount + 1);
+    // setTotalPrice(originalPrice * count);
   };
 
   const minus = () => {
@@ -36,10 +37,11 @@ const Description: React.FC<DescriptionProps> = ({
         return prevCount - 1;
       }
     });
+    // setTotalPrice(originalPrice * count);
   };
 
   const addToChart = () => {
-    // setTotalPrice(price * count);
+    // setTotalPrice(totalPrice * count);
     // setRemoveProduct(false);
     alert('Product has been added to cart');
   };
