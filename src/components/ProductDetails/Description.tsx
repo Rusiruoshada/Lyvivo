@@ -84,7 +84,7 @@ const Description: React.FC<DescriptionProps> = ({
                 {
                   <Input
                     type='submit'
-                    value={`${itemSize} ${itemSize >= 1000 ? 'Kg' : 'g'}`}
+                    value={`${itemSize >= 1000? itemSize/1000 : itemSize} ${itemSize >= 1000 ? 'Kg' : 'g'}`}
                     onClick={() => {
                       alert(itemSize);
                     }}
