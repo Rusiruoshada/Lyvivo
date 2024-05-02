@@ -1,4 +1,4 @@
-import { Button } from 'antd';
+import { Button, Input, Space, Tooltip } from 'antd';
 import React, { useState } from 'react';
 import { BsCart2 } from 'react-icons/bs';
 import { FaMinus, FaPlus } from 'react-icons/fa';
@@ -19,7 +19,7 @@ const Description: React.FC<DescriptionProps> = ({
   description = undefined,
   originalPrice,
   percentage = 0,
-  size
+  size,
 }) => {
   const [count, setCount] = useState(1);
   // const [totalPrice, setTotalPrice] = useState(originalPrice)
@@ -57,7 +57,7 @@ const Description: React.FC<DescriptionProps> = ({
       )}
       {/* use only for electronic d */}
       <h1 className='text-5xl mt-4 mb-8 max-sm:text-3xl'>{productName}</h1>
-      {}
+
       {description && <p>{description}</p>}
       <div className='flex flex-col items-start gap-4 mt-4 mb-5 max-sm:flex-row max-sm:justify-between max-sm:mb-7 max-sm:items-center'>
         <div className='flex items-center gap-4'>
@@ -75,17 +75,37 @@ const Description: React.FC<DescriptionProps> = ({
           <p className='line-through font-bold'>Rs. {originalPrice}</p>
         )}
       </div>
-      <div className='flex items-center justify-center gap-5 max-lg:flex-col lg:items-start max-sm:clear-right'>
-        {<div
-          className='flex items-center justify-between px-3 py-2 rounded-lg w-1/2 max-sm:w-full gap-2'
-          style={{ backgroundColor: '#00000011' }}
-        >
-          <FaMinus className='cursor-pointer w-4 text-3xl' onClick={minus} />
+      <div className='flex items-center justify-center gap-5 max-lg:flex-col lg:items-center max-sm:clear-right'>
+        {size ? (
+          <Space.Compact>
+            {size.map((itemSize, index) => (
+              <Tooltip key={index
+              }>
+                {
+                  <Input
+                    type='submit'
+                    value={`${itemSize} ${itemSize >= 1000 ? 'Kg' : 'g'}`}
+                    onClick={() => {
+                      alert(itemSize);
+                    }}
+                    className='items-center justify-between px-3 py-2 rounded-lg w-1/2 max-sm:w-full gap-2'
+                  />
+                }
+              </Tooltip>
+            ))}
+          </Space.Compact>
+        ) : (
+          <div
+            className='flex items-center justify-between px-3 py-2 rounded-lg w-1/2 max-sm:w-full gap-2'
+            style={{ backgroundColor: '#00000011' }}
+          >
+            <FaMinus className='cursor-pointer w-4 text-3xl' onClick={minus} />
 
-          <div className='font-bold text-md'>{count}</div>
+            <div className='font-bold text-md'>{count}</div>
 
-          <FaPlus className='cursor-pointer w-4 text-3xl' onClick={add} />
-        </div>}
+            <FaPlus className='cursor-pointer w-4 text-3xl' onClick={add} />
+          </div>
+        )}
         <Button
           onClick={addToChart}
           className='hover:opacity-70 flex items-center justify-center gap-1 !bg-[var(--primaryColor)] w-full py-4 rounded-lg max-sm:w-full'
