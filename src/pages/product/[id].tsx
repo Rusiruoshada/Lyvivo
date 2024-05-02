@@ -41,6 +41,7 @@ const SingleProductPage = () => {
         description={undefined}
         originalPrice={250}
         percentage={50}
+        size={[500,1000]}
       />
     </div>
   );
