@@ -33,7 +33,7 @@ const images: ImageType[] = [
 
 const SingleProductPage = () => {
   return (
-    <div className='flex items-center gap-16 px-10 py-20 max-lg:flex-col max-sm:py-0 max-sm:px-4 mb-10'>
+    <div className='flex items-center  sm:gap-1 md:gap-2 lg:gap-16  px-10 py-20 max-lg:flex-col max-sm:py-0 max-sm:px-4 mb-10'>
       <Images images={images} />
       <Description
         title={undefined}
