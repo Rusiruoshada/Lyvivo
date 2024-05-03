@@ -1,58 +1,60 @@
 import React, { useState } from 'react';
+import {
+  BsArrow90DegLeft,
+  BsArrowDown,
+  BsArrowDownCircleFill,
+  BsArrowDownShort,
+} from 'react-icons/bs';
 
 interface ImageProps {
-    images: {
-        thumbnail: string,
-        fullSize: string, 
-        alt: string
-    }[]
+  images: {
+    thumbnail: string;
+    fullSize: string;
+    alt: string;
+  }[];
 }
 
-const Images: React.FC<ImageProps> = ({images}) => {
-
+const Images: React.FC<ImageProps> = ({ images }) => {
   const [isLightbox, setLightbox] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(
-    '/images/Pic923056.jpg'
-  );
+  const [selectedImage, setSelectedImage] = useState('/images/Pic923056.jpg');
 
-
-  const handleClick = () =>{
+  const handleClick = () => {
     setLightbox(!isLightbox);
-  }
+  };
 
   const handleOverlayClick = (event) => {
     if (event.target === event.currentTarget) {
       setLightbox(!isLightbox);
     }
-  }
+  };
 
   const fullSizeClick = (image) => {
     setSelectedImage(image);
-  }
+  };
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const nextImage  = () => {
+  const nextImage = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-  }
+  };
 
-  const prevImage  = () => {
+  const prevImage = () => {
     setCurrentIndex(
       (prevIndex) => (prevIndex - 1 + images.length) % images.length
     );
-  }
+  };
 
   return (
-    <div className='grid grid-cols-1 w-1/2 max-lg:w-10/12 max-sm:h-3/4 max-sm:w-screen max-sm:mb-[-140px]'>
+    <div className='grid grid-cols-1 w-1/2 max-lg:w-10/12 max-sm:h-3/4 max-sm:w-full max-sm:mb-3 justify-items-center sm:justify-items-center md:justify-items-end lg:justify-items-center'>
       {selectedImage && (
         <img
           src={selectedImage}
           onClick={handleClick}
-          className='rounded-lg w-10/12 max-sm:w-screen max-sm:h-3/4 max-sm:rounded-none'
+          className='rounded-lg w-full sm:w-full md:w-3/4 max-sm:h-3/4 max-sm:rounded-none'
           alt={images[1].alt}
         />
       )}
-      <div className='grid grid-cols-4 gap-3 pt-4 w-10/12 max-sm:hidden'>
+      <div className='grid grid-cols-4 gap-3 pt-4 w-full sm:w-full md:w-full lg:w-full'>
         {images.map((image, imageIndex) => {
           return (
             <button key={imageIndex} className='focus:opacity-60'>
@@ -75,17 +77,13 @@ const Images: React.FC<ImageProps> = ({images}) => {
         className='flex flex-col items-center justify-center group-hover:block fixed inset-0 bg-black bg-opacity-50 max-sm:justify-start'
       >
         <div className='relative flex flex-col items-end'>
-          <img
-            alt='icons'
-            src='images/icon-previous.svg'
+          <BsArrowDownShort
             onClick={prevImage}
-            className='hover:opacity-80 cursor-pointer bg-white rounded-full w-fit h-[44px] absolute -left-5 top-1/2 transform -translate-y-1/2 px-4 py-2 max-sm:left-0'
+            className='hover:opacity-80 cursor-pointer rounded-full w-fit h-[44px] absolute -left-5 top-1/2 transform -translate-y-1/2 px-4 py-2 max-sm:left-0 rotate-90 bg-gray-300'
           />
-          <img
-            alt='icons'
-            src='images/icon-next.svg'
+          <BsArrowDownShort
             onClick={nextImage}
-            className='hover:opacity-80 cursor-pointer bg-white rounded-full w-fit h-[44px] absolute -right-5 top-1/2 transform -translate-y-1/2 px-4 py-2 max-sm:right-0'
+            className='hover:opacity-80 cursor-pointer bg-gray-300 rounded-full w-fit h-[44px] absolute -right-5 top-1/2 transform -translate-y-1/2 px-4 py-2 max-sm:right-0 -rotate-90'
           />
           <svg
             className=' fill-white active:fill-orange cursor-pointer'
