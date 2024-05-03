@@ -59,32 +59,38 @@ const Description: React.FC<DescriptionProps> = ({
       <h1 className='text-5xl mt-4 mb-8 max-sm:text-3xl'>{productName}</h1>
 
       {description && <p>{description}</p>}
-      <div className='flex flex-col items-start gap-4 mt-4 mb-5 max-sm:flex-row max-sm:justify-between max-sm:mb-7 max-sm:items-center'>
+      <div className='flex flex-col items-start gap-1 mt-4 mb-5 max-sm:flex-row max-sm:justify-between max-sm:mb-7 max-sm:items-center'>
         <div className='flex items-center gap-4'>
           <span className='font-bold text-4xl'>
             Rs.
             {savingPrice > 0 ? savingPrice : originalPrice}
           </span>
           {percentage > 0 && (
-            <span className='text-orange bg-pale-orange-500 py-1 px-2 rounded-sm'>
+            <span
+              className='py-1 px-2 rounded-md'
+              style={{ backgroundColor: '#00000011', color: 'black' }}
+            >
               {percentage}%
             </span>
           )}
         </div>
         {originalPrice && (
-          <p className='line-through font-bold'>Rs. {originalPrice}</p>
+          <p className='line-through font-bold text-gray-400'>
+            Rs. {originalPrice}
+          </p>
         )}
       </div>
-      <div className='flex items-center justify-center gap-5 max-lg:flex-col lg:items-center max-sm:clear-right'>
+      <div className='flex items-center justify-center gap-5 flex-col sm:flex-col md:flex-row lg:flex-row lg:items-center max-sm:clear-right'>
         {size ? (
           <Space.Compact>
             {size.map((itemSize, index) => (
-              <Tooltip key={index
-              }>
+              <Tooltip key={index}>
                 {
                   <Input
                     type='submit'
-                    value={`${itemSize >= 1000? itemSize/1000 : itemSize} ${itemSize >= 1000 ? 'Kg' : 'g'}`}
+                    value={`${itemSize >= 1000 ? itemSize / 1000 : itemSize} ${
+                      itemSize >= 1000 ? 'Kg' : 'g'
+                    }`}
                     onClick={() => {
                       alert(itemSize);
                     }}
