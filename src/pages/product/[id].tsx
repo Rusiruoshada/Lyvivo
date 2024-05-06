@@ -1,6 +1,8 @@
 import React from 'react';
 import Images from '../../components/ProductDetails/Image.tsx';
 import Description from '../../components/ProductDetails/Description.tsx';
+import ProductSpace from '../../components/ProductArea/ProductSpace.tsx';
+import HomepageProduct from '../../components/ProductArea/HomePageProductCategoryArea/HomepageProduct.tsx';
 
 interface ImageType {
   thumbnail: string;
@@ -31,8 +33,13 @@ const images: ImageType[] = [
   },
 ];
 
+const productCarousel:any = [
+  <HomepageProduct productTitle='Best Savings' />,
+];
+
 const SingleProductPage = () => {
   return (
+    <>
     <div className='flex items-center  sm:gap-1 md:gap-2 lg:gap-16  px-10 py-20 max-lg:flex-col max-sm:py-0 max-sm:px-4 mb-10'>
       <Images images={images} />
       <Description
@@ -44,6 +51,10 @@ const SingleProductPage = () => {
         size={[500,1000]}
       />
     </div>
+    <div>
+      <ProductSpace element={productCarousel} />
+    </div>
+    </>
   );
 };
 
