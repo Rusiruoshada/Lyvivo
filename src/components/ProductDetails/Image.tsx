@@ -13,7 +13,7 @@ interface ImageProps {
 
 const Images: React.FC<ImageProps> = ({ images }) => {
   const [isLightbox, setLightbox] = useState(false);
-  const [selectedImage, setSelectedImage] = useState('/images/Pic923056.jpg');
+  const [selectedImage, setSelectedImage] = useState(images[0].fullSize);
 
   const handleClick = () => {
     setLightbox(!isLightbox);
