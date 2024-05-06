@@ -42,21 +42,21 @@ const Images: React.FC<ImageProps> = ({ images }) => {
   };
 
   return (
-    <div className='grid sm:grid md:flex lg:grid grid-cols-1 md:w-3/4 lg:w-1/2 max-sm:h-3/4 max-sm:w-full max-sm:mb-3 justify-items-center sm:justify-items-center md:justify-items-end md:justify-center lg:justify-items-center'>
+    <div className='grid sm:grid md:flex lg:grid grid-cols-1 md:w-full md:gap-3 lg:w-1/2 max-sm:h-3/4 max-sm:w-full max-sm:mb-3 justify-items-center sm:justify-items-center md:justify-items-end md:justify-center lg:justify-items-center '>
       {selectedImage && (
         <img
           src={selectedImage}
           onClick={handleClick}
-          className='rounded-lg w-full sm:w-full md:w-3/4 max-sm:h-3/4 max-sm:rounded-none'
+          className='rounded-lg w-full sm:w-full md:w-3/4 h-fit max-sm:rounded-none'
           alt={images[1].alt}
         />
       )}
-      <div className='grid grid-cols-4 sm:grid-cols-4 sm:grid-rows-1 md:grid-cols-1 md:grid-rows-4 lg:grid-rows-1 lg:grid-cols-4 gap-3 pt-4 w-full sm:w-full md:w-1/6 lg:w-full'>
+      <div className='grid grid-cols-4 sm:grid-cols-4 sm:grid-rows-1 md:grid-cols-1 md:grid-rows-4 lg:grid-rows-1 lg:grid-cols-4 max-sm:gap-2 md:gap-0 lg:gap-3 pt-4 w-full sm:w-full md:w-1/6 lg:w-full'>
         {images.map((image, imageIndex) => {
           return (
-            <button key={imageIndex} className='focus:opacity-60'>
+            <button key={imageIndex} className='focus:opacity-60 focus:border-2 focus:border-red-400 rounded-md'>
               <img
-                className='rounded-md hover:opacity-70'
+                className='rounded-md hover:opacity-70 '
                 src={`/images/${image.thumbnail}`}
                 alt={`${imageIndex + 1}`}
                 onClick={() => {
