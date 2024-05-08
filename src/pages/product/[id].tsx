@@ -34,7 +34,7 @@ const images: ImageType[] = [
 ];
 
 const productCarousel:any = [
-  <HomepageProduct productTitle='Best Savings' />,
+  <HomepageProduct productTitle='You may also like' />,
 ];
 
 const SingleProductPage = () => {
