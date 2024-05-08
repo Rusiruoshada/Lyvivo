@@ -72,7 +72,7 @@ const Images: React.FC<ImageProps> = ({ images }) => {
       <div
         onClick={handleOverlayClick}
         style={{ display: isLightbox ? 'flex' : 'none' }}
-        className='flex flex-col items-center justify-center group-hover:block fixed inset-0 bg-black bg-opacity-50 max-sm:justify-start z-[1060]'
+        className='flex flex-col items-center justify-center group-hover:block fixed inset-0 bg-black bg-opacity-50 max-sm:justify-start z-[100]'
       >
         <div className='relative flex flex-col items-end'>
           <BsArrowDownShort
