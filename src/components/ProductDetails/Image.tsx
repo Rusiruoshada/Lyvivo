@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import {
-  BsArrowDownShort,
-} from 'react-icons/bs';
+import { BsArrowDownShort } from 'react-icons/bs';
 
 interface ImageProps {
   images: {
@@ -54,7 +52,10 @@ const Images: React.FC<ImageProps> = ({ images }) => {
       <div className='grid grid-cols-4 sm:grid-cols-4 sm:grid-rows-1 md:grid-cols-1 md:grid-rows-4 lg:grid-rows-1 lg:grid-cols-4 max-sm:gap-2 md:gap-0 lg:gap-3 pt-4 w-full sm:w-full md:w-1/6 lg:w-full'>
         {images.map((image, imageIndex) => {
           return (
-            <button key={imageIndex} className='focus:opacity-60 focus:border-2 focus:border-red-400 rounded-md'>
+            <button
+              key={imageIndex}
+              className='focus:opacity-60 focus:border-2 focus:border-red-400 rounded-md'
+            >
               <img
                 className='rounded-md hover:opacity-70 '
                 src={`/images/${image.thumbnail}`}
@@ -71,7 +72,7 @@ const Images: React.FC<ImageProps> = ({ images }) => {
       <div
         onClick={handleOverlayClick}
         style={{ display: isLightbox ? 'flex' : 'none' }}
-        className='flex flex-col items-center justify-center group-hover:block fixed inset-0 bg-black bg-opacity-50 max-sm:justify-start'
+        className='flex flex-col items-center justify-center group-hover:block fixed inset-0 bg-black bg-opacity-50 max-sm:justify-start z-[1060]'
       >
         <div className='relative flex flex-col items-end'>
           <BsArrowDownShort
