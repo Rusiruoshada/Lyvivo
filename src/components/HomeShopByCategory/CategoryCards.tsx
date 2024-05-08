@@ -29,11 +29,12 @@ const CategoryCard: React.FC<CategoryCardProps> = ({
       }
       aria-label={categoryName}
       onClick={onCardClick}
-      className='last:[&_div]:p-0 '
+      className='last:[&_div]:p-0 p-1 sm:p-1 md:p-2.5 lg:p-2.5  hover:bg-[#79ffa863]'
     >
       <Meta
-        title=<p className='m-0 py-3 text-[12px] sm:text-[12px] md:text-[18px] lg:text-[18px] ' aria-label={categoryName}>
+        title=<p className='m-0 py-3 text-[12px] sm:text-[12px] md:text-[18px] lg:text-[18px] after:content ' aria-label={categoryName}>
           {categoryName}
+          
         </p>
         style={{
           display: 'flex',
