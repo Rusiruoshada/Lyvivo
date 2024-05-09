@@ -24,7 +24,7 @@ const BottomNav: React.FC = () => {
     <Navbar
       collapseOnSelect
       expand='lg'
-      className='sticky top-0 bottom-auto left-0 right-0 z-10 bg-white shadow-md drop-shadow-sm'
+      className='sticky top-0 bottom-auto left-0 right-0 z-20 mb-[35px] bg-white shadow-md drop-shadow-sm'
       sticky='top'
     >
       <Container>
