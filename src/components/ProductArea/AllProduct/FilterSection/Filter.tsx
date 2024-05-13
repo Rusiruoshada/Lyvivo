@@ -1,24 +1,35 @@
-import React from 'react'
-import filters from './filterContent.ts'
-import { Button } from 'antd'
+import React from 'react';
+import filters from './filterContent.ts';
+import { Button, Divider } from 'antd';
 
-interface FilterProps{
-  count: number[]
+interface FilterProps {
+  count: number[];
 }
 
-const Filter:React.FC<FilterProps> = ({count}) => {
-
-
+const Filter: React.FC<FilterProps> = ({ count }) => {
   return (
-    <section className='border border-gray-300'>
-      <section>
+    <section className='border border-gray-300 w-fit mx-10'>
+      <section className='p-3'>
         <h4>Lyvivo Specials</h4>
-        {filters.specials.map((special,index) => (
-          <Button type='link' className='flex flex-cols'>{special} {count[index]}</Button>
+        {filters.specials.map((special, index) => (
+          <Button
+            type='link'
+            onClick={() => {
+              alert(special);
+            }}
+            className='flex flex-cols text-black '
+          >
+            {special} ({count[index]})
+          </Button>
         ))}
       </section>
+      <Divider />
+      <section>
+        <h4>Filters</h4>
+        {filters.productType.map((ProductType,index) => (<div></div>))}
+      </section>
     </section>
-  )
-}
+  );
+};
 
-export default Filter
+export default Filter;
