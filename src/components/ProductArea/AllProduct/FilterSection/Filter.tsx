@@ -1,6 +1,6 @@
 import React from 'react';
 import filters from './filterContent.ts';
-import { Button, Divider } from 'antd';
+import { Button, Checkbox, Divider } from 'antd';
 
 interface FilterProps {
   count: number[];
@@ -24,9 +24,11 @@ const Filter: React.FC<FilterProps> = ({ count }) => {
         ))}
       </section>
       <Divider />
-      <section>
+      <section className='p-3'>
         <h4>Filters</h4>
-        {filters.productType.map((ProductType,index) => (<div></div>))}
+        {filters.productType.map((ProductType,index) => (<Checkbox.Group
+          
+        />))}
       </section>
     </section>
   );
