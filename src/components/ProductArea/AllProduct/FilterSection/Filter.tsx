@@ -26,9 +26,7 @@ const Filter: React.FC<FilterProps> = ({ count }) => {
       <Divider />
       <section className='p-3'>
         <h4>Filters</h4>
-        {filters.productType.map((ProductType,index) => (<Checkbox.Group
-          
-        />))}
+        {filters.productType.map((productType,index) => (<div><input type='checkbox'  /> <label title={productType}>{productType}</label></div>))}
       </section>
     </section>
   );
