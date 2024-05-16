@@ -1,10 +1,21 @@
 import React from 'react';
 import filters from './filterContent.ts';
 import { Button, Checkbox, Divider } from 'antd';
+import { MdMailOutline } from 'react-icons/md';
 
 interface FilterProps {
   count: number[];
 }
+
+const items = [
+{
+  key: 'product types',
+  label: 'Product Types',
+  icon: < MdMailOutline />,
+  children: [{}],
+}
+
+]
 
 const Filter: React.FC<FilterProps> = ({ count }) => {
   return (
@@ -26,7 +37,7 @@ const Filter: React.FC<FilterProps> = ({ count }) => {
       <Divider />
       <section className='p-3'>
         <h4>Filters</h4>
-        {filters.productType.map((productType,index) => (<div><input type='checkbox'  /> <label title={productType}>{productType}</label></div>))}
+        {filters.productType.map((productType,index) => (<div><input type='checkbox'  /> <label title={productType}>{productType.label}</label></div>))}
       </section>
     </section>
   );
