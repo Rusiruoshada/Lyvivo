@@ -1,7 +1,6 @@
 import React from 'react';
 import filters from './filterContent.ts';
-import { Button, Checkbox, Divider } from 'antd';
-import { MdMailOutline } from 'react-icons/md';
+import { Button, Collapse, Divider, Menu } from 'antd';
 
 interface FilterProps {
   count: number[];
@@ -9,12 +8,10 @@ interface FilterProps {
 
 const items = [
 {
-  key: 'product types',
+  key: '1',
   label: 'Product Types',
-  icon: < MdMailOutline />,
-  children: [{}],
+  children: [filters.productType.map((productItem,index) => (<div><input type='checkbox'  /> <label title={productItem.label}>{productItem.label}</label></div>))],
 }
-
 ]
 
 const Filter: React.FC<FilterProps> = ({ count }) => {
@@ -37,7 +34,19 @@ const Filter: React.FC<FilterProps> = ({ count }) => {
       <Divider />
       <section className='p-3'>
         <h4>Filters</h4>
-        {filters.productType.map((productType,index) => (<div><input type='checkbox'  /> <label title={productType}>{productType.label}</label></div>))}
+        <Collapse
+        // onClick={onClick}
+          style={{ width: 256, borderBottom: 'none'   }}
+          items={items}
+          expandIconPosition='end'
+          bordered={false}
+          ghost
+          defaultActiveKey={['1']}
+          className='border-none shadow-none'
+        /> 
+      </section>
+      <section className='p-3'>
+            
       </section>
     </section>
   );
