@@ -7,7 +7,8 @@ import ProductSpace from './ProductArea/ProductSpace.tsx';
 import HomepageProduct from './ProductArea/HomePageProductCategoryArea/HomepageProduct.tsx';
 
 const ClientApp: React.FC = () => {
-  const productCarousel = [
+
+  const productCarousel:any = [
     <HomepageProduct productTitle='Best Savings' />,
     <HomepageProduct productTitle='Groceries' />,
     <HomepageProduct productTitle='Lyvivo Products' />,
@@ -19,6 +20,8 @@ const ClientApp: React.FC = () => {
       <TextWithIcon />
       <CategorySpace />
       <ProductSpace element={productCarousel} />
+
+
     </>
   );
 };
