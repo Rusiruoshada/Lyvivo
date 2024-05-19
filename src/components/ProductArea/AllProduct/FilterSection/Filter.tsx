@@ -24,9 +24,14 @@ const items = [
 const Filter: React.FC<FilterProps> = ({ count }) => {
   const [inputValue, setInputValue] = useState({ input1: 1, input2: 9999 });
 
-  const onChange: any = (newValue: number) => {
-    setInputValue({ input1: newValue, input2: newValue });
+  const onChangeInput: any = (newValue: number) => {
+    setInputValue((prev) =>
+      prev.input1 === newValue
+        ? { input1: newValue, input2: prev.input2 }
+        : { input1: prev.input2, input2: newValue }
+    );
   };
+
   return (
     <section className='border border-gray-300 w-fit mx-10'>
       <section className='p-3'>
@@ -61,11 +66,11 @@ const Filter: React.FC<FilterProps> = ({ count }) => {
         <Slider
           min={1}
           max={9999}
-          range={{ draggableTrack : true }}
-          onChange={onChange}
+          range={{ draggableTrack: true }}
+          onChange={onChangeInput}
           defaultValue={[
             inputValue.input1 > 0 ? inputValue.input1 : 0,
-            inputValue.input2 > 0 ? inputValue.input2 : 0,
+            inputValue.input2 > 0 ? inputValue.input2 : 9999,
           ]}
         />
         <InputNumber
@@ -73,7 +78,7 @@ const Filter: React.FC<FilterProps> = ({ count }) => {
           max={9999}
           style={{ margin: '0 16px' }}
           value={inputValue.input1}
-          onChange={onChange}
+          onChange={onChangeInput}
         />
         <p className='inline'>- to -</p>
         <InputNumber
@@ -81,7 +86,7 @@ const Filter: React.FC<FilterProps> = ({ count }) => {
           max={9999}
           style={{ margin: '0 16px' }}
           value={inputValue.input2}
-          onChange={onChange}
+          onChange={onChangeInput}
         />
       </section>
     </section>
