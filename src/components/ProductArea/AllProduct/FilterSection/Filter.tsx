@@ -25,10 +25,11 @@ const Filter: React.FC<FilterProps> = ({ count }) => {
   const [inputValue, setInputValue] = useState({ input1: 1, input2: 9999 });
 
   const onChangeInput: any = (newValue: number) => {
+    console.log(newValue[0],'hello', newValue[1])
     setInputValue((prev) =>
-      prev.input1 === newValue
-        ? { input1: newValue, input2: prev.input2 }
-        : { input1: prev.input2, input2: newValue }
+      prev.input1 !== newValue[0]
+        ? { input1: newValue[0], input2: prev.input2 }
+        : { input1: prev.input1, input2: newValue[1] }
     );
   };
 
@@ -43,6 +44,7 @@ const Filter: React.FC<FilterProps> = ({ count }) => {
               alert(special);
             }}
             className='flex flex-cols text-black '
+            key={index}
           >
             {special} ({count[index]})
           </Button>
@@ -70,7 +72,7 @@ const Filter: React.FC<FilterProps> = ({ count }) => {
           onChange={onChangeInput}
           defaultValue={[
             inputValue.input1 > 0 ? inputValue.input1 : 0,
-            inputValue.input2 > 0 ? inputValue.input2 : 9999,
+            inputValue.input2 <= 9999 ? inputValue.input2 : 9999,
           ]}
         />
         <InputNumber
