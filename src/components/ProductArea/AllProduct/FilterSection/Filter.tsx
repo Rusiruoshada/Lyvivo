@@ -145,7 +145,7 @@ const Filter: React.FC<FilterProps> = ({ count }) => {
             expandIconPosition='end'
             bordered={false}
             ghost
-            defaultActiveKey={['1']}
+            defaultActiveKey={['2']}
             className='border-none shadow-none py-0'
           />
       </section>
@@ -157,7 +157,7 @@ const Filter: React.FC<FilterProps> = ({ count }) => {
             expandIconPosition='end'
             bordered={false}
             ghost
-            defaultActiveKey={['1']}
+            defaultActiveKey={['3']}
             className='border-none shadow-none py-0'
           />
       </section>
