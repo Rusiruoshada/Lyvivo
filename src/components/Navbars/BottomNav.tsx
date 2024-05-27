@@ -27,7 +27,7 @@ const BottomNav: React.FC = () => {
       className='sticky top-0 bottom-auto left-0 right-0 z-20 mb-[35px] bg-white shadow-md drop-shadow-sm'
       sticky='top'
     >
-      <Container>
+      <Container style={{padding:0}}>
         <Navbar.Brand
           href='/'
           style={{
