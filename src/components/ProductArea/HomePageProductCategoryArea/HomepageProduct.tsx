@@ -4,9 +4,10 @@ import categories from '../../HomeShopByCategory/exportCategoryObject.tsx';
 import Carousel from 'react-multi-carousel';
 import responsive from './responsive.ts';
 import "react-multi-carousel/lib/styles.css";
+import { useSelector } from 'react-redux';
 
 interface HomepageProductProps {
-  productTitle: string;
+  productTitle: string[];
 }
 
 const cardTitle: string = 'hello kitty';
@@ -17,36 +18,41 @@ const badgeColor: string = 'var(--secondaryColor)';
 const saving: string = 'Save Rs.120.00';
 
 
-const HomepageProduct: React.FC<HomepageProductProps> = ({ productTitle }) => {
+const HomepageProduct: React.FC <HomepageProductProps> = ({ productTitle }) => {
+  const activeCategory = useSelector((state:any)=> state.homepageCategory.category)
+
+console.log(productTitle)
 
   return (
-
-    <div className="parent">
-      <h4 className='px-10'>{productTitle}</h4>
-      <Carousel
-        responsive={responsive}
-        autoPlay={false}
-        swipeable={true}
-        draggable={true}
-        showDots={false}
-        infinite={true}
-        partialVisible={true}
-        itemClass=''      
-      >
-        {[1,2,3,4,5].map((imageUrl, index) => (
-          <ItemCard
-            cardTitle={cardTitle}
-            cardDescription={cardDescription}
-            cardPrice={cardPrice}
-            badgeRibbonText={badgeRibbonText}
-            badgeColor={badgeColor}
-            saving={saving}
-            categories={categories}
-          />
-        ))}
-            
-      </Carousel>
-    </div>
+    {productTitle.map((title:string) => (
+      <div className="parent">
+        <h4 className='px-10'>{title}</h4>
+        <Carousel
+          responsive={responsive}
+          autoPlay={false}
+          swipeable={true}
+          draggable={true}
+          showDots={false}
+          infinite={true}
+          partialVisible={true}
+          itemClass=''      
+        >
+          {[1,2,3,4,5].map((imageUrl, index) => (
+            <ItemCard
+              cardTitle={cardTitle}
+              cardDescription={cardDescription}
+              cardPrice={cardPrice}
+              badgeRibbonText={badgeRibbonText}
+              badgeColor={badgeColor}
+              saving={saving}
+              categories={categories}
+              key={index}
+            />
+          ))}
+              
+        </Carousel>
+      </div>
+    ))}
   );
 };
 
