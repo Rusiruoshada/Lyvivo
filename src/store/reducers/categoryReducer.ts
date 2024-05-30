@@ -1,17 +1,17 @@
-import * as ACTIONS from '../actionConstants/categroyActions.ts';
-export interface CategorySelect {
-  category: { id: number; title: string };
-  allCategories: any;
-}
+import * as ACTIONS from '../actionConstants/categoryActions.ts';
+import { CategoryActionTypes } from '../actionTypes/categoryActionTypes.ts';
+import { ICategoryList } from '../../types/shoppingAreaTypes.ts';
 
-const CategoryInitState: CategorySelect = {
+
+
+const CategoryInitState: ICategoryList = {
   category: { id: 1, title: 'All' },
   allCategories: [],
 };
 
-export const categoryReducer: CategorySelect = (
-  state: CategorySelect = CategoryInitState,
-  action: any
+export const categoryReducer: any = (
+  state: ICategoryList = CategoryInitState,
+  action: CategoryActionTypes
 ) => {
   switch (action.type) {
     case ACTIONS.CHANGE_CATEGORY: {
