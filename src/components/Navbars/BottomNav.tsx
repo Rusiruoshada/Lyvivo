@@ -24,10 +24,11 @@ const BottomNav: React.FC = () => {
     <Navbar
       collapseOnSelect
       expand='lg'
-      className='sticky top-0 bottom-auto left-0 right-0 z-20 mb-[35px] bg-white shadow-md drop-shadow-sm'
+      className='sticky  top-0 bottom-auto left-0 right-0 z-20 mb-[35px] bg-white shadow-md drop-shadow-sm'
       sticky='top'
+      style={{justifyContent:'center'}}
     >
-      <Container style={{padding:0}}>
+      <Container style={{padding:0, margin: '0 2.5rem'}}>
         <Navbar.Brand
           href='/'
           style={{
