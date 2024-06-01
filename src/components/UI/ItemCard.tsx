@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Card, Badge } from 'antd';
-import { BsCart2 } from 'react-icons/bs';
+import { BsCart2, BsEscape, BsListCheck, BsTicketDetailed } from 'react-icons/bs';
 import DropDown from './DropDown.tsx';
 
 interface ItemCardProps {
@@ -16,6 +16,7 @@ interface ItemCardProps {
     children: {value: string; label: string;}[];
     imgPath: string;
   }[]
+  onClickFunction: React.MouseEventHandler<HTMLButtonElement>
 }
 
 const { Meta } = Card;
@@ -27,8 +28,10 @@ const ItemCard: React.FC<ItemCardProps> = ({
   badgeRibbonText,
   badgeColor,
   saving,
-  categories
+  categories,
+  onClickFunction
 }) => {
+
   return (
 
     <Card
@@ -51,18 +54,35 @@ const ItemCard: React.FC<ItemCardProps> = ({
       }
       className='scale-[0.80] hover:shadow-lg hover:pscale-[0.81] border-2'
       actions={[
+        <div className='flex flex-col gap-y-3 justify-center items-center'>
+        <Button
+          style={{
+            width: '90%',
+            backgroundColor: 'var(--primaryColor)',
+            borderColor: 'var(--primaryColor)',
+            color: 'white'
+          }}
+          className='hover:!bg-[var(--primaryColor)] hover:shadow-md hover:scale-105  text-[18px]'
+          size='large'
+          icon=<BsCart2 />
+          // onClick={onClickFunction}          
+        >
+          Add to Cart
+        </Button>
         <Button
           style={{
             width: '90%',
             color: 'var(--primaryColor)',
             borderColor: 'var(--primaryColor)',
           }}
-          className='hover:!bg-[var(--primaryColor)] hover:!text-white text-[18px]'
+          className='hover:shadow-md hover:scale-105 text-[18px] !items-center flex flex-row justify-center'
           size='large'
-          icon=<BsCart2 />
+          icon=<BsListCheck />
+          // onClick={onClickFunction}          
         >
-          Add to Cart
-        </Button>,
+          Details
+        </Button>
+        </div>
       ]}
     >
       <Meta title=<h4 className='font-bold  capitalize'>{cardTitle}</h4> />
