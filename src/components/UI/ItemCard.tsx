@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Card, Badge } from 'antd';
-import { BsCart2, BsEscape, BsListCheck, BsTicketDetailed } from 'react-icons/bs';
+import { BsCart2, BsListCheck } from 'react-icons/bs';
 import DropDown from './DropDown.tsx';
 
 interface ItemCardProps {
@@ -16,7 +16,8 @@ interface ItemCardProps {
     children: {value: string; label: string;}[];
     imgPath: string;
   }[]
-  onClickFunction: React.MouseEventHandler<HTMLButtonElement>
+  onClickFunction: any;
+  id: string
 }
 
 const { Meta } = Card;
@@ -29,7 +30,8 @@ const ItemCard: React.FC<ItemCardProps> = ({
   badgeColor,
   saving,
   categories,
-  onClickFunction
+  onClickFunction,
+  id
 }) => {
 
   return (
@@ -65,7 +67,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
           className='hover:!bg-[var(--primaryColor)] hover:shadow-md hover:scale-105  text-[18px]'
           size='large'
           icon=<BsCart2 />
-          // onClick={onClickFunction}          
+          onClick={()=>onClickFunction(id)}          
         >
           Add to Cart
         </Button>
