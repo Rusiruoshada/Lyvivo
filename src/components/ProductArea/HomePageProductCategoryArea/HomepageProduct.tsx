@@ -4,10 +4,11 @@ import categories from '../../HomeShopByCategory/exportCategoryObject.tsx';
 import Carousel from 'react-multi-carousel';
 import responsive from './responsive.ts';
 import "react-multi-carousel/lib/styles.css";
-import { useSelector } from 'react-redux';
+
 
 interface HomepageProductProps {
-  productTitle: string[];
+  productTitle: string;
+  onClickCard: any;
 }
 
 const cardTitle: string = 'hello kitty';
@@ -18,15 +19,15 @@ const badgeColor: string = 'var(--secondaryColor)';
 const saving: string = 'Save Rs.120.00';
 
 
-const HomepageProduct: React.FC <HomepageProductProps> = ({ productTitle }) => {
-  const activeCategory = useSelector((state:any)=> state.homepageCategory.category)
+const HomepageProduct: React.FC <HomepageProductProps> = ({ productTitle,  }) => {
 
-console.log(productTitle)
+const onClickCard = (id: string) => {
+  console.log(id)
+}
 
   return (
-    {productTitle.map((title:string) => (
       <div className="parent">
-        <h4 className='px-10'>{title}</h4>
+        <h4 className='px-10'>{productTitle}</h4>
         <Carousel
           responsive={responsive}
           autoPlay={false}
@@ -34,8 +35,7 @@ console.log(productTitle)
           draggable={true}
           showDots={false}
           infinite={true}
-          partialVisible={true}
-          itemClass=''      
+          partialVisible={true}    
         >
           {[1,2,3,4,5].map((imageUrl, index) => (
             <ItemCard
@@ -47,12 +47,13 @@ console.log(productTitle)
               saving={saving}
               categories={categories}
               key={index}
+              onClickFunction={onClickCard}
+              id={cardTitle+index.toString()}
             />
           ))}
               
         </Carousel>
       </div>
-    ))}
   );
 };
 
