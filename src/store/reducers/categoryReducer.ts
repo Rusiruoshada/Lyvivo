@@ -22,7 +22,6 @@ export const categoryReducer: any = (
       };
     }
     case ACTIONS.GET_ALL_CATEGORY: {
-      console.log(action);
       return {
         ...state,
         allCategories: action.payload,
