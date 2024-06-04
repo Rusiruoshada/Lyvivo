@@ -10,6 +10,22 @@ const categorySelectSlice = createSlice({
     name:'homepageCategorySelect',
     initialState:categoryInitState,
     reducers: {
-        
+        changeCategory(state,action){
+            const newCategory = action.payload;
+            return {
+                ...state,
+                category: newCategory,
+            };
+        },
+        getAllCategories(state,action){
+            return {
+                ...state,
+                allCategories: action.payload,
+            };
+        }
     }
 })
+
+export const {changeCategory, getAllCategories} = categorySelectSlice.actions;
+
+export default categorySelectSlice.reducer;
