@@ -2,6 +2,8 @@ import React from 'react';
 import { Card, Col, Row } from 'antd';
 import categories1 from './exportCategoryObject.tsx';
 import CategoryCard from './CategoryCards.tsx';
+import { useDispatch, useSelector } from 'react-redux';
+import { categorySelectAction } from '../../store/reducers/categorySlice.ts';
 
 const gridStyle: React.CSSProperties = {
   width: '100%',
@@ -9,7 +11,27 @@ const gridStyle: React.CSSProperties = {
 };
 
 
-const CategorySpace: React.FC = () => (
+
+const CategorySpace: React.FC = () => {
+
+  const dispatch = useDispatch();
+
+  const handleOnCategoryChange = (event) => {
+    if(event.target.ariaLabel === "All"){
+      dispatch(categorySelectAction.changeCategory({id: 1, title: "All"}));
+    }else if(event.target.ariaLabel === "Grocery"){
+      dispatch(categorySelectAction.changeCategory({id: 2, title: "Grocery"}));
+    }else if(event.target.ariaLabel === "Pharmacy"){
+      dispatch(categorySelectAction.changeCategory({id: 3, title: "Pharmacy"}));
+    }else if(event.target.ariaLabel === "Food"){
+      dispatch(categorySelectAction.changeCategory({id: 4, title: "Food"}));
+    }else if(event.target.ariaLabel === "Electronics"){
+      dispatch(categorySelectAction.changeCategory({id: 5, title: "Electronics"}));
+    }
+};
+
+
+return (
   <Card
     title={
       <h3 className='mb-3 sm:mb-3 md:mb-10 font-bold text-[var(--primaryColor)]'>
@@ -33,12 +55,13 @@ const CategorySpace: React.FC = () => (
               categoryName={categoryItem.value}
               categoryImg={categoryItem.imgPath}
               key={categoryItem.value}
+              onCardClick={handleOnCategoryChange}
             />
           </Card.Grid>
         </Col>
       ))}
     </Row>
   </Card>
-);
+)};
 
 export default CategorySpace;
