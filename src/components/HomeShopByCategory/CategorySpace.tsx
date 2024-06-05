@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Col, Row } from 'antd';
 import categories1 from './exportCategoryObject.tsx';
 import CategoryCard from './CategoryCards.tsx';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { categorySelectAction } from '../../store/reducers/categorySlice.ts';
 
 const gridStyle: React.CSSProperties = {
@@ -16,7 +16,7 @@ const CategorySpace: React.FC = () => {
 
   const dispatch = useDispatch();
 
-  const handleOnCategoryChange = (event) => {
+  const handleOnCategoryChange = (event:any) => {
     if(event.target.ariaLabel === "All"){
       dispatch(categorySelectAction.changeCategory({id: 1, title: "All"}));
     }else if(event.target.ariaLabel === "Grocery"){
@@ -28,7 +28,7 @@ const CategorySpace: React.FC = () => {
     }else if(event.target.ariaLabel === "Electronics"){
       dispatch(categorySelectAction.changeCategory({id: 5, title: "Electronics"}));
     }
-};
+  };
 
 
 return (
