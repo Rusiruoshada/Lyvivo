@@ -1,13 +1,12 @@
-import * as ACTIONS from '../actionConstants/categoryActions'
 import { ICategoryList } from '../../types/shoppingAreaTypes' 
 
 export interface ChangeCategory {
-    type: typeof ACTIONS.CHANGE_CATEGORY
+    type: string
     payload: ICategoryList
 }
 
 export interface GetAllCategoriesActionType {
-    type: typeof ACTIONS.GET_ALL_CATEGORY
+    type:string
     payload: ICategoryList[]
 }
 
