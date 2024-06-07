@@ -2,7 +2,12 @@ import React, { useState } from 'react';
 import type { DrawerProps } from 'antd';
 import { Button, Drawer, Space } from 'antd';
 
-const CartDrawer: React.FC = () => {
+interface CartDrawerProps{
+  openCart: any
+}
+
+const CartDrawer: React.FC<CartDrawerProps> = ({openCart}) => {
+  
   const [open, setOpen] = useState(false);
   
   const showDrawer = () => {
