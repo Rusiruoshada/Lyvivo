@@ -1,17 +1,10 @@
-import {ChangeCategory, GetAllCategoriesActionType } from "../actionTypes/categoryActionTypes";
-import * as ACTIONS from '../actionConstants/categoryActions.ts'
-import { ICategory } from "../../types/shoppingAreaTypes";
+import { ICategoryList } from '../../types/shoppingAreaTypes';
 
-export const changeCategory:any = (category:ICategory) => {
-    return{
-        type: ACTIONS.CHANGE_CATEGORY,
-        payload: category
-    }
-}
+export const changeCategory: any = (state: ICategoryList, action: any) => {
+  const newCategory = action.payload;
+  state.category = newCategory;
+};
 
-export const getAllCategories:any = (categories: ICategory[]) => {
-    return {
-      type: ACTIONS.GET_ALL_CATEGORY,
-      payload: categories
-    }
-  }
+export const getAllCategories: any = (state: ICategoryList, action: any) => {
+  state.allCategories = action.payload;
+};
