@@ -1,11 +1,14 @@
 import React, {useState } from 'react';
-import { MinusOutlined, PlusOutlined } from '@ant-design/icons';
 import {Badge, Button, Space } from 'antd';
 import { BsCart3 } from 'react-icons/bs';
 
 const ButtonGroup = Button.Group;
 
-const CartBadge: React.FC = () => {
+interface CartBadgeProps {
+  onOpenCart?: any
+}
+
+const CartBadge: React.FC<CartBadgeProps> = ({onOpenCart}) => {
   const [count, setCount] = useState(1);
 
   const increase = () => {
@@ -20,9 +23,10 @@ const CartBadge: React.FC = () => {
     setCount(newCount);
   };
 
+  const isOpen = false;
 
   return (
-    <Space direction="vertical">
+    <Space direction="vertical" onClick={() =>onOpenCart(!isOpen)} >
       <Space size="large">
         <Badge count={count} color='var(--primaryColor)'>
             <BsCart3 className='text-[var(--primaryColor)] font-bold text-2xl' />
