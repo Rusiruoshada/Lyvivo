@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -6,6 +6,7 @@ import CartBadge from './CartBadge.tsx';
 import SearchBar from '../SearchBar/SearchBar.tsx';
 import DropDown from '../UI/DropDown.tsx';
 import categories from '../HomeShopByCategory/exportCategoryObject.tsx';
+import CartDrawer from '../UI/CartDrawer.tsx';
 
 interface navLinks {
   dropDown: string[];
@@ -20,15 +21,21 @@ const BottomNav: React.FC = () => {
     navLinks: ['Home', 'FAQ', 'About Us', 'Contact Us'],
   };
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const onCartOpen = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <Navbar
       collapseOnSelect
       expand='lg'
-      className='sticky  top-0 bottom-auto left-0 right-0 z-20 mb-[35px] bg-white shadow-md drop-shadow-sm'
+      className='sticky top-0 bottom-auto left-0 right-0 mb-[35px] bg-white shadow-md drop-shadow-sm !z-[100]'
       sticky='top'
-      style={{justifyContent:'center'}}
+      style={{ justifyContent: 'center' }}
     >
-      <Container style={{padding:0, margin: '0 2.5rem'}}>
+      <Container style={{ padding: 0, margin: '0 2.5rem' }}>
         <Navbar.Brand
           href='/'
           style={{
@@ -47,7 +54,11 @@ const BottomNav: React.FC = () => {
             style={{ padding: '0.5rem', zIndex: 10 }}
           >
             <Nav className='flex justify-end '>
-              <DropDown categories={categories} displayRender={displayRender} placeholderName='Categories' />
+              <DropDown
+                categories={categories}
+                displayRender={displayRender}
+                placeholderName='Categories'
+              />
               {navLinks.navLinks.map((link) => (
                 <Nav.Link
                   className='hover:font-medium hover:text-[var(--primaryColor)] hover:border  text-gray-400  transition-all duration-500'
@@ -60,11 +71,9 @@ const BottomNav: React.FC = () => {
             </Nav>
           </Navbar.Collapse>
           <Nav>
-            <Nav.Link
-              href='#cart'
-              style={{ display: 'flex', alignItems: 'center' }}
-            >
-              <CartBadge />
+            <Nav.Link style={{ display: 'flex', alignItems: 'center' }}>
+              <CartBadge onOpenCart={onCartOpen} />
+              <CartDrawer openCart={isOpen} onOpenCart={onCartOpen} />
             </Nav.Link>
           </Nav>
         </div>
