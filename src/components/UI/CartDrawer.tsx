@@ -1,44 +1,31 @@
-import React, { useState } from 'react';
+import React from 'react';
 import type { DrawerProps } from 'antd';
 import { Button, Drawer, Space } from 'antd';
 
 interface CartDrawerProps {
-  openCart: any;
+  openCart: boolean;
+  onOpenCart:any;
 }
 
-const CartDrawer: React.FC<CartDrawerProps> = ({ openCart }) => {
-  const [open, setOpen] = useState(false);
+const CartDrawer: React.FC<CartDrawerProps> = ({ openCart,onOpenCart }) => {
 
-  // alert(openCart)
-
-  const showDrawer = () => {
-    setOpen(true);
-  };
-
-  const onClose = () => {
-    setOpen(false);
-  };
 
   return (
-    <>
-      <Space>
-        <Button type='primary' onClick={showDrawer}>
-          Open
-        </Button>
-      </Space>
+    <div className='z-[1021]'>
       <Drawer
         title='Basic Drawer'
         placement={'right'}
-        closable={false}
-        onClose={onClose}
-        open={open}
+        closable={true}
+        onClose={onOpenCart}
+        open={openCart}
         key={'right'}
+        
       >
         <p>Some contents...</p>
         <p>Some contents...</p>
         <p>Some contents...</p>
       </Drawer>
-    </>
+    </div>
   );
 };
 
