@@ -23,10 +23,9 @@ const CartBadge: React.FC<CartBadgeProps> = ({onOpenCart}) => {
     setCount(newCount);
   };
 
-  const isOpen = false;
 
   return (
-    <Space direction="vertical" onClick={() =>onOpenCart(!isOpen)} >
+    <Space direction="vertical" onClick={onOpenCart} >
       <Space size="large">
         <Badge count={count} color='var(--primaryColor)'>
             <BsCart3 className='text-[var(--primaryColor)] font-bold text-2xl' />
