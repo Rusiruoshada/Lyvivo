@@ -1,6 +1,7 @@
 import React, {useState } from 'react';
 import {Badge, Button, Space } from 'antd';
 import { BsCart3 } from 'react-icons/bs';
+import { useSelector } from 'react-redux';
 
 const ButtonGroup = Button.Group;
 
@@ -9,6 +10,9 @@ interface CartBadgeProps {
 }
 
 const CartBadge: React.FC<CartBadgeProps> = ({onOpenCart}) => {
+
+  const countProduct = useSelector((state) => state.productCount)
+
   const [count, setCount] = useState(1);
 
   const increase = () => {
@@ -22,7 +26,6 @@ const CartBadge: React.FC<CartBadgeProps> = ({onOpenCart}) => {
     }
     setCount(newCount);
   };
-
 
   return (
     <Space direction="vertical" onClick={onOpenCart} >
