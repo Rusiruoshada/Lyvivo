@@ -11,7 +11,10 @@ interface CartBadgeProps {
 
 const CartBadge: React.FC<CartBadgeProps> = ({onOpenCart}) => {
 
-  const countProduct = useSelector((state) => state.productCount)
+  const countProduct = useSelector((state:any) => state.cartProduct)
+  
+  console.log('count product ')
+  console.log(countProduct)
 
   const [count, setCount] = useState(1);
 
