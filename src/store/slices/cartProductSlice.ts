@@ -1,7 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { addProduct } from "../actions/cartProductActions.ts";
 
-const cartProductsInitialState = {
+interface CartProductsInitialState {
+    cartProducts: {id:string}[],
+    productCount: number
+}
+
+const cartProductsInitialState:CartProductsInitialState = {
     cartProducts: [],
     productCount: 0,
 }
@@ -10,7 +15,11 @@ const cartProductSlice = createSlice({
     name:'cartProduct',
     initialState: cartProductsInitialState,
     reducers: {
-        addProduct : addProduct,
+        // addProducts : addProduct,
+        addProduct(state:any, action:any):any  {
+            const currentProductCount = action.payload;
+            state.productCount += currentProductCount ;
+        }
 
     }
 });
