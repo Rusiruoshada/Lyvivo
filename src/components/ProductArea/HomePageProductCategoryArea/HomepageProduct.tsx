@@ -4,8 +4,8 @@ import categories from '../../HomeShopByCategory/exportCategoryObject.tsx';
 import Carousel from 'react-multi-carousel';
 import responsive from './responsive.ts';
 import "react-multi-carousel/lib/styles.css";
-import { useDispatch, useSelector } from 'react-redux';
-import { cartProduct } from '../../../store/slices/cartProductSlice.ts';
+import { useDispatch } from 'react-redux';
+import { cartProductAction } from '../../../store/slices/cartProductSlice.ts';
 
 
 interface HomepageProductProps {
@@ -22,11 +22,15 @@ const saving: string = 'Save Rs.120.00';
 
 
 const HomepageProduct: React.FC <HomepageProductProps> = ({ productTitle,  }) => {
+
 const dispatch = useDispatch();
 
 const onClickCard = (id: string) => {
   console.log(id)
-  dispatch(cartProduct.addProduct(1))
+  dispatch(cartProductAction.addProduct({               
+    cartProducts: id,
+    productCount: 1,
+  }))
 }
 
   return (
