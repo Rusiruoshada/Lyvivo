@@ -1,10 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { addProduct } from "../actions/cartProductActions.ts";
+import { CartProductsInitialState } from "../actionTypes/cartActionTypes.ts";
 
-interface CartProductsInitialState {
-    cartProducts: {id:string}[],
-    productCount: number
-}
+
 
 const cartProductsInitialState:CartProductsInitialState = {
     cartProducts: [],
@@ -15,15 +13,10 @@ const cartProductSlice = createSlice({
     name:'cartProduct',
     initialState: cartProductsInitialState,
     reducers: {
-        // addProducts : addProduct,
-        addProduct(state:any, action:any):any  {
-            const currentProductCount = action.payload;
-            state.productCount += currentProductCount ;
-        }
-
+        addProduct : addProduct,
     }
 });
 
-export const cartProduct = cartProductSlice.actions;
+export const cartProductAction = cartProductSlice.actions;
 
 export default cartProductSlice.reducer;
