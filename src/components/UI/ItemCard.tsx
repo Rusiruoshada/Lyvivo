@@ -91,7 +91,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
       <DropDown
         placeholderName='place'
         categories={categories}
-        className='[&_div]:!bg-gray-200 w-100 my-3  '
+        className='[&_div]:!bg-gray-200 w-100 my-3'
       />
       <Meta
         title=<h4 className='font-medium  m-0 capitalize'>Rs. {cardPrice}</h4>
