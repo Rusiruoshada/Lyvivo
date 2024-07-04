@@ -9,7 +9,7 @@ interface ItemCardProps {
   cardPrice: string;
   badgeRibbonText?: string;
   badgeColor?: string;
-  saving?: string;
+  saving?: number;
   categories: {
     value: string;
     label: string;
@@ -18,6 +18,7 @@ interface ItemCardProps {
   }[]
   onClickFunction: any;
   id: string
+  image: string
 }
 
 const { Meta } = Card;
@@ -31,7 +32,8 @@ const ItemCard: React.FC<ItemCardProps> = ({
   saving,
   categories,
   onClickFunction,
-  id
+  id,
+  image
 }) => {
 
   return (
@@ -41,7 +43,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
       cover={
         <Badge.Ribbon text={badgeRibbonText} color={badgeColor}>
           <Badge.Ribbon
-            text={saving}
+            text={'Save Rs.'+saving}
             placement='start'
             color='var(--savingBadgeColor)'
             className={`text-[18px] py-1 ${!saving ? 'hidden' : ''}`}
@@ -49,12 +51,12 @@ const ItemCard: React.FC<ItemCardProps> = ({
             <img
               className='aspect-square '
               alt='example'
-              src='./images/Pic923056.jpg'
+              src={image}
             />
           </Badge.Ribbon>
         </Badge.Ribbon>
       }
-      className='scale-[0.80] hover:shadow-lg hover:pscale-[0.81] border-2'
+      className='scale-[0.80] hover:shadow-lg] border-2'
       actions={[
         <div className='flex flex-col gap-y-3 justify-center items-center'>
         <Button
@@ -94,10 +96,11 @@ const ItemCard: React.FC<ItemCardProps> = ({
         className='[&_div]:!bg-gray-200 w-100 my-3'
       />
       <Meta
-        title=<h4 className='font-medium  m-0 capitalize'>Rs. {cardPrice}</h4>
+        title=<div> <h4 className='font-medium  m-0 capitalize'>Rs. {cardPrice}</h4><h5 className='line-through semibold text-red-300'>Rs. {cardPrice + saving}</h5></div>
         description=<p className='text-[18px]  m-0 capitalize'>
           {cardDescription}
         </p>
+
       />
     </Card>
   );
