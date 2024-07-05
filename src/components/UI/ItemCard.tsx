@@ -10,7 +10,7 @@ interface ItemCardProps {
   badgeRibbonText?: string;
   badgeColor?: string;
   saving?: number;
-  onClickFunction: any;
+  onAddToCartClick: any;
   id: string;
   image: string;
   weight?: string;
@@ -23,7 +23,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
   badgeRibbonText,
   badgeColor,
   saving,
-  onClickFunction,
+  onAddToCartClick,
   id,
   image,
   weight,
@@ -73,7 +73,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
             className='hover:!bg-[var(--primaryColor)] hover:shadow-md hover:scale-105  text-[18px]'
             size='large'
             icon=<BsCart2 />
-            onClick={() => onClickFunction(id)}
+            onClick={() => onAddToCartClick(id)}
           >
             Add to Cart
           </Button>
@@ -86,7 +86,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
             className='hover:shadow-md hover:scale-105 text-[18px] !items-center flex flex-row justify-center'
             size='large'
             icon=<BsListCheck />
-            // onClick={onClickFunction}
+            href={`/product/${id}`}
           >
             Details
           </Button>
