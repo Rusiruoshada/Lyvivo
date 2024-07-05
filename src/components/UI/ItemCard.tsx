@@ -1,7 +1,7 @@
-import React from 'react';
-import { Button, Card, Badge } from 'antd';
+import React, { useState } from 'react';
+import { Button, Card, Badge, Radio, RadioChangeEvent } from 'antd';
 import { BsCart2, BsListCheck } from 'react-icons/bs';
-import DropDown from './DropDown.tsx';
+
 
 interface ItemCardProps {
   cardTitle: string;
@@ -10,18 +10,11 @@ interface ItemCardProps {
   badgeRibbonText?: string;
   badgeColor?: string;
   saving?: number;
-  categories: {
-    value: string;
-    label: string;
-    children: {value: string; label: string;}[];
-    imgPath: string;
-  }[]
   onClickFunction: any;
-  id: string
-  image: string
+  id: string;
+  image: string;
+  weight?: string;
 }
-
-const { Meta } = Card;
 
 const ItemCard: React.FC<ItemCardProps> = ({
   cardTitle,
@@ -30,77 +23,96 @@ const ItemCard: React.FC<ItemCardProps> = ({
   badgeRibbonText,
   badgeColor,
   saving,
-  categories,
   onClickFunction,
   id,
-  image
+  image,
+  weight,
 }) => {
+  const { Meta } = Card;
+
+  const [value, setValue] = useState();
+
+  const onWeightChange = ({ target: { value } }: RadioChangeEvent) => {
+    console.log('radio3 checked', value);
+    setValue(value);
+  };
+
+
+
+  const options = weight
+    ? [
+        { label: weight + 'g', value: weight + 'g' },
+      ]
+    : [];
 
   return (
-
     <Card
       style={{ width: 300 }}
       cover={
         <Badge.Ribbon text={badgeRibbonText} color={badgeColor}>
           <Badge.Ribbon
-            text={'Save Rs.'+saving}
+            text={'Save Rs.' + saving}
             placement='start'
             color='var(--savingBadgeColor)'
             className={`text-[18px] py-1 ${!saving ? 'hidden' : ''}`}
           >
-            <img
-              className='aspect-square '
-              alt='example'
-              src={image}
-            />
+            <img className='aspect-square ' alt='example' src={image} />
           </Badge.Ribbon>
         </Badge.Ribbon>
       }
       className='scale-[0.80] hover:shadow-lg] border-2'
       actions={[
         <div className='flex flex-col gap-y-3 justify-center items-center'>
-        <Button
-          style={{
-            width: '90%',
-            backgroundColor: 'var(--primaryColor)',
-            borderColor: 'var(--primaryColor)',
-            color: 'white'
-          }}
-          className='hover:!bg-[var(--primaryColor)] hover:shadow-md hover:scale-105  text-[18px]'
-          size='large'
-          icon=<BsCart2 />
-          onClick={()=>onClickFunction(id)}          
-        >
-          Add to Cart
-        </Button>
-        <Button
-          style={{
-            width: '90%',
-            color: 'var(--primaryColor)',
-            borderColor: 'var(--primaryColor)',
-          }}
-          className='hover:shadow-md hover:scale-105 text-[18px] !items-center flex flex-row justify-center'
-          size='large'
-          icon=<BsListCheck />
-          // onClick={onClickFunction}          
-        >
-          Details
-        </Button>
-        </div>
+          <Button
+            style={{
+              width: '90%',
+              backgroundColor: 'var(--primaryColor)',
+              borderColor: 'var(--primaryColor)',
+              color: 'white',
+            }}
+            className='hover:!bg-[var(--primaryColor)] hover:shadow-md hover:scale-105  text-[18px]'
+            size='large'
+            icon=<BsCart2 />
+            onClick={() => onClickFunction(id)}
+          >
+            Add to Cart
+          </Button>
+          <Button
+            style={{
+              width: '90%',
+              color: 'var(--primaryColor)',
+              borderColor: 'var(--primaryColor)',
+            }}
+            className='hover:shadow-md hover:scale-105 text-[18px] !items-center flex flex-row justify-center'
+            size='large'
+            icon=<BsListCheck />
+            // onClick={onClickFunction}
+          >
+            Details
+          </Button>
+        </div>,
       ]}
     >
-      <Meta title=<h4 className='font-bold  capitalize'>{cardTitle}</h4> />
-      <DropDown
-        placeholderName='place'
-        categories={categories}
-        className='[&_div]:!bg-gray-200 w-100 my-3'
+      <Meta title=<h4 className={`font-bold  capitalize ${cardTitle.length > 18? 'text-wrap text-[18px]' : ''} `} title={cardTitle}>{cardTitle}</h4> />
+
+      <Radio.Group
+        options={options}
+        onChange={onWeightChange}
+        value={value}
+        optionType='button'
+        className='w-100 my-3'
       />
+      
       <Meta
-        title=<div> <h4 className='font-medium  m-0 capitalize'>Rs. {cardPrice}</h4><h5 className='line-through semibold text-red-300'>Rs. {cardPrice + saving}</h5></div>
+        title=<div>
+          <h4 className='font-medium  m-0 capitalize'>Rs. {cardPrice}</h4>
+          <h5 className='line-through semibold text-red-300'>
+            Rs. {cardPrice + saving}
+          </h5>
+        </div>
         description=<p className='text-[18px]  m-0 capitalize'>
           {cardDescription}
         </p>
-
       />
     </Card>
   );
