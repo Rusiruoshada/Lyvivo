@@ -59,20 +59,25 @@ const HomepageProduct: React.FC<HomepageProductProps> = ({ productTitle }) => {
         partialVisible={true}
         className='[&>button]:z-50'
       >
-        {productQuery.data.map((product: any, index) => (
+        {productQuery.data.map((product: any, index) => {
+         const saving = parseFloat((product.regularPrice - product.discountPrice).toFixed(2));
+
+          
+         return (
           <ItemCard
             cardTitle={product.productName}
             cardDescription={cardDescription}
-            cardPrice={product.regularPrice}
+            cardPrice={product.discountPrice? product.discountPrice : product.regularPrice}
             badgeRibbonText={badgeRibbonText}
             badgeColor={badgeColor}
             saving={saving}
-            categories={categories}
             key={index}
             onClickFunction={onClickCard}
             id={product._id}
+            image={product.image}
+            weight={product.weight}
           />
-        ))}
+        )})}
       </Carousel>
     </div>
   );
