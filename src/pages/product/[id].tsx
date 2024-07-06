@@ -1,9 +1,12 @@
 import React from 'react';
+import {useParams} from 'react-router-dom';
 import Images from '../../components/ProductDetails/Image.tsx';
 import Description from '../../components/ProductDetails/Description.tsx';
 import ProductSpace from '../../components/ProductArea/ProductSpace.tsx';
 import HomepageProduct from '../../components/ProductArea/HomePageProductCategoryArea/HomepageProduct.tsx';
 import Path from '../../components/Breadcrumb/Breadcrumb.tsx';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
 
 interface ImageType {
@@ -40,18 +43,38 @@ const productCarousel:any = [
 ];
 
 const SingleProductPage = () => {
+  let { id } = useParams<{ id: string }>();
+
+  const showProductQuery = useQuery({
+    queryKey: ['getSelectProduct'],
+    queryFn: async () => {
+      const response = await axios.get(`http://localhost:5000/api/products/${id}`);
+      const data = response.data;
+      return data;
+    },
+  });
+
+  // console.log(showProductQuery.data);
+
+  if (showProductQuery.isLoading) return <h1>Loading...</h1>;
+  if (showProductQuery.isError) return <h1>Error loading data...</h1>;
+
+  const showProductDetails = showProductQuery.data;
+
+  const {productName, category, weight, regularPrice,discountPrice, description, image} = showProductDetails;
+
   return (
     <>
-    <Path currentPath='Mangosteen' />
+    <Path currentPath={productName} />
     <div className='flex items-center  sm:gap-1 md:gap-2 lg:gap-16  px-10 py-20 max-lg:flex-col max-sm:py-0 max-sm:px-4 mb-10'>
-      <Images images={images} />
+      <Images images={image} />
       <Description
-        title={undefined}
-        productName='Mangosteen'
-        description={undefined}
-        originalPrice={250}
+        title={category}
+        productName={productName}
+        description={description}
+        originalPrice={regularPrice}
         percentage={50}
-        size={[500,1000]}
+        size={weight}
       />
     </div>
     <div>
