@@ -18,9 +18,11 @@ const Description: React.FC<DescriptionProps> = ({
   productName,
   description = undefined,
   originalPrice,
+  savingPrice=0,
   percentage = 0,
   size,
 }) => {
+
   const [count, setCount] = useState(1);
   // const [totalPrice, setTotalPrice] = useState(originalPrice)
 
@@ -46,7 +48,7 @@ const Description: React.FC<DescriptionProps> = ({
     alert('Product has been added to cart');
   };
 
-  const savingPrice = originalPrice - (originalPrice * percentage) / 100;
+
 
   return (
     <div className='w-full sm:w-full md:w-4/5  lg:w-1/2 lg:pr-10'>
