@@ -63,18 +63,22 @@ const SingleProductPage = () => {
 
   const {productName, category, weight, regularPrice,discountPrice, description, image} = showProductDetails;
 
+  const discountPercentage = parseFloat((((regularPrice - discountPrice)/regularPrice ) * 100).toFixed(2)) ;
+
+  
   return (
     <>
     <Path currentPath={productName} />
     <div className='flex items-center  sm:gap-1 md:gap-2 lg:gap-16  px-10 py-20 max-lg:flex-col max-sm:py-0 max-sm:px-4 mb-10'>
-      <Images images={image} />
+      <Images images={images} />
       <Description
         title={category}
         productName={productName}
         description={description}
         originalPrice={regularPrice}
-        percentage={50}
-        size={weight}
+        percentage={discountPercentage}
+        savingPrice={discountPrice}
+        size={[weight]}
       />
     </div>
     <div>
