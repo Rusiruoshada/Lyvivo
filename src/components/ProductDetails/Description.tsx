@@ -10,7 +10,7 @@ interface DescriptionProps {
   originalPrice: number;
   savingPrice?: number;
   percentage?: number;
-  size?: number[];
+  size?: number;
 }
 
 const Description: React.FC<DescriptionProps> = ({
@@ -20,17 +20,17 @@ const Description: React.FC<DescriptionProps> = ({
   originalPrice,
   savingPrice=0,
   percentage = 0,
-  size,
+  size = undefined ,
 }) => {
 
   const [count, setCount] = useState(1);
-  // const [totalPrice, setTotalPrice] = useState(originalPrice)
+  const [totalPrice, setTotalPrice] = useState(savingPrice)
 
   const add = () => {
     setCount((prevCount) => prevCount + 1);
-    // setTotalPrice(originalPrice * count);
+    setTotalPrice(originalPrice * count);
   };
-
+ 
   const minus = () => {
     setCount((prevCount) => {
       if (prevCount <= 1) {
@@ -39,8 +39,10 @@ const Description: React.FC<DescriptionProps> = ({
         return prevCount - 1;
       }
     });
-    // setTotalPrice(originalPrice * count);
+    setTotalPrice(originalPrice * count);
   };
+
+  // alert(totalPrice)
 
   const addToChart = () => {
     // setTotalPrice(totalPrice * count);
@@ -83,27 +85,8 @@ const Description: React.FC<DescriptionProps> = ({
         )}
       </div>
       <div className='flex items-center justify-center gap-5 flex-col sm:flex-col md:flex-row lg:flex-row lg:items-center max-sm:clear-right'>
-        {size ? (
-          <Space.Compact>
-            {size.map((itemSize, index) => (
-              <Tooltip key={index}>
-                {
-                  <Input
-                    type='submit'
-                    value={`${itemSize >= 1000 ? itemSize / 1000 : itemSize} ${
-                      itemSize >= 1000 ? 'Kg' : 'g'
-                    }`}
-                    onClick={() => {
-                      alert(itemSize);
-                    }}
-                    className='items-center justify-between px-3 py-2 rounded-lg w-1/2 max-sm:w-full gap-2'
-                  />
-                }
-              </Tooltip>
-            ))}
-          </Space.Compact>
-        ) : (
-          <div
+        {size === undefined ? (
+            <div
             className='flex items-center justify-between px-3 py-2 rounded-lg w-1/2 max-sm:w-full gap-2'
             style={{ backgroundColor: '#00000011' }}
           >
@@ -113,6 +96,22 @@ const Description: React.FC<DescriptionProps> = ({
 
             <FaPlus className='cursor-pointer w-4 text-3xl' onClick={add} />
           </div>
+        ) : (
+          <Space.Compact>
+            <Tooltip>
+                <Input
+                  type='submit'
+                  value={`${size >= 1000 ? size / 1000 : size} ${
+                    size >= 1000 ? 'Kg' : 'g'
+                  }`}
+                  onClick={() => {
+                    alert(size);
+                  }}
+                  className='items-center justify-between px-3 py-2 rounded-lg w-full max-sm:w-full gap-2'
+                />
+            </Tooltip>
+        </Space.Compact>
+          
         )}
         <Button
           onClick={addToChart}
