@@ -9,34 +9,12 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
 
+
 interface ImageType {
-  thumbnail: string;
-  fullSize: string;
+  thumbnail: any;
+  fullSize: any;
   alt: string;
 }
-
-const images: ImageType[] = [
-  {
-    thumbnail: '/Pic923056.jpg',
-    fullSize: '/images/Pic923056.jpg',
-    alt: '1',
-  },
-  {
-    thumbnail: '/slide1.png',
-    fullSize: '/images/slide1.png',
-    alt: '2',
-  },
-  {
-    thumbnail: '/slide2.png',
-    fullSize: '/images/slide2.png',
-    alt: '3',
-  },
-  {
-    thumbnail: '/slide3.jpg',
-    fullSize: '/images/slide3.jpg',
-    alt: '4',
-  },
-];
 
 const productCarousel:any = [
   <HomepageProduct productTitle='You may also like' />,
@@ -54,7 +32,6 @@ const SingleProductPage = () => {
     },
   });
 
-  // console.log(showProductQuery.data);
 
   if (showProductQuery.isLoading) return <h1>Loading...</h1>;
   if (showProductQuery.isError) return <h1>Error loading data...</h1>;
@@ -62,6 +39,31 @@ const SingleProductPage = () => {
   const showProductDetails = showProductQuery.data;
 
   const {productName, category, weight, regularPrice,discountPrice, description, image} = showProductDetails;
+
+  
+
+  const images: ImageType[] = [
+    {
+      thumbnail: {image},
+      fullSize: {image},
+      alt: '1',
+    },
+    {
+      thumbnail: '/slide1.png',
+      fullSize: '/images/slide1.png',
+      alt: '2',
+    },
+    {
+      thumbnail: '/slide2.png',
+      fullSize: '/images/slide2.png',
+      alt: '3',
+    },
+    {
+      thumbnail: '/slide3.jpg',
+      fullSize: '/images/slide3.jpg',
+      alt: '4',
+    },
+  ];
 
   const discountPercentage = parseFloat((((regularPrice - discountPrice)/regularPrice ) * 100).toFixed(2)) ;
 
@@ -78,7 +80,7 @@ const SingleProductPage = () => {
         originalPrice={regularPrice}
         percentage={discountPercentage}
         savingPrice={discountPrice}
-        size={[weight]}
+        size={weight}
       />
     </div>
     <div>
