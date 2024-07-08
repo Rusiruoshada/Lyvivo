@@ -11,7 +11,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart,onOpenCart }) => {
 
 
   return (
-    <div className='z-[1021]'>
+    <div className='z-[102]'>
       <Drawer
         title='Basic Drawer'
         placement={'right'}
