@@ -18,10 +18,11 @@ interface HomepageProductProps {
 const cardDescription: string = '(Inclusive of all taxes)';
 const badgeRibbonText: string = 'In Stock';
 const badgeColor: string = 'var(--secondaryColor)';
-const saving: string = 'Save Rs.120.00';
+
 
 const HomepageProduct: React.FC<HomepageProductProps> = ({ productTitle }) => {
   const dispatch = useDispatch();
+
   const productQuery = useQuery({
     queryKey: ['product'],
     queryFn: async () => {
@@ -31,12 +32,13 @@ const HomepageProduct: React.FC<HomepageProductProps> = ({ productTitle }) => {
     },
   });
 
-  console.log(productQuery.data);
-
+  
   if (productQuery.isLoading) return <h1>Loading...</h1>;
   if (productQuery.isError) return <h1>Error loading data...</h1>;
 
-  const onClickCard = (id: string) => {
+  const productDetails = productQuery.data;
+  
+  const onAddToCartClick = (id: string) => {
     console.log(id);
     dispatch(
       cartProductAction.addProduct({
@@ -59,10 +61,10 @@ const HomepageProduct: React.FC<HomepageProductProps> = ({ productTitle }) => {
         partialVisible={true}
         className='[&>button]:z-50'
       >
-        {productQuery.data.map((product: any, index) => {
+        {productDetails?.map((product: any) => {
+
          const saving = parseFloat((product.regularPrice - product.discountPrice).toFixed(2));
 
-          
          return (
           <ItemCard
             cardTitle={product.productName}
@@ -71,8 +73,8 @@ const HomepageProduct: React.FC<HomepageProductProps> = ({ productTitle }) => {
             badgeRibbonText={badgeRibbonText}
             badgeColor={badgeColor}
             saving={saving}
-            key={index}
-            onClickFunction={onClickCard}
+            key={product._id}
+            onAddToCartClick={onAddToCartClick}
             id={product._id}
             image={product.image}
             weight={product.weight}
