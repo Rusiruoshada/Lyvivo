@@ -7,6 +7,7 @@ import { CartProductsInitialState } from "../actionTypes/cartActionTypes.ts";
 const cartProductsInitialState:CartProductsInitialState = {
     cartProducts: [],
     productCount: 0,
+    cartProductCount: 1
 }
 
 const cartProductSlice = createSlice({
