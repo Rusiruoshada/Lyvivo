@@ -1,6 +1,7 @@
 export interface CartProductsInitialState {
     cartProducts: {id:string}[],
-    productCount: number
+    productCount: number,
+    cartProductCount: number,
 }
 
 export interface addProductAction {
