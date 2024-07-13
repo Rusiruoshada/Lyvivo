@@ -1,7 +1,8 @@
 export interface CartProductsInitialState {
-    cartProducts: {id:string}[],
-    productCount: number,
-    cartProductCount: number,
+    cartProducts?: {id:string}[],
+    productCount?: number,
+    cartProductCount?: number,
+    totalPriceForProduct? : number,
 }
 
 export interface addProductAction {
