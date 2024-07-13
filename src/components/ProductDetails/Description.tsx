@@ -1,7 +1,10 @@
 import { Button, Input, Space, Tooltip } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BsCart2 } from 'react-icons/bs';
 import { FaMinus, FaPlus } from 'react-icons/fa';
+import { useDispatch, useSelector } from 'react-redux';
+import { cartProductAction } from '../../store/slices/cartProductSlice.ts';
+
 
 interface DescriptionProps {
   title?: string;
@@ -22,15 +25,18 @@ const Description: React.FC<DescriptionProps> = ({
   percentage = 0,
   size = undefined ,
 }) => {
-
+  
+  const dispatch = useDispatch()
   const [count, setCount] = useState(1);
-  const [totalPrice, setTotalPrice] = useState(savingPrice)
-
+  
   const add = () => {
     setCount((prevCount) => prevCount + 1);
-    setTotalPrice(originalPrice * count);
+    dispatch(cartProductAction.totalPrice({
+      cartProductCount: 1,
+      totalPriceForProduct: savingPrice * count,
+    }))
   };
- 
+  
   const minus = () => {
     setCount((prevCount) => {
       if (prevCount <= 1) {
@@ -39,10 +45,16 @@ const Description: React.FC<DescriptionProps> = ({
         return prevCount - 1;
       }
     });
-    setTotalPrice(originalPrice * count);
+    if(count===1) return;
+    dispatch(cartProductAction.totalPrice({
+      cartProductCount: -1,
+      totalPriceForProduct: savingPrice * count,
+    }))
   };
-
-  // alert(totalPrice)
+  
+  const cartProductCount = useSelector((state:any) => state.cartShow.totalPriceForProduct)
+ 
+  console.log(cartProductCount)
 
   const addToChart = () => {
     // setTotalPrice(totalPrice * count);
@@ -67,7 +79,7 @@ const Description: React.FC<DescriptionProps> = ({
         <div className='flex items-center gap-4'>
           <span className='font-bold text-4xl'>
             Rs.
-            {savingPrice > 0 ? savingPrice : originalPrice}
+            {savingPrice > 0 ? cartProductCount : originalPrice}
           </span>
           {percentage > 0 && (
             <span
