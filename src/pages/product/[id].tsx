@@ -81,6 +81,7 @@ const SingleProductPage = () => {
         percentage={discountPercentage}
         savingPrice={discountPrice}
         size={weight}
+        id={id}
       />
     </div>
     <div>
