@@ -5,7 +5,6 @@ import { FaMinus, FaPlus } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { cartProductAction } from '../../store/slices/cartProductSlice.ts';
 
-
 interface DescriptionProps {
   title?: string;
   productName: string;
@@ -14,6 +13,7 @@ interface DescriptionProps {
   savingPrice?: number;
   percentage?: number;
   size?: number;
+  id: any;
 }
 
 const Description: React.FC<DescriptionProps> = ({
@@ -21,22 +21,35 @@ const Description: React.FC<DescriptionProps> = ({
   productName,
   description = undefined,
   originalPrice,
-  savingPrice=0,
+  savingPrice = 0,
   percentage = 0,
-  size = undefined ,
+  size = undefined,
+  id
 }) => {
-  
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [count, setCount] = useState(1);
-  
+  const [clickAdd, setClickAdd] = useState({
+    click: false,
+    text: 'Added to Cart'
+  })
+
+  useEffect(() => {
+    // Dispatch savingPrice to the store when component mounts
+    dispatch(
+      cartProductAction.totalPrice({ totalPriceForProduct: savingPrice })
+    );
+  }, [dispatch,savingPrice]);
+
   const add = () => {
     setCount((prevCount) => prevCount + 1);
-    dispatch(cartProductAction.totalPrice({
-      cartProductCount: 1,
-      totalPriceForProduct: savingPrice * count,
-    }))
+    dispatch(
+      cartProductAction.totalPrice({
+        cartProductCount: 1,
+        totalPriceForProduct: savingPrice + savingPrice * count,
+      })
+    );
   };
-  
+
   const minus = () => {
     setCount((prevCount) => {
       if (prevCount <= 1) {
@@ -45,24 +58,31 @@ const Description: React.FC<DescriptionProps> = ({
         return prevCount - 1;
       }
     });
-    if(count===1) return;
-    dispatch(cartProductAction.totalPrice({
-      cartProductCount: -1,
-      totalPriceForProduct: savingPrice * count,
-    }))
+    if (count === 1) return;
+    dispatch(
+      cartProductAction.totalPrice({
+        cartProductCount: -1,
+        totalPriceForProduct: savingPrice * count - savingPrice,
+      })
+    );
   };
-  
-  const cartProductCount = useSelector((state:any) => state.cartShow.totalPriceForProduct)
- 
-  console.log(cartProductCount)
+
+  const cartProductCount = useSelector(
+    (state: any) => state.cartShow.totalPriceForProduct
+  );
+
+  const cartProductCountFixed = parseFloat(cartProductCount.toFixed(2))
 
   const addToChart = () => {
     // setTotalPrice(totalPrice * count);
-    // setRemoveProduct(false);
-    alert('Product has been added to cart');
+    setClickAdd({click: true,text:`Added ${productName} to Cart`})
+    dispatch(
+      cartProductAction.addProduct({
+        cartProducts: id,
+        productCount: 1,
+      })
+    );
   };
-
-
 
   return (
     <div className='w-full sm:w-full md:w-4/5  lg:w-1/2 lg:pr-10'>
@@ -79,7 +99,7 @@ const Description: React.FC<DescriptionProps> = ({
         <div className='flex items-center gap-4'>
           <span className='font-bold text-4xl'>
             Rs.
-            {savingPrice > 0 ? cartProductCount : originalPrice}
+            {savingPrice > 0 ? cartProductCountFixed : originalPrice}
           </span>
           {percentage > 0 && (
             <span
@@ -98,7 +118,7 @@ const Description: React.FC<DescriptionProps> = ({
       </div>
       <div className='flex items-center justify-center gap-5 flex-col sm:flex-col md:flex-row lg:flex-row lg:items-center max-sm:clear-right'>
         {size === undefined ? (
-            <div
+          <div
             className='flex items-center justify-between px-3 py-2 rounded-lg w-1/2 max-sm:w-full gap-2'
             style={{ backgroundColor: '#00000011' }}
           >
@@ -111,19 +131,18 @@ const Description: React.FC<DescriptionProps> = ({
         ) : (
           <Space.Compact>
             <Tooltip>
-                <Input
-                  type='submit'
-                  value={`${size >= 1000 ? size / 1000 : size} ${
-                    size >= 1000 ? 'Kg' : 'g'
-                  }`}
-                  onClick={() => {
-                    alert(size);
-                  }}
-                  className='items-center justify-between px-3 py-2 rounded-lg w-full max-sm:w-full gap-2'
-                />
+              <Input
+                type='submit'
+                value={`${size >= 1000 ? size / 1000 : size} ${
+                  size >= 1000 ? 'Kg' : 'g'
+                }`}
+                onClick={() => {
+                  alert(size);
+                }}
+                className='items-center justify-between px-3 py-2 rounded-lg w-full max-sm:w-full gap-2'
+              />
             </Tooltip>
-        </Space.Compact>
-          
+          </Space.Compact>
         )}
         <Button
           onClick={addToChart}
@@ -132,7 +151,8 @@ const Description: React.FC<DescriptionProps> = ({
           style={{ backgroundColor: 'var(--primaryColor)', border: 'none' }}
           size='large'
         >
-          <span className='text-white font-bold'>Add to cart</span>
+          <span className='text-white font-bold'>{
+          clickAdd.text}</span>
         </Button>
       </div>
     </div>
