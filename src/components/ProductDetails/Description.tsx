@@ -30,7 +30,7 @@ const Description: React.FC<DescriptionProps> = ({
   const [count, setCount] = useState(1);
   const [clickAdd, setClickAdd] = useState({
     click: false,
-    text: 'Added to Cart'
+    text: 'Add to Cart'
   })
 
   useEffect(() => {
@@ -58,13 +58,21 @@ const Description: React.FC<DescriptionProps> = ({
         return prevCount - 1;
       }
     });
-    if (count === 1) return;
-    dispatch(
-      cartProductAction.totalPrice({
-        cartProductCount: -1,
-        totalPriceForProduct: savingPrice * count - savingPrice,
+    if (count <= 1) {
+      dispatch(
+        cartProductAction.totalPrice({
+          cartProductCount: 0,
+          totalPriceForProduct: savingPrice,
+        })
+      );
+        setClickAdd({click:false, text:`Remove ${productName} from Cart`})
+    } else {
+      dispatch(
+        cartProductAction.totalPrice({
+          cartProductCount: -1,
+          totalPriceForProduct: savingPrice * count - savingPrice,
       })
-    );
+    )};
   };
 
   const cartProductCount = useSelector(
@@ -146,10 +154,11 @@ const Description: React.FC<DescriptionProps> = ({
         )}
         <Button
           onClick={addToChart}
-          className='hover:opacity-70 flex items-center justify-center gap-1 !bg-[var(--primaryColor)] w-full py-4 rounded-lg max-sm:w-full'
+          className='hover:opacity-70 flex items-center justify-center gap-1 !bg-[var(--primaryColor)] w-full py-4 rounded-lg max-sm:w-full disabled:!bg-slate-300'
           icon={<BsCart2 className='text-white font-bold ' />}
           style={{ backgroundColor: 'var(--primaryColor)', border: 'none' }}
           size='large'
+          disabled={clickAdd.click}
         >
           <span className='text-white font-bold'>{
           clickAdd.text}</span>
