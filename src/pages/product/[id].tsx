@@ -66,7 +66,7 @@ const SingleProductPage = () => {
   ];
 
   const discountPercentage = parseFloat((((regularPrice - discountPrice)/regularPrice ) * 100).toFixed(2)) ;
-
+         
   
   return (
     <>
