@@ -24,21 +24,37 @@ const Description: React.FC<DescriptionProps> = ({
   savingPrice = 0,
   percentage = 0,
   size = undefined,
-  id
+  id,
 }) => {
   const dispatch = useDispatch();
   const [count, setCount] = useState(1);
   const [clickAdd, setClickAdd] = useState({
     click: false,
-    text: 'Add to Cart'
-  })
+    text: 'Add to Cart',
+  });
 
   useEffect(() => {
     // Dispatch savingPrice to the store when component mounts
     dispatch(
       cartProductAction.totalPrice({ totalPriceForProduct: savingPrice })
     );
-  }, [dispatch,savingPrice]);
+  }, [dispatch, savingPrice]);
+
+  const cartProductCount = useSelector(
+    (state: any) => state.cartShow.totalPriceForProduct
+  );
+
+  const checkIFProductAddToCart = useSelector(
+    (state: any) => state.cartShow.cartProducts
+  );
+
+  const filterCartProduct = checkIFProductAddToCart
+    .filter((productId: any) => productId === id)
+    .some((productId: any) => productId === id);
+
+  console.log(filterCartProduct);
+
+  const cartProductCountFixed = parseFloat(cartProductCount.toFixed(2));
 
   const add = () => {
     setCount((prevCount) => prevCount + 1);
@@ -59,31 +75,37 @@ const Description: React.FC<DescriptionProps> = ({
       }
     });
     if (count <= 1) {
+      const filterAndRemoveProduct = checkIFProductAddToCart.filter(
+        (productId: any) => productId !== id
+      );
+      console.log(filterAndRemoveProduct)
       dispatch(
         cartProductAction.totalPrice({
           cartProductCount: 0,
           totalPriceForProduct: savingPrice,
         })
       );
-        setClickAdd({click:false, text:`Remove ${productName} from Cart`})
+      dispatch(
+        cartProductAction.addProduct({
+          cartProducts: filterAndRemoveProduct,
+          productCount: -1,
+        })
+      );
+      console.log(checkIFProductAddToCart);
+      setClickAdd({ click: false, text: `Remove ${productName} from Cart` });
     } else {
       dispatch(
         cartProductAction.totalPrice({
           cartProductCount: -1,
           totalPriceForProduct: savingPrice * count - savingPrice,
-      })
-    )};
+        })
+      );
+    }
   };
-
-  const cartProductCount = useSelector(
-    (state: any) => state.cartShow.totalPriceForProduct
-  );
-
-  const cartProductCountFixed = parseFloat(cartProductCount.toFixed(2))
 
   const addToChart = () => {
     // setTotalPrice(totalPrice * count);
-    setClickAdd({click: true,text:`Added ${productName} to Cart`})
+    setClickAdd({ click: true, text: `Added ${productName} to Cart` });
     dispatch(
       cartProductAction.addProduct({
         cartProducts: id,
@@ -160,8 +182,7 @@ const Description: React.FC<DescriptionProps> = ({
           size='large'
           disabled={clickAdd.click}
         >
-          <span className='text-white font-bold'>{
-          clickAdd.text}</span>
+          <span className='text-white font-bold'>{clickAdd.text}</span>
         </Button>
       </div>
     </div>
