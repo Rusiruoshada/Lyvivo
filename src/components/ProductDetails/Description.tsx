@@ -1,7 +1,7 @@
 import { Button, Input, Space, Tooltip } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { BsCart2 } from 'react-icons/bs';
-import { FaMinus, FaPlus } from 'react-icons/fa';
+import { FaMinus, FaPlus, FaTrash } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { cartProductAction } from '../../store/slices/cartProductSlice.ts';
 
@@ -75,24 +75,27 @@ const Description: React.FC<DescriptionProps> = ({
       }
     });
     if (count <= 1) {
-      const filterAndRemoveProduct = checkIFProductAddToCart.filter(
-        (productId: any) => productId !== id
-      );
-      console.log(filterAndRemoveProduct)
-      dispatch(
-        cartProductAction.totalPrice({
-          cartProductCount: 0,
-          totalPriceForProduct: savingPrice,
-        })
-      );
-      dispatch(
-        cartProductAction.addProduct({
-          cartProducts: filterAndRemoveProduct,
-          productCount: -1,
-        })
-      );
-      console.log(checkIFProductAddToCart);
-      setClickAdd({ click: false, text: `Remove ${productName} from Cart` });
+      if(checkIFProductAddToCart.length !== 0) {
+        const filterAndRemoveProduct = checkIFProductAddToCart.filter(
+          (productId: any) => productId !== id
+        );
+        console.log(filterAndRemoveProduct);
+        dispatch(
+          cartProductAction.totalPrice({
+            cartProductCount: 0,
+            totalPriceForProduct: savingPrice,
+          })
+        );
+        dispatch(
+          cartProductAction.addProduct({
+            cartProducts: filterAndRemoveProduct,
+            productCount: -1,
+          })
+        );
+        setClickAdd({ click: false, text: `Remove ${productName} from Cart` });
+      } else {
+        alert('There is no Product in cart')
+      }
     } else {
       dispatch(
         cartProductAction.totalPrice({
@@ -102,6 +105,7 @@ const Description: React.FC<DescriptionProps> = ({
       );
     }
   };
+  console.log(checkIFProductAddToCart);
 
   const addToChart = () => {
     // setTotalPrice(totalPrice * count);
@@ -152,7 +156,17 @@ const Description: React.FC<DescriptionProps> = ({
             className='flex items-center justify-between px-3 py-2 rounded-lg w-1/2 max-sm:w-full gap-2'
             style={{ backgroundColor: '#00000011' }}
           >
-            <FaMinus className='cursor-pointer w-4 text-3xl' onClick={minus} />
+            {count !== 1 ? (
+              <FaMinus
+                className='cursor-pointer w-4 text-3xl'
+                onClick={minus}
+              />
+            ) : (
+              <FaTrash
+                className='cursor-pointer w-4 text-3xl'
+                onClick={minus}
+              />
+            )}
 
             <div className='font-bold text-md'>{count}</div>
 
@@ -182,7 +196,7 @@ const Description: React.FC<DescriptionProps> = ({
           size='large'
           disabled={clickAdd.click}
         >
-          <span className='text-white font-bold'>{clickAdd.text}</span>
+          <span className='text-white font-bold'>Add to Cart</span>
         </Button>
       </div>
     </div>
