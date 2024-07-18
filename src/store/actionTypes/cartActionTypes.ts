@@ -4,10 +4,11 @@ export interface CartProductsInitialState {
   cartProductCount?: number;
   totalPriceForProduct?: number;
   cartProductDetails?: {
+    title:string;
     id: string;
     productName: string;
-    image: string;
-    addItems: number;
+    image?: string;
+    addItemsCount?: number;
     price: number;
   }[];
 }
