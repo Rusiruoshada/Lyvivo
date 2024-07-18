@@ -38,14 +38,14 @@ const SingleProductPage = () => {
 
   const showProductDetails = showProductQuery.data;
 
-  const {productName, category, weight, regularPrice,discountPrice, description, image} = showProductDetails;
+  const {productName, category, weight, regularPrice,discountPrice, description, image :imageUrl} = showProductDetails;
 
-  
+  const imageUrlLink = imageUrl? imageUrl: ''
 
   const images: ImageType[] = [
     {
-      thumbnail: {image},
-      fullSize: {image},
+      thumbnail: {imageUrlLink},
+      fullSize: {imageUrlLink},
       alt: '1',
     },
     {
