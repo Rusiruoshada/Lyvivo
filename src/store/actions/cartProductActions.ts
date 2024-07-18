@@ -1,15 +1,40 @@
-import { addProductAction } from "../actionTypes/cartActionTypes";
+import { PayloadAction } from '@reduxjs/toolkit';
+import { addProductAction } from '../actionTypes/cartActionTypes';
 
-export const addProduct:any =(state:any, action:addProductAction) => {
-    const currentProductCount = action.payload;
+export const addProduct: any = (state: any, action: PayloadAction<any>) => {
+  const currentProductCount = action.payload;
+  if (Array.isArray(currentProductCount.cartProducts)) {
+    state.cartProducts = currentProductCount.cartProducts;
+  } else {
+    state.cartProducts.push(currentProductCount.cartProducts);
+  }
+  state.productCount += currentProductCount.productCount;
+};
 
-    state.cartProducts.push(currentProductCount.cartProducts)
+export const totalPrice: any = (state: any, action: PayloadAction<any>) => {
+  const productCount = action.payload;
 
-    state.productCount += currentProductCount.productCount ;
-}
+  state.cartProductCount += productCount.cartProductCount;
 
-export const cartProductCount:any = (state:any, action:addProductAction)=> {
-    const productCount = action.payload;
+  state.totalPriceForProduct = productCount.totalPriceForProduct;
+};
 
-    
-}
+export const getAllDetails: any = (state: any, action: PayloadAction<any>) => {
+  const productDetails = action.payload;
+
+  const checkProductExist = state.cartProductDetails
+    .filter(
+      (productDetail: any) =>
+        productDetail.id === productDetails.cartProductDetails.id
+    )
+    .some(
+      (productDetail: any) =>
+        productDetail.id === productDetails.cartProductDetails.id
+    );
+
+  console.log('check if id exist ' + checkProductExist);
+  console.log('action load ' + productDetails.cartProductDetails.id);
+  console.log('initial state ' + state.cartProductDetails[0]?.id);
+
+  state.cartProductDetails.push(productDetails.cartProductDetails);
+};
