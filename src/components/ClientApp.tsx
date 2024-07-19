@@ -9,9 +9,9 @@ import HomepageProduct from './ProductArea/HomePageProductCategoryArea/HomepageP
 const ClientApp: React.FC = () => {
 
   const productCarousel:any = [
-    <HomepageProduct productTitle='Best Savings' />,
-    <HomepageProduct productTitle='Groceries' />,
-    <HomepageProduct productTitle='Lyvivo Products' />,
+    <HomepageProduct key={'bestSavings'} productTitle={'Best Savings'} />,
+    <HomepageProduct key={'Groceries'} productTitle='Groceries' />,
+    <HomepageProduct key={'Electronics'} productTitle='Electronics' />,
   ];
 
   return (
