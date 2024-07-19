@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { ICategoryList } from '../../types/shoppingAreaTypes.ts';
 import {
   changeCategory,
@@ -14,8 +14,13 @@ const categorySelectSlice = createSlice({
   name: 'homepageCategorySelect',
   initialState: categoryInitState,
   reducers: {
-    changeCategory,
-    getAllCategories,
+    changeCategory:(state: ICategoryList, action: PayloadAction<any>) => {
+      const newCategory = action.payload;
+      state.category = newCategory;
+    },
+    getAllCategories:(state: ICategoryList, action: PayloadAction<any>) => {
+      state.allCategories = action.payload;
+    },
   },
 });
 
