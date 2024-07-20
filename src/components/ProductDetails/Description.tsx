@@ -4,6 +4,7 @@ import { BsCart2 } from 'react-icons/bs';
 import { FaMinus, FaPlus, FaTrash } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { cartProductAction } from '../../store/slices/cartProductSlice.ts';
+import Notification from '../UI/Notification.tsx';
 
 interface DescriptionProps {
   title?: string;
@@ -52,12 +53,11 @@ const Description: React.FC<DescriptionProps> = ({
     .filter((productId: any) => productId === id)
     .some((productId: any) => productId === id);
 
-  console.log(filterCartProduct);
-
   const cartProductCountFixed = parseFloat(cartProductCount.toFixed(2));
 
   const add = () => {
     setCount((prevCount) => prevCount + 1);
+    setClickAdd({ click: false, text: `Added new ${productName} to Cart` });
     dispatch(
       cartProductAction.totalPrice({
         cartProductCount: 1,
@@ -75,11 +75,10 @@ const Description: React.FC<DescriptionProps> = ({
       }
     });
     if (count <= 1) {
-      if(checkIFProductAddToCart.length !== 0) {
+      if (checkIFProductAddToCart.length !== 0) {
         const filterAndRemoveProduct = checkIFProductAddToCart.filter(
           (productId: any) => productId !== id
         );
-        console.log(filterAndRemoveProduct);
         dispatch(
           cartProductAction.totalPrice({
             cartProductCount: 0,
@@ -94,7 +93,7 @@ const Description: React.FC<DescriptionProps> = ({
         );
         setClickAdd({ click: false, text: `Remove ${productName} from Cart` });
       } else {
-        alert('There is no Product in cart')
+        alert('There is no Product in cart');
       }
     } else {
       dispatch(
@@ -103,19 +102,52 @@ const Description: React.FC<DescriptionProps> = ({
           totalPriceForProduct: savingPrice * count - savingPrice,
         })
       );
+      setClickAdd({ click: false, text: `Remove one ${productName} in Cart` });
     }
   };
-  console.log(checkIFProductAddToCart);
 
   const addToChart = () => {
     // setTotalPrice(totalPrice * count);
     setClickAdd({ click: true, text: `Added ${productName} to Cart` });
-    dispatch(
-      cartProductAction.addProduct({
-        cartProducts: id,
-        productCount: 1,
-      })
-    );
+    if (filterCartProduct) {
+      dispatch(
+        cartProductAction.addProduct({
+          cartProducts: id,
+          productCount: 0,
+        })
+      );
+      dispatch(
+        cartProductAction.getAllDetails({
+          cartProductDetails: {
+            price: savingPrice * count,
+            addItemsCount: count,
+            size: size,
+            id: id,
+          },
+        })
+      );
+    } else {
+      dispatch(
+        cartProductAction.addProduct({
+          cartProducts: id,
+          productCount: 1,
+        })
+      );
+      dispatch(
+        cartProductAction.getAllDetails({
+          cartProductDetails: {
+            title: title,
+            productName: productName,
+            description: description,
+            price: savingPrice * count,
+            // percentage ,
+            size: size,
+            addItemsCount: count,
+            id: id,
+          },
+        })
+      );
+    }
   };
 
   return (
@@ -146,7 +178,7 @@ const Description: React.FC<DescriptionProps> = ({
         </div>
         {originalPrice && (
           <p className='line-through font-bold text-gray-400'>
-            Rs. {originalPrice}
+            Rs. {originalPrice * count}
           </p>
         )}
       </div>
@@ -188,16 +220,19 @@ const Description: React.FC<DescriptionProps> = ({
             </Tooltip>
           </Space.Compact>
         )}
-        <Button
-          onClick={addToChart}
-          className='hover:opacity-70 flex items-center justify-center gap-1 !bg-[var(--primaryColor)] w-full py-4 rounded-lg max-sm:w-full disabled:!bg-slate-300'
-          icon={<BsCart2 className='text-white font-bold ' />}
-          style={{ backgroundColor: 'var(--primaryColor)', border: 'none' }}
-          size='large'
-          disabled={clickAdd.click}
-        >
-          <span className='text-white font-bold'>Add to Cart</span>
-        </Button>
+          <Button
+            onClick={addToChart}
+            className='w-hover:opacity-70 flex items-center justify-center !bg-[var(--primaryColor)] w-full  rounded-lg max-sm:w-full border-0 [&>div]:w-full disabled:!bg-slate-300'
+            icon={<BsCart2 className='text-white font-bold ' />}
+            style={{ backgroundColor: 'var(--primaryColor)', border: 'none' }}
+            size='large'
+            disabled={clickAdd.click}
+            >
+              <span className='text-white font-bold'>
+              <Notification className='' />Add to Cart</span>
+          
+          </Button>
+
       </div>
     </div>
   );
