@@ -4,7 +4,7 @@ import { BsCart2 } from 'react-icons/bs';
 import { FaMinus, FaPlus, FaTrash } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { cartProductAction } from '../../store/slices/cartProductSlice.ts';
-import Notification from '../UI/Notification.tsx';
+import openNotification from '../../hooks/notification.ts';
 
 interface DescriptionProps {
   title?: string;
@@ -108,6 +108,8 @@ const Description: React.FC<DescriptionProps> = ({
 
   const addToChart = () => {
     // setTotalPrice(totalPrice * count);
+    openNotification({type:'success', description:`${productName} Add to cart`, message:'Successful',role:'status'});
+
     setClickAdd({ click: true, text: `Added ${productName} to Cart` });
     if (filterCartProduct) {
       dispatch(
@@ -220,19 +222,16 @@ const Description: React.FC<DescriptionProps> = ({
             </Tooltip>
           </Space.Compact>
         )}
-          <Button
-            onClick={addToChart}
-            className='w-hover:opacity-70 flex items-center justify-center !bg-[var(--primaryColor)] w-full  rounded-lg max-sm:w-full border-0 [&>div]:w-full disabled:!bg-slate-300'
-            icon={<BsCart2 className='text-white font-bold ' />}
-            style={{ backgroundColor: 'var(--primaryColor)', border: 'none' }}
-            size='large'
-            disabled={clickAdd.click}
-            >
-              <span className='text-white font-bold'>
-              <Notification className='' />Add to Cart</span>
-          
-          </Button>
-
+        <Button
+          onClick={addToChart}
+          className='w-hover:opacity-70 flex items-center justify-center !bg-[var(--primaryColor)] w-full  rounded-lg max-sm:w-full border-0 [&>div]:w-full disabled:!bg-slate-300'
+          icon={<BsCart2 className='text-white font-bold ' />}
+          style={{ backgroundColor: 'var(--primaryColor)', border: 'none' }}
+          size='large'
+          disabled={clickAdd.click}
+        >
+          <span className='text-white font-bold'>Add to Cart</span>
+        </Button>
       </div>
     </div>
   );
