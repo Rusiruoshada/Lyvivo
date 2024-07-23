@@ -13,6 +13,11 @@ interface OpenNotificationTypes {
   className?: string;
 }
 
+notification.config({
+  top: 50,
+  duration: 2
+})
+
 const openNotification = ({
   type,
   message,
@@ -28,7 +33,6 @@ const openNotification = ({
     icon: icon,
     role: role,
     className: className,
-    
   });
 };
 
