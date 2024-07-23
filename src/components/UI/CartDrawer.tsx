@@ -1,6 +1,7 @@
 import React from 'react';
 import type { DrawerProps } from 'antd';
 import { Button, Drawer, Space } from 'antd';
+import CartProductCard from './CartProductCard.tsx';
 
 interface CartDrawerProps {
   openCart: boolean;
@@ -9,6 +10,14 @@ interface CartDrawerProps {
 
 const CartDrawer: React.FC<CartDrawerProps> = ({ openCart,onOpenCart }) => {
 
+  const cartProducts = [
+    {
+      image:'/images/Pic923056.jpg',
+      productName: 'Kodiak Cakes Power Cakes Pancake & Waffle Mix',
+      productTotalPrice:100.99,
+      count:10
+    },
+  ]
 
   return (
     <div className='z-[102]'>
@@ -21,9 +30,11 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart,onOpenCart }) => {
         key={'right'}
         
       >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+        {
+          cartProducts.map((productDetails:any) =>(
+            <CartProductCard productName={productDetails.productName} price={productDetails.productTotalPrice} count={productDetails.count} image={productDetails.image} />
+          ))
+        }
       </Drawer>
     </div>
   );
