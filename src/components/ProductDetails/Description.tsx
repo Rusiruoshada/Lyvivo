@@ -92,8 +92,11 @@ const Description: React.FC<DescriptionProps> = ({
           })
         );
         setClickAdd({ click: false, text: `Remove ${productName} from Cart` });
+
+        openNotification({type:'success', description:`${productName} remove from cart`, message:'Successful',role:'status', className:'[&<div]:!top-10'});
+
       } else {
-        alert('There is no Product in cart');
+        openNotification({type:'error', description:`${productName} not in cart to remove it.`, message:'Error',role:'alert'});
       }
     } else {
       dispatch(
@@ -108,7 +111,7 @@ const Description: React.FC<DescriptionProps> = ({
 
   const addToChart = () => {
     // setTotalPrice(totalPrice * count);
-    openNotification({type:'success', description:`${productName} Add to cart`, message:'Successful',role:'status'});
+    openNotification({type:'success', description:`${count===1? '': count} ${productName} Add to cart`, message:'Successful',role:'status'});
 
     setClickAdd({ click: true, text: `Added ${productName} to Cart` });
     if (filterCartProduct) {
