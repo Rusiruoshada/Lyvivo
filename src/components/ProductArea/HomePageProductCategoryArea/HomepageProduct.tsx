@@ -1,6 +1,5 @@
 import React from 'react';
 import ItemCard from '../../UI/ItemCard.tsx';
-import categories from '../../HomeShopByCategory/exportCategoryObject.tsx';
 import Carousel from 'react-multi-carousel';
 import responsive from './responsive.ts';
 import 'react-multi-carousel/lib/styles.css';
