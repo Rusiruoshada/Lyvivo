@@ -28,7 +28,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart,onOpenCart }) => {
         onClose={onOpenCart}
         open={openCart}
         key={'right'}
-        
+        className='p-0 [&>div]:!p-2'
       >
         {
           cartProducts.map((productDetails:any) =>(
