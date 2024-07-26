@@ -32,7 +32,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart,onOpenCart }) => {
       >
         {
           cartProducts.map((productDetails:any) =>(
-            <CartProductCard productName={productDetails.productName} price={productDetails.productTotalPrice} count={productDetails.count} image={productDetails.image} />
+            <CartProductCard key={productDetails.productName} productName={productDetails.productName} price={productDetails.productTotalPrice} count={productDetails.count} image={productDetails.image} />
           ))
         }
       </Drawer>
