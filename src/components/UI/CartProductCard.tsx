@@ -1,7 +1,9 @@
 import { Flex, Image } from 'antd';
-import React from 'react';
+import React, { useState } from 'react';
 import { FaMinus, FaPlus } from 'react-icons/fa';
 import { IoIosCloseCircleOutline } from "react-icons/io";
+import { useDispatch } from 'react-redux';
+import { cartProductAction } from '../../store/slices/cartProductSlice.ts';
 
 interface CartProductCardProps {
   productName: string;
@@ -14,12 +16,25 @@ interface CartProductCardProps {
 const CartProductCard: React.FC<CartProductCardProps> = ({
   productName,
   price,
-  count,
+  count : productCount,
   image,
   removeProductFC,
 }) => {
 
-  const isMinusShow:boolean = count <= 1;
+  const isMinusShow:boolean = productCount <= 1;
+
+  const dispatch = useDispatch();
+  const [count, setCount] = useState(productCount);
+
+  const add = () => {
+    setCount((prevCount) => prevCount + 1);
+    dispatch(
+      cartProductAction.totalPrice({
+        cartProductCount: 1,
+        totalPriceForProduct:  price * count,
+      })
+    );
+  };
 
   return (
     <div className='shadow-md p-2'>
@@ -34,7 +49,7 @@ const CartProductCard: React.FC<CartProductCardProps> = ({
           </div>
           <div className='mr-2 ml-2 shadow-md pr-2 pl-2 pt-0 pb-0'>
             <FaPlus className='cursor-pointer w-4 text-3xl' 
-            // onClick={add}
+            onClick={add}
              />
             
             <div className='font-bold text-md'>{count}</div>
