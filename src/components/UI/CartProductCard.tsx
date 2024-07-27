@@ -2,7 +2,7 @@ import { Flex, Image } from 'antd';
 import React, { useState } from 'react';
 import { FaMinus, FaPlus } from 'react-icons/fa';
 import { IoIosCloseCircleOutline } from "react-icons/io";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { cartProductAction } from '../../store/slices/cartProductSlice.ts';
 
 interface CartProductCardProps {
@@ -26,6 +26,15 @@ const CartProductCard: React.FC<CartProductCardProps> = ({
   const dispatch = useDispatch();
   const [count, setCount] = useState(productCount);
 
+  const checkIFProductAddToCart = useSelector(
+    (state: any) => state.cartShow.cartProducts
+  );
+
+  // const filterCartProduct = checkIFProductAddToCart
+  //   .filter((productId: any) => productId === id)
+  //   .some((productId: any) => productId === id);
+
+
   const add = () => {
     setCount((prevCount) => prevCount + 1);
     dispatch(
@@ -34,6 +43,45 @@ const CartProductCard: React.FC<CartProductCardProps> = ({
         totalPriceForProduct:  price * count,
       })
     );
+  };
+
+  const minus = () => {
+    setCount((prevCount) => {
+      if (prevCount <= 1) {
+        return 1;
+      } else {
+        return prevCount - 1;
+      }
+    });
+    if (count <= 1) {
+      if (checkIFProductAddToCart.length !== 0) {
+
+        // const filterAndRemoveProduct = checkIFProductAddToCart.filter(
+        //   (productId: any) => productId !== id
+        // );
+        dispatch(
+          cartProductAction.totalPrice({
+            cartProductCount: 0,
+            totalPriceForProduct: price,
+          })
+        );
+        // dispatch(
+        //   cartProductAction.addProduct({
+        //     cartProducts: filterAndRemoveProduct,
+        //     productCount: -1,
+        //   })
+        // );
+
+      } else {
+      }
+    } else {
+      dispatch(
+        cartProductAction.totalPrice({
+          cartProductCount: -1,
+          totalPriceForProduct: price * count - price,
+        })
+      );
+    }
   };
 
   return (
@@ -57,7 +105,7 @@ const CartProductCard: React.FC<CartProductCardProps> = ({
             <FaMinus
                 className={`cursor-pointer w-4 text-3xl ${isMinusShow?'text-gray-500':''}`}
                 
-                // onClick={minus}
+                onClick={minus}
             />
           </div>
           <div className='flex justify-center align-middle'><IoIosCloseCircleOutline className='flex justify-center align-middle text-2xl  m-auto' /></div>
