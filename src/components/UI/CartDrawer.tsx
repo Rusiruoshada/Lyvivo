@@ -1,7 +1,8 @@
 import React from 'react';
 import type { DrawerProps } from 'antd';
-import { Button, Divider, Drawer, Space } from 'antd';
+import { Button, Drawer } from 'antd';
 import CartProductCard from './CartProductCard.tsx';
+import { IoIosArrowBack } from 'react-icons/io';
 
 interface CartDrawerProps {
   openCart: boolean;
@@ -51,15 +52,16 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
   return (
     <div className='z-[102]'>
       <Drawer
-        title='Basic Drawer'
+        title='Keep Shopping'
         placement={'right'}
         closable={true}
         onClose={onOpenCart}
         open={openCart}
         key={'right'}
         className='p-0 [&>div]:!p-2'
+        closeIcon={<IoIosArrowBack />}
       >
-        <div className='!p-0 overflow-y-scroll mb-32'>
+        <div className='!p-0 mb-36'>
         {cartProducts.map((productDetails: any) => (
           <CartProductCard
             key={productDetails.productName}
@@ -70,11 +72,15 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
           />
         ))}
         </div>
-        <div className='h-[120px] absolute bottom-0 right-0 left-0 top-auto bg-white !p-2 shadow-lg rounded-tl-3xl rounded-tr-3xl'>
+        <div className='h-[140px] absolute bottom-0 right-0 left-0 top-auto bg-white !p-2 shadow-lg rounded-tl-3xl rounded-tr-3xl'>
           
-          <div className='flex justify-between mt-3 mb-2'>
-              <span><h5>Total Price: </h5></span>
+          <div className='flex justify-between mt-3 mb-0'>
+              <span><h5>Total Price : </h5></span>
               <span><h4>Rs. 1000.99</h4></span>
+          </div>
+          <div className='flex justify-between mt-0 mb-2 text-gray-500'>
+              <span><h6>Items : </h6></span>
+              <span><h6>{cartProducts.length}</h6></span>
           </div>
           <Button type='primary' className='bg-black w-full' onClick={()=>{alert('click check out')}}>Check Out</Button>
         </div>
