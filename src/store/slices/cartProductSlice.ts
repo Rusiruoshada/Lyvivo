@@ -24,8 +24,7 @@ const cartProductSlice = createSlice({
             if (Array.isArray(currentProductCount.cartProducts)) {
               state.cartProducts = currentProductCount.cartProducts;
             } else {
-              console.log('pushing addProduct ids')
-              console.log(state.cartProducts)
+                           
               state.cartProducts.push(currentProductCount.cartProducts);
             }
             state.productCount += currentProductCount.productCount;
@@ -34,8 +33,7 @@ const cartProductSlice = createSlice({
         totalPrice : (state: any, action: PayloadAction<any>) => {
             const productCount = action.payload;
             state.cartProductCount += productCount.cartProductCount;
-            console.log(state)
-          
+                      
             state.totalPriceForProduct = productCount.totalPriceForProduct;
           },
           
