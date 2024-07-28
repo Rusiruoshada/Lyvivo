@@ -81,14 +81,14 @@ const Description: React.FC<DescriptionProps> = ({
         );
         dispatch(
           cartProductAction.totalPrice({
-            cartProductCount: 0,
+            cartProductCount: 0, // how many add to cart in one product
             totalPriceForProduct: savingPrice,
           })
         );
         dispatch(
           cartProductAction.addProduct({
             cartProducts: filterAndRemoveProduct,
-            productCount: -1,
+            productCount: -1, // how many products in cart
           })
         );
         setClickAdd({ click: false, text: `Remove ${productName} from Cart` });
@@ -109,8 +109,14 @@ const Description: React.FC<DescriptionProps> = ({
     }
   };
 
+  const checkWhatsWrong = useSelector(
+    (state: any) => state.cartShow
+  );
+  
+  console.log(checkWhatsWrong)
+
   const addToChart = () => {
-    // setTotalPrice(totalPrice * count);
+    
     openNotification({type:'success', description:`${count===1? '': count} ${productName} Add to cart`, message:'Successful',role:'status'});
 
     setClickAdd({ click: true, text: `Added ${productName} to Cart` });
