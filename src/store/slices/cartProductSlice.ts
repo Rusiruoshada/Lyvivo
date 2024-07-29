@@ -20,11 +20,14 @@ const cartProductSlice = createSlice({
     reducers: {
         addProduct : (state: any , action: PayloadAction<any>) => {
             const currentProductCount = action.payload;
-
+            console.log(currentProductCount)
             if (Array.isArray(currentProductCount.cartProducts)) {
               state.cartProducts = currentProductCount.cartProducts;
             } else {
-                           
+               const checkSameId = state.cartPRoducts.filter((productId:string)=> productId===currentProductCount.cartProducts).some((productId: any) => productId === currentProductCount.cartProducts);
+
+               alert(checkSameId)
+                 
               state.cartProducts.push(currentProductCount.cartProducts);
             }
             state.productCount += currentProductCount.productCount;
@@ -32,8 +35,11 @@ const cartProductSlice = createSlice({
 
         totalPrice : (state: any, action: PayloadAction<any>) => {
             const productCount = action.payload;
-            state.cartProductCount += productCount.cartProductCount;
-                      
+            if(state.cartProductCount === 0){
+              return
+            }else{
+              state.cartProductCount += productCount.cartProductCount;
+            }    
             state.totalPriceForProduct = productCount.totalPriceForProduct;
           },
           
