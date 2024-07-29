@@ -3,6 +3,7 @@ import type { DrawerProps } from 'antd';
 import { Button, Drawer } from 'antd';
 import CartProductCard from './CartProductCard.tsx';
 import { IoIosArrowBack } from 'react-icons/io';
+import { useSelector } from 'react-redux';
 
 interface CartDrawerProps {
   openCart: boolean;
@@ -10,44 +11,13 @@ interface CartDrawerProps {
 }
 
 const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
-  const cartProducts = [
-    {
-      image: '/images/Pic923056.jpg',
-      productName: 'Kodiak Cakes Power Cakes Pancake & Waffle Mix',
-      productTotalPrice: 100.99,
-      count: 10,
-    },
-    {
-      image: '/images/Pic923056.jpg',
-      productName: 'Kodiak Cakes Power Cakes Pancake & Waffle Mix',
-      productTotalPrice: 100.99,
-      count: 10,
-    },
-    {
-      image: '/images/Pic923056.jpg',
-      productName: 'Kodiak Cakes Power Cakes Pancake & Waffle Mix',
-      productTotalPrice: 100.99,
-      count: 10,
-    },
-    {
-      image: '/images/Pic923056.jpg',
-      productName: 'Kodiak Cakes Power Cakes Pancake & Waffle Mix',
-      productTotalPrice: 100.99,
-      count: 10,
-    },
-    {
-      image: '/images/Pic923056.jpg',
-      productName: 'Kodiak Cakes Power Cakes Pancake & Waffle Mix',
-      productTotalPrice: 100.99,
-      count: 10,
-    },
-    {
-      image: '/images/Pic923056.jpg',
-      productName: 'Kodiak Cakes Power Cakes Pancake & Waffle Mix',
-      productTotalPrice: 100.99,
-      count: 10,
-    },
-  ];
+
+  const checkIFProductAddToCart = useSelector(
+    (state: any) => state.cartShow.cartProductDetails
+  );
+
+  console.log(checkIFProductAddToCart)
+
 
   return (
     <div className='z-[102]'>
@@ -62,12 +32,12 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
         closeIcon={<IoIosArrowBack />}
       >
         <div className='!p-0 mb-36'>
-        {cartProducts.map((productDetails: any) => (
+        {checkIFProductAddToCart?.map((productDetails: any) => (
           <CartProductCard
-            key={productDetails.productName}
+            key={productDetails.id}
             productName={productDetails.productName}
-            price={productDetails.productTotalPrice}
-            count={productDetails.count}
+            price={productDetails.price}
+            count={productDetails.addItemsCount}
             image={productDetails.image}
           />
         ))}
@@ -80,7 +50,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
           </div>
           <div className='flex justify-between mt-0 mb-2 text-gray-500'>
               <span><h6>Items : </h6></span>
-              <span><h6>{cartProducts.length}</h6></span>
+              <span><h6>{checkIFProductAddToCart?.length}</h6></span>
           </div>
           <Button type='primary' className='bg-black w-full' onClick={()=>{alert('click check out')}}>Check Out</Button>
         </div>
