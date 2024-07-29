@@ -37,7 +37,10 @@ const Description: React.FC<DescriptionProps> = ({
   useEffect(() => {
     // Dispatch savingPrice to the store when component mounts
     dispatch(
-      cartProductAction.totalPrice({ totalPriceForProduct: savingPrice })
+      cartProductAction.totalPrice({    
+        totalPriceForProduct: savingPrice,
+        cartProductCount: 0
+      })
     );
   }, [dispatch, savingPrice]);
 
