@@ -24,11 +24,14 @@ const cartProductSlice = createSlice({
             if (Array.isArray(currentProductCount.cartProducts)) {
               state.cartProducts = currentProductCount.cartProducts;
             } else {
-               const checkSameId = state.cartPRoducts.filter((productId:string)=> productId===currentProductCount.cartProducts).some((productId: any) => productId === currentProductCount.cartProducts);
+               const checkSameId = state.cartProducts.filter((productId:string)=> productId===currentProductCount.cartProducts).some((productId: any) => productId === currentProductCount.cartProducts);
 
-               alert(checkSameId)
+               if(!checkSameId){
+                 state.cartProducts.push(currentProductCount.cartProducts);
+                }else {
+                 return
+               }
                  
-              state.cartProducts.push(currentProductCount.cartProducts);
             }
             state.productCount += currentProductCount.productCount;
           },
@@ -74,6 +77,10 @@ const cartProductSlice = createSlice({
               state.cartProductDetails.push(productDetails.cartProductDetails);
             }
           },
+
+        removeItems: (state:any, action: PayloadAction<any>) => {
+          
+        }
     }
 });
 
