@@ -79,7 +79,12 @@ const cartProductSlice = createSlice({
           },
 
         removeItems: (state:any, action: PayloadAction<any>) => {
-          
+          const actionData = action.payload;
+
+          const removeFilterProduct = state.cartProductDetails.filter((productId:any)=> productId.id !== actionData )
+
+          state.cartProductDetails = 
+
         }
     }
 });
