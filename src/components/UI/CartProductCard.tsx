@@ -11,6 +11,7 @@ interface CartProductCardProps {
   count: number;
   image: string;
   removeProductFC?: any;
+  id:string;
 }
 
 const CartProductCard: React.FC<CartProductCardProps> = ({
@@ -19,6 +20,7 @@ const CartProductCard: React.FC<CartProductCardProps> = ({
   count: productCount,
   image,
   removeProductFC,
+  id
 }) => {
   
   const dispatch = useDispatch();
@@ -28,15 +30,7 @@ const CartProductCard: React.FC<CartProductCardProps> = ({
   const checkIFProductAddToCart = useSelector(
     (state: any) => state.cartShow.cartProducts
   );
-  const checkWhatsWrong = useSelector(
-    (state: any) => state.cartShow
-  );
-  
-  console.log(checkWhatsWrong)
-  
-  // const filterCartProduct = checkIFProductAddToCart
-  //   .filter((productId: any) => productId === id)
-  //   .some((productId: any) => productId === id);
+    
   
   const add = () => {
     setCount((prevCount) => prevCount + 1);
@@ -68,12 +62,7 @@ const CartProductCard: React.FC<CartProductCardProps> = ({
             totalPriceForProduct: price,
           })
         );
-        // dispatch(
-        //   cartProductAction.addProduct({
-        //     cartProducts: filterAndRemoveProduct,
-        //     productCount: -1,
-        //   })
-        // );
+        
       } else {
       }
     } else {
@@ -111,7 +100,7 @@ const CartProductCard: React.FC<CartProductCardProps> = ({
             />
           </div>
           <div className='flex justify-center align-middle'>
-            <IoIosCloseCircleOutline className='flex justify-center align-middle text-2xl  m-auto text-gray-500' />
+            <IoIosCloseCircleOutline className='flex justify-center align-middle text-2xl  m-auto text-gray-500 hover:text-red-400' cursor='pointer' onClick={()=>removeProductFC(id)} />
           </div>
           </div>
         </div>
