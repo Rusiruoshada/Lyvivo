@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Card, Badge, Radio, RadioChangeEvent } from 'antd';
 import { BsCart2, BsListCheck } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom';
 
 
 interface ItemCardProps {
@@ -30,13 +31,18 @@ const ItemCard: React.FC<ItemCardProps> = ({
 }) => {
   const { Meta } = Card;
 
+  const navigate = useNavigate();
   const [value, setValue] = useState();
-
+  
   const onWeightChange = ({ target: { value } }: RadioChangeEvent) => {
     console.log('radio3 checked', value);
     setValue(value);
   };
-
+  
+  const onNavigate = ():any => {
+      alert('click details')
+      navigate(`/product/${id}`)
+  }
 
 
   const options = weight
@@ -86,7 +92,8 @@ const ItemCard: React.FC<ItemCardProps> = ({
             className='hover:shadow-md hover:scale-105 text-[18px] !items-center flex flex-row justify-center'
             size='large'
             icon=<BsListCheck />
-            href={`/product/${id}`}
+            // href={`/product/${id}`}
+            onClick={onNavigate}
           >
             Details
           </Button>
