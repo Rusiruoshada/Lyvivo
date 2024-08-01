@@ -3,6 +3,7 @@ export interface CartProductsInitialState {
   productCount?: number;
   cartProductCount?: number;
   totalPriceForProduct?: number;
+  removingProductId?: string,
   cartProductDetails?: {
     title:string;
     id: string;
