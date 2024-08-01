@@ -12,6 +12,7 @@ const cartProductsInitialState:CartProductsInitialState = {
     cartProductCount: 1,
     totalPriceForProduct: 0,
     cartProductDetails: [],
+    removingProductId:'',
 }
 
 const cartProductSlice = createSlice({
@@ -81,9 +82,11 @@ const cartProductSlice = createSlice({
         removeItems: (state:any, action: PayloadAction<any>) => {
           const actionData = action.payload;
 
-          const removeFilterProduct = state.cartProductDetails.filter((productId:any)=> productId.id !== actionData )
+          const removeFilterProduct = state.cartProductDetails.filter((productId:any)=> productId.id !== actionData.removingProductId )
 
-          state.cartProductDetails = 
+          console.log(removeFilterProduct)
+
+          state.cartProductDetails = removeFilterProduct
 
         }
     }
