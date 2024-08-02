@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Card, Badge, Radio, RadioChangeEvent } from 'antd';
 import { BsCart2, BsListCheck } from 'react-icons/bs';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 
 interface ItemCardProps {
@@ -32,16 +32,15 @@ const ItemCard: React.FC<ItemCardProps> = ({
   const { Meta } = Card;
 
   const navigate = useNavigate();
-  const [value, setValue] = useState();
+  const [value, setValue] = useState<string | undefined>();
   
   const onWeightChange = ({ target: { value } }: RadioChangeEvent) => {
     console.log('radio3 checked', value);
     setValue(value);
   };
   
-  const onNavigate = ():any => {
-      alert('click details')
-      navigate(`/product/${id}`)
+  const onNavigate = (id:string):any => {
+    navigate(`/product/${id}`)
   }
 
 
@@ -93,9 +92,9 @@ const ItemCard: React.FC<ItemCardProps> = ({
             size='large'
             icon=<BsListCheck />
             // href={`/product/${id}`}
-            onClick={onNavigate}
+            onClick={() => onNavigate(id)}
           >
-            Details
+          Details
           </Button>
         </div>,
       ]}
@@ -114,7 +113,7 @@ const ItemCard: React.FC<ItemCardProps> = ({
         title=<div>
           <h4 className='font-medium  m-0 capitalize'>Rs. {cardPrice}</h4>
           <h5 className='line-through semibold text-red-300'>
-            Rs. {cardPrice + saving}
+            Rs. {parseFloat(cardPrice) + (saving || 0)}
           </h5>
         </div>
         description=<p className='text-[18px]  m-0 capitalize'>
