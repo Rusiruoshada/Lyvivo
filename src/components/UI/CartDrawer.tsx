@@ -3,7 +3,8 @@ import type { DrawerProps } from 'antd';
 import { Button, Drawer } from 'antd';
 import CartProductCard from './CartProductCard.tsx';
 import { IoIosArrowBack } from 'react-icons/io';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { cartProductAction } from '../../store/slices/cartProductSlice.ts';
 
 interface CartDrawerProps {
   openCart: boolean;
@@ -12,11 +13,36 @@ interface CartDrawerProps {
 
 const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
 
+  const dispatch = useDispatch()
+
   const checkIFProductAddToCart = useSelector(
     (state: any) => state.cartShow.cartProductDetails
   );
+  const checkIFProductIdExist = useSelector(
+    (state: any) => state.cartShow.cartProducts
+  );
 
   console.log(checkIFProductAddToCart)
+
+  let filterAndRemoveProductId:string[] ;
+  
+  const removeProductFC =(id:string) => {
+    
+    dispatch(cartProductAction.removeItems({
+      removingProductId:id,
+    }))
+
+    filterAndRemoveProductId = checkIFProductIdExist
+      .filter((productId: any) => productId !== id)
+      
+    dispatch(
+        cartProductAction.addProduct({
+          cartProducts: filterAndRemoveProductId,
+          productCount: -1,
+        })
+    );
+        
+  }
 
 
   return (
@@ -39,6 +65,8 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
             price={productDetails.price}
             count={productDetails.addItemsCount}
             image={productDetails.image}
+            id={productDetails.id}
+            removeProductFC={removeProductFC}
           />
         ))}
         </div>
