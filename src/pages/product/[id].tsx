@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {useParams} from 'react-router-dom';
 import Images from '../../components/ProductDetails/Image.tsx';
 import Description from '../../components/ProductDetails/Description.tsx';
@@ -21,23 +21,25 @@ const productCarousel:any = [
 ];
 
 const SingleProductPage = () => {
-  let { id } = useParams<{ id: string }>();
-
+  const { id } = useParams<{ id: string }>();
+    
   const showProductQuery = useQuery({
-    queryKey: ['getSelectProduct'],
+   queryKey: ['getSelectProduct', id],
     queryFn: async () => {
-      const response = await axios.get(`http://localhost:5000/api/products/${id}`);
-      const data = response.data;
-      return data;
-    },
-  });
-
+    const response = await axios.get(`http://localhost:5000/api/products/${id}`);
+    const data = response.data;
+    return data;
+  },
+  enabled: !!id,
+  })
+  
+  
 
   if (showProductQuery.isLoading) return <h1>Loading...</h1>;
   if (showProductQuery.isError) return <h1>Error loading data...</h1>;
 
   const showProductDetails = showProductQuery.data;
-
+  
   const {productName, category, weight, regularPrice,discountPrice, description, image :imageUrl} = showProductDetails;
 
   const imageUrlLink = imageUrl? imageUrl: ''
