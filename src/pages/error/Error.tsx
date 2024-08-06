@@ -12,7 +12,7 @@ const ErrorPage = () => {
             <h1 className="flex justify-center">Oops!</h1>
             <p className="flex justify-center">Sorry, an unexpected error occurred</p>
             <p className="flex flex-col justify-center">
-                <i>{error?.statusText || error?.message}</i>
+                <i className="flex justify-center">{error?.statusText || error?.message}</i>
             </p>
         </div>
     )
