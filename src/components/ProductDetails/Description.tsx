@@ -58,13 +58,22 @@ const Description: React.FC<DescriptionProps> = ({
 
   const cartProductCountFixed = parseFloat(cartProductCount.toFixed(2));
 
+  const checkProductInCartOrNot = checkIFProductAddToCart===id? true : false;
+
+  const checkWhatsWrong = useSelector(
+    (state: any) => state.cartShow
+  );
+  
+  console.log(checkWhatsWrong)
+
+
   const add = () => {
-    setCount((prevCount) => prevCount + 1);
+    setCount((prevCount) => size? prevCount: prevCount + 1);
     setClickAdd({ click: false, text: `Added new ${productName} to Cart` });
     dispatch(
       cartProductAction.totalPrice({
-        cartProductCount: 1,
-        totalPriceForProduct: savingPrice + savingPrice * count,
+        cartProductCount: size? 0:1,
+        totalPriceForProduct: checkProductInCartOrNot?savingPrice + savingPrice * count: savingPrice,
       })
     );
   };
@@ -112,11 +121,6 @@ const Description: React.FC<DescriptionProps> = ({
     }
   };
 
-  const checkWhatsWrong = useSelector(
-    (state: any) => state.cartShow
-  );
-  
-  console.log(checkWhatsWrong)
 
   const addToChart = () => {
     
@@ -192,7 +196,7 @@ const Description: React.FC<DescriptionProps> = ({
         </div>
         {originalPrice && (
           <p className='line-through font-bold text-gray-400'>
-            Rs. {originalPrice * count}
+            Rs. {checkProductInCartOrNot?originalPrice * count: originalPrice}
           </p>
         )}
       </div>
@@ -226,9 +230,7 @@ const Description: React.FC<DescriptionProps> = ({
                 value={`${size >= 1000 ? size / 1000 : size} ${
                   size >= 1000 ? 'Kg' : 'g'
                 }`}
-                onClick={() => {
-                  alert(size);
-                }}
+                onClick={add}
                 className='items-center justify-between px-3 py-2 rounded-lg w-full max-sm:w-full gap-2'
               />
             </Tooltip>
