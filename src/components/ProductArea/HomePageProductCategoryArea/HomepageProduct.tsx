@@ -37,9 +37,26 @@ const HomepageProduct: React.FC<HomepageProductProps> = ({ productTitle }) => {
 
   const productDetails = productQuery.data; // product details from DB
 
-
-  
   const onAddToCartClick = (id: string) => {
+    productDetails.map((product:any)=>{ 
+      if(product._id===id) {
+        dispatch(
+          cartProductAction.getAllDetails({
+            cartProductDetails: {
+              title: product.category,
+              productName: product.productName,
+              description: product.description,
+              price: product.discountPrice ,
+              image: product?.image,
+              // percentage ,
+              size: product?.weight,
+              addItemsCount: 1,
+              id: product._id,
+            },
+          })
+        );
+      }
+    })
     dispatch(
       cartProductAction.addProduct({
         cartProducts: id,
