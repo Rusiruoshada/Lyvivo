@@ -35,16 +35,18 @@ const HomepageProduct: React.FC<HomepageProductProps> = ({ productTitle }) => {
   if (productQuery.isLoading) return <h1>Loading...</h1>;
   if (productQuery.isError) return <h1>Error loading data...</h1>;
 
-  const productDetails = productQuery.data;
+  const productDetails = productQuery.data; // product details from DB
+
+
   
   const onAddToCartClick = (id: string) => {
-    console.log(id);
     dispatch(
       cartProductAction.addProduct({
         cartProducts: id,
         productCount: 1,
       })
     );
+    
   };
 
   return (
