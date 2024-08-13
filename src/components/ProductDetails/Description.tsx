@@ -15,6 +15,7 @@ interface DescriptionProps {
   percentage?: number;
   size?: number;
   id: any;
+  image: string
 }
 
 const Description: React.FC<DescriptionProps> = ({
@@ -26,6 +27,7 @@ const Description: React.FC<DescriptionProps> = ({
   percentage = 0,
   size = undefined,
   id,
+  image,
 }) => {
   const dispatch = useDispatch();
   const [count, setCount] = useState(1);
@@ -158,6 +160,7 @@ const Description: React.FC<DescriptionProps> = ({
             productName: productName,
             description: description,
             price: savingPrice * count,
+            image: image,
             // percentage ,
             size: size,
             addItemsCount: count,
