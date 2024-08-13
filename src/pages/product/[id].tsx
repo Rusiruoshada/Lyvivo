@@ -84,6 +84,7 @@ const SingleProductPage = () => {
         savingPrice={discountPrice}
         size={weight}
         id={id}
+        image={imageUrl}
       />
     </div>
     <div>
