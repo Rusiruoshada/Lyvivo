@@ -104,3 +104,6 @@ const HomepageProduct: React.FC<HomepageProductProps> = ({ productTitle }) => {
 };
 
 export default HomepageProduct;
+
+// have to redesign cart cards for long names
+// when a click add to cart form a card disable the button for not send double requests
