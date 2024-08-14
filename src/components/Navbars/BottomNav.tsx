@@ -6,7 +6,7 @@ import CartBadge from './CartBadge.tsx';
 import SearchBar from '../SearchBar/SearchBar.tsx';
 import DropDown from '../UI/DropDown.tsx';
 import categories from '../HomeShopByCategory/exportCategoryObject.tsx';
-import CartDrawer from '../UI/CartDrawer.tsx';
+import CartDrawer from '../Cart/CartDrawer.tsx';
 
 interface navLinks {
   dropDown: string[];
