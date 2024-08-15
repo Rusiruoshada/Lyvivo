@@ -35,7 +35,6 @@ const ItemCard: React.FC<ItemCardProps> = ({
   const [value, setValue] = useState<string | undefined>();
   
   const onWeightChange = ({ target: { value } }: RadioChangeEvent) => {
-    console.log('radio3 checked', value);
     setValue(value);
   };
   
