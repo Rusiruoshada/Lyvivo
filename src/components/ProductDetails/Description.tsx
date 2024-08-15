@@ -62,7 +62,7 @@ const Description: React.FC<DescriptionProps> = ({
 
   const checkProductInCartOrNot = checkIFProductAddToCart===id? true : false;
 
-  const checkWhatsWrong = useSelector(
+  const checkWhatsWrong = useSelector(// delete this when done
     (state: any) => state.cartShow
   );
   
@@ -179,7 +179,7 @@ const Description: React.FC<DescriptionProps> = ({
         </h2>
       )}
       {/* use only for electronic d */}
-      <h1 className='text-5xl mt-4 mb-8 max-sm:text-3xl'>{productName}</h1>
+      <h1 className={`${productName.length >= 20?'!text-3xl font-bold':''} text-5xl mt-4 mb-8 max-sm:text-3xl font-bold`}>{productName}</h1>
 
       {description && <p>{description}</p>}
       <div className='flex flex-col items-start gap-1 mt-4 mb-5 max-sm:flex-row max-sm:justify-between max-sm:mb-7 max-sm:items-center'>
