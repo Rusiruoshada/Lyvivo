@@ -7,6 +7,7 @@ import SearchBar from '../SearchBar/SearchBar.tsx';
 import DropDown from '../UI/DropDown.tsx';
 import categories from '../HomeShopByCategory/exportCategoryObject.tsx';
 import CartDrawer from '../Cart/CartDrawer.tsx';
+import { useNavigate } from 'react-router-dom';
 
 interface navLinks {
   dropDown: string[];
@@ -26,6 +27,16 @@ const BottomNav: React.FC = () => {
   const onCartOpen = () => {
     setIsOpen(!isOpen);
   };
+
+  const navigate = useNavigate()
+
+  const navigation = (link:string) => {
+    if(link === 'home'){
+      navigate('/')
+    }else{
+      navigate(`/${link}`)
+    }
+  }
 
   return (
     <Navbar
@@ -62,8 +73,8 @@ const BottomNav: React.FC = () => {
               {navLinks.navLinks.map((link) => (
                 <Nav.Link
                   className='hover:font-medium hover:text-[var(--primaryColor)] hover:border  text-gray-400  transition-all duration-500'
-                  href={'/' + link.toLowerCase()}
                   key={link}
+                  onClick={() => navigation(link.toLowerCase().replace(/\s+/g, '-'))}
                 >
                   {link}
                 </Nav.Link>
