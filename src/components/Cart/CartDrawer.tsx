@@ -21,9 +21,6 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
   const checkIFProductIdExist = useSelector(
     (state: any) => state.cartShow.cartProducts
   );
-
-  console.log(checkIFProductAddToCart)
-
   
   let cartItemPrice:number=0;
 
@@ -31,7 +28,6 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
     cartItemPrice = cartItemPrice + checkIFProductAddToCart[i].price
     
   }
-  console.log(cartItemPrice)
 
   let filterAndRemoveProductId:string[] ;
   
