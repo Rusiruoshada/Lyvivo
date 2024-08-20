@@ -5,9 +5,10 @@ import { useNavigate } from 'react-router-dom';
 
 interface BreadcrumbProps{
     currentPath?:string,
+    classNames?: string,
 }
 
-const Path: React.FC<BreadcrumbProps> = ({currentPath}) => {
+const Path: React.FC<BreadcrumbProps> = ({currentPath, classNames}) => {
 
 const navigate = useNavigate();
 
@@ -31,7 +32,7 @@ const navigate = useNavigate();
 
 
   return (
-    <Breadcrumb className='mx-10 my-[40px]' separator='>'>
+    <Breadcrumb className={`mx-10 my-[40px] ${classNames}`} separator='>'>
       {breadcrumbItems.map((item, index) => (
         <Breadcrumb.Item
           key={index}
