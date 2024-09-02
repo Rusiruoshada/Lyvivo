@@ -1,0 +1,23 @@
+.ant-drawer-body .ant-card .ant-card-cover {
+  width: fit-content;
+  height: 90px;
+  aspect-ratio: 1;
+  
+}
+
+.ant-drawer-body .ant-card .ant-card-body {
+  padding: 10px 8px 10px 8px;
+  width:100%;
+}
+
+.ant-drawer-body .ant-card .ant-card-actions {
+    border:none;
+    height: fit-content;
+    margin: auto 4px auto 0;
+    :hover{
+        color: gray;
+    }
+    li {
+        margin: 0;
+    }
+}
