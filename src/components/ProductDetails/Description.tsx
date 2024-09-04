@@ -59,8 +59,7 @@ const Description: React.FC<DescriptionProps> = ({
     .some((productId: any) => productId === id);
 
   const cartProductCountFixed = parseFloat(cartProductCount.toFixed(2));
-
-  const checkProductInCartOrNot = checkIFProductAddToCart===id? true : false;
+ 
 
   const checkWhatsWrong = useSelector(// delete this when done
     (state: any) => state.cartShow
@@ -75,7 +74,7 @@ const Description: React.FC<DescriptionProps> = ({
     dispatch(
       cartProductAction.totalPrice({
         cartProductCount: size? 0:1,
-        totalPriceForProduct: checkProductInCartOrNot?savingPrice + savingPrice * count: savingPrice,
+        totalPriceForProduct: savingPrice + savingPrice * count
       })
     );
   };
@@ -90,9 +89,11 @@ const Description: React.FC<DescriptionProps> = ({
     });
     if (count <= 1) {
       if (checkIFProductAddToCart.length !== 0) {
+
         const filterAndRemoveProduct = checkIFProductAddToCart.filter(
           (productId: any) => productId !== id
         );
+
         dispatch(
           cartProductAction.totalPrice({
             cartProductCount: 0, // how many add to cart in one product
@@ -105,6 +106,12 @@ const Description: React.FC<DescriptionProps> = ({
             productCount: -1, // how many products in cart
           })
         );
+        dispatch(
+          cartProductAction.removeItems({
+            removingProductId:id
+          })
+        )
+
         setClickAdd({ click: false, text: `Remove ${productName} from Cart` });
 
         openNotification({type:'success', description:`${productName} remove from cart`, message:'Successful',role:'status', className:'[&<div]:!top-10'});
@@ -199,7 +206,7 @@ const Description: React.FC<DescriptionProps> = ({
         </div>
         {originalPrice && (
           <p className='line-through font-bold text-gray-400'>
-            Rs. {checkProductInCartOrNot?originalPrice * count: originalPrice}
+            Rs. {filterCartProduct?originalPrice * count: originalPrice}
           </p>
         )}
       </div>
