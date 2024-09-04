@@ -1,7 +1,6 @@
 import React from 'react';
-import type { DrawerProps } from 'antd';
 import { Button, Drawer } from 'antd';
-import CartProductCard from './CartProductCard.tsx';
+import CartProductCard from './ CartProductCard.tsx';
 import { IoIosArrowBack } from 'react-icons/io';
 import { useDispatch, useSelector } from 'react-redux';
 import { cartProductAction } from '../../store/slices/cartProductSlice.ts';
@@ -62,7 +61,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
         className='p-0 [&>div]:!p-2'
         closeIcon={<IoIosArrowBack />}
       >
-        <div className='!p-0 mb-36'>
+        <div className='!p-0'>
         {checkIFProductAddToCart?.map((productDetails: any) => (
           <CartProductCard
             key={productDetails.id}
