@@ -25,7 +25,6 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
 
   for (let i = 0; i < checkIFProductAddToCart.length; i++) {
     cartItemPrice = cartItemPrice + checkIFProductAddToCart[i].price
-    
   }
 
   let filterAndRemoveProductId:string[] ;
@@ -79,7 +78,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
           
           <div className='flex justify-between mt-3 mb-0'>
               <span><h5>Total Price : </h5></span>
-              <span><h4>{cartItemPrice}</h4></span>
+              <span><h4>{cartItemPrice.toFixed(2)}</h4></span>
           </div>
           <div className='flex justify-between mt-0 mb-2 text-gray-500'>
               <span><h6>Items : </h6></span>
