@@ -193,7 +193,7 @@ const Description: React.FC<DescriptionProps> = ({
         <div className='flex items-center gap-4'>
           <span className='font-bold text-4xl'>
             Rs.
-            {savingPrice > 0 ? cartProductCountFixed : originalPrice}
+            {savingPrice > 0 ? savingPrice*count : originalPrice}
           </span>
           {percentage > 0 && (
             <span
