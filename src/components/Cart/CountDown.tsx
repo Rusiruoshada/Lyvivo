@@ -26,11 +26,7 @@ const CountDown: React.FC<CountDownProps> = ({
     (state: any) => state.cartShow.cartProducts
   );
 
-  const checkWhatsWrong = useSelector(
-    // delete this when done
-    (state: any) => state.cartShow
-  );
-
+  
   const add = () => {
     setCount((prevCount) => (size ? prevCount : prevCount + 1));
     dispatch(
@@ -61,18 +57,20 @@ const CountDown: React.FC<CountDownProps> = ({
             totalPriceForProduct: savingPrice,
           })
         );
+            
         dispatch(
           cartProductAction.addProduct({
             cartProducts: filterAndRemoveProduct,
             productCount: -1, // how many products in cart
           })
         );
+            
         dispatch(
           cartProductAction.removeItems({
             removingProductId: id,
           })
         );
-        // setClickAdd({ click: false, text: `Remove ${productName} from Cart` });
+
 
         openNotification({
           type: 'success',
