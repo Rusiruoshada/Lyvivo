@@ -17,6 +17,9 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
   const checkIFProductAddToCart = useSelector(
     (state: any) => state.cartShow.cartProductDetails
   );
+
+  console.log(checkIFProductAddToCart)
+
   const checkIFProductIdExist = useSelector(
     (state: any) => state.cartShow.cartProducts
   );
@@ -66,6 +69,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
             key={productDetails.id}
             productName={productDetails.productName}
             price={productDetails.price}
+            originalSavingPrice={productDetails.originalSavingPrice}
             count={productDetails.addItemsCount}
             image={productDetails.image}
             size={productDetails.size}
