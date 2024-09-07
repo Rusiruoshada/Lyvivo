@@ -5,6 +5,7 @@ import CountDown from './CountDown.tsx';
 interface CartProductCardProps {
   productName: string;
   price: number;
+  originalSavingPrice: number;
   count: number;
   image: string;
   size: number;
@@ -15,6 +16,7 @@ interface CartProductCardProps {
 const CartProductCard: React.FC<CartProductCardProps> = ({
   productName,
   price,
+  originalSavingPrice,
   count,
   image,
   size,
@@ -45,6 +47,7 @@ const CartProductCard: React.FC<CartProductCardProps> = ({
               size={size}
               productName={productName}
               price={price}
+              originalSavingPrice={originalSavingPrice}
               id={id}
             />
           </div>,
@@ -68,8 +71,8 @@ const CartProductCard: React.FC<CartProductCardProps> = ({
             }
             description={
               <div>
-                <h3 className='font-bold '>Rs. {price}</h3>
-                {size && <h4>{size + `${size >= 1000 ? 'kg' : 'g'}`}</h4>}
+                <h3 className='font-bold '>Rs. {price.toFixed(2)}</h3>
+                {size && <h4>{size + `${size.toString()==='1L'?'': size >= 1000? 'kg' : 'g'}`}</h4>}
               </div>
             }
           />
