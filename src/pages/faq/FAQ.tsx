@@ -1,6 +1,6 @@
 import { Breadcrumb, Collapse } from 'antd';
 import React from 'react';
-import { itemsOnlineOrderAndDeliveryRelated } from './faqCollapseItems.ts';
+import itemsForCollapse from './faqCollapseItems.tsx';
 
 const FAQ = () => {
   return (
@@ -22,7 +22,7 @@ const FAQ = () => {
         </h1>
         <div className='mt-3'>
           <h2>Online order & delivery related</h2>
-          <Collapse items={itemsOnlineOrderAndDeliveryRelated} />
+          <Collapse items={itemsForCollapse} />
         </div>
       </div>
     </>
