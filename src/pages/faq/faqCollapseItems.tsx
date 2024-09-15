@@ -1,75 +1,48 @@
-import React from "react";
-import { CollapseProps } from "antd";
-import collapseText from "./faqtext.ts";
-import { Collapse } from "antd";
+import React from 'react';
+import { CollapseProps } from 'antd';
+import collapseText from './faqtext.ts';
+import { Collapse } from 'antd';
 
-const items:any = [
-  collapseText[0].onlineOrderAndDeliveryRelated.children.map((item:any,index:number) => (
-    {
-      key: index,
+
+const itemsNest: any =
+  collapseText[0].onlineOrderAndDeliveryRelated.children.map(
+    (item: any, index: number) => ({
+      key: (index + 1).toString(),
       label: item.question,
-      children: item.answer,
-    }
-  ))
-]
-console.log(items)
+      children: <p>{item.answer}</p>,
+    })
+  );
 
+console.log(itemsNest);
 
-const itemsForCollapse: CollapseProps['items'] = [
-    {
-      key: '1',
-      label: 'Can I place an order for person residing elsewhere within the delivery grid?',
-      children: <Collapse items={items} />,
-    },
-    {
-      key: '2',
-      label: 'This is panel header 2',
-      children: 'a',
-    },
-    {
-      key: '3',
-      label: 'This is panel header 3',
-      children: 'a',
-    },
-    {
-      key: '4',
-      label: 'This is panel header 3',
-      children: 'a',
-    },
-    {
-      key: '5',
-      label: 'This is panel header 3',
-      children: 'a',
-    },
-    {
-      key: '6',
-      label: 'This is panel header 3',
-      children: 'a',
-    },
-    {
-      key: '7',
-      label: 'This is panel header 3',
-      children: 'a',
-    },
-    {
-      key: '8',
-        label: 'This is panel header 3',
-        children: 'a',
-      },
-      {
-        key: '9',
-        label: 'This is panel header 3',
-        children: 'a',
-      },
-      {
-        key: '10',
-        label: 'This is panel header 3',
-        children: 'a',
-      },
-      {
-        key: '11',
-        label: 'This is panel header 3',
-        children: 'a',
-      },
-    ]
-export default itemsForCollapse;
+const items: CollapseProps['items'] = [
+  {
+    key: '1',
+    label:
+      collapseText[0].onlineOrderAndDeliveryRelated.label,
+    children: (
+      <Collapse
+        items={itemsNest}
+        size='large'
+        expandIconPosition='end'
+        
+      />
+    ),
+  },
+  {
+    key: '2',
+    label: 'This is panel header 2',
+    children: 'a',
+  },
+  {
+    key: '3',
+    label: 'This is panel header 3',
+    children: 'a',
+  },
+  {
+    key: '4',
+    label: 'This is panel header 3',
+    children: 'a',
+  },
+];
+export default items;
