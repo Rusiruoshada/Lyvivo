@@ -21,7 +21,7 @@ const FAQ = () => {
           Frequently <b>asked questions</b>
         </h1>
         <div className='mt-3'>
-          <Collapse items={items} ghost size='large'  />
+          <Collapse items={items} ghost size='large' />
         </div>
       </div>
     </>
