@@ -63,7 +63,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
         className='p-0 [&>div]:!p-2'
         closeIcon={<IoIosArrowBack />}
       >
-        <div className='!p-0'>
+        <div className='!p-0 mb-28 overflow-hidden'>
         {checkIFProductAddToCart?.map((productDetails: any) => (
           <CartProductCard
             key={productDetails.id}
@@ -78,7 +78,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
           />
         ))}
         </div>
-        <div className='h-[140px] absolute bottom-0 right-0 left-0 top-auto bg-white !p-2 shadow-lg rounded-tl-3xl rounded-tr-3xl'>
+        <div className='!pb-4 absolute bottom-0 right-0 left-0 top-auto bg-white !p-2 shadow-lg rounded-tl-3xl rounded-tr-3xl'>
           
           <div className='flex justify-between mt-3 mb-0'>
               <span><h5>Total Price : </h5></span>
