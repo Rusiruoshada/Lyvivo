@@ -4,7 +4,7 @@ import collapseText from './faqtext.ts';
 import { Collapse } from 'antd';
 
 
-const itemsNest: any =
+const itemsNestOnlineOrderAndDeliveryRelated: any =
   collapseText[0].onlineOrderAndDeliveryRelated.children.map(
     (item: any, index: number) => ({
       key: (index + 1).toString(),
@@ -13,7 +13,16 @@ const itemsNest: any =
     })
   );
 
-console.log(itemsNest);
+const itemsNestProductRangeAndOtherLimitations: any =
+  collapseText[0].productRangeAndOtherLimitations.children.map(
+    (item: any, index: number) => ({
+      key: (index + 1).toString(),
+      label: item.question,
+      children: <p>{item.answer}</p>,
+    })
+  );
+
+
 
 const items: CollapseProps['items'] = [
   {
@@ -22,27 +31,26 @@ const items: CollapseProps['items'] = [
       collapseText[0].onlineOrderAndDeliveryRelated.label,
     children: (
       <Collapse
-        items={itemsNest}
+        items={itemsNestOnlineOrderAndDeliveryRelated}
         size='large'
         expandIconPosition='end'
+        rootClassName=''
+        className=''
         
       />
     ),
   },
   {
     key: '2',
-    label: 'This is panel header 2',
-    children: 'a',
+    label: collapseText[0].productRangeAndOtherLimitations.label,
+    children: (
+      <Collapse 
+        items={itemsNestProductRangeAndOtherLimitations}
+        size='large'
+        expandIconPosition='end'
+      />
+    ),
   },
-  {
-    key: '3',
-    label: 'This is panel header 3',
-    children: 'a',
-  },
-  {
-    key: '4',
-    label: 'This is panel header 3',
-    children: 'a',
-  },
+  
 ];
 export default items;
