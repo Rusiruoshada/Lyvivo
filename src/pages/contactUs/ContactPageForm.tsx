@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Form, Input, InputNumber, Select } from 'antd';
 import { selectOptionsContactPage } from './contactUsPageDropdownOptions.ts';
+import axios from 'axios';
 
 interface ContactPageFormProps {
   dropdownSelect: string;
@@ -9,6 +10,7 @@ interface ContactPageFormProps {
 const ContactPageForm: React.FC<ContactPageFormProps> = ({
   dropdownSelect,
 }) => {
+
   const formItemLayout = {
     labelCol: {
       xs: { span: 24 },
@@ -23,11 +25,25 @@ const ContactPageForm: React.FC<ContactPageFormProps> = ({
   const [form] = Form.useForm();
   const [disable, setDisable] = useState(false);
 
-  const onFinish = (values: any) => {
+  const onFinish = async (values: any) => {
     console.log('Form topic: ', dropdownSelect);
     console.log('Received values of form: ', values);
-    setDisable(true);
-    form.resetFields();
+
+    // send form data to the backend
+    try {
+      const response = await axios.post('http://localhost:5000/api/send-email', {
+          category: dropdownSelect,
+          ...values,
+      })
+      const data = response.data
+      console.log(data)
+      form.resetFields();
+      setDisable(true);
+    } catch (error) {
+      console.log('error sending email',error)
+      setDisable(false);
+    }
+
   };
 
  
