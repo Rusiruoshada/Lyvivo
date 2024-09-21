@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {useParams} from 'react-router-dom';
 import Images from '../../components/ProductDetails/Image.tsx';
 import Description from '../../components/ProductDetails/Description.tsx';
