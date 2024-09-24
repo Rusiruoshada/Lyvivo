@@ -26,10 +26,7 @@ const ContactPageForm: React.FC<ContactPageFormProps> = ({
   const [disable, setDisable] = useState(false);
 
   const onFinish = async (values: any) => {
-    console.log('Form topic: ', dropdownSelect);
-    console.log('Received values of form: ', values);
-
-    // send form data to the backend
+     // send form data to the backend
     try {
       const response = await axios.post('http://localhost:5000/api/send-email', {
           category: dropdownSelect,
