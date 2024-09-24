@@ -8,7 +8,8 @@ interface CountDownProps {
   count: number;
   size?: number;
   productName: string;
-  price: number;
+    price: number;
+    originalSavingPrice: number;
   id: string;
 }
 
@@ -16,7 +17,8 @@ const CountDown: React.FC<CountDownProps> = ({
   count: productCount,
   size,
   productName,
-  price: savingPrice,
+    price: savingPrice,
+    originalSavingPrice,
   id,
 }) => {
   const dispatch = useDispatch();
@@ -25,16 +27,25 @@ const CountDown: React.FC<CountDownProps> = ({
   const checkIFProductAddToCart = useSelector(
     (state: any) => state.cartShow.cartProducts
   );
-
-  
+    
   const add = () => {
-    setCount((prevCount) => (size ? prevCount : prevCount + 1));
+    setCount( count + 1);
     dispatch(
       cartProductAction.totalPrice({
-        cartProductCount: size ? 0 : 1,
-        totalPriceForProduct: savingPrice + savingPrice * count,
+        cartProductCount: 1,
+        totalPriceForProduct:  originalSavingPrice + originalSavingPrice * count,
       })
     );
+    dispatch(
+        cartProductAction.getAllDetails({
+          cartProductDetails: {
+            price: originalSavingPrice * count + originalSavingPrice,
+            addItemsCount: count + 1,
+            size: size,
+            id: id,
+          },
+        })
+      );
   };
 
   const minus = () => {
@@ -91,7 +102,17 @@ const CountDown: React.FC<CountDownProps> = ({
       dispatch(
         cartProductAction.totalPrice({
           cartProductCount: -1,
-          totalPriceForProduct: savingPrice * count - savingPrice,
+          totalPriceForProduct: originalSavingPrice * count - originalSavingPrice,
+        })
+      );
+      dispatch(
+        cartProductAction.getAllDetails({
+          cartProductDetails: {
+            price: originalSavingPrice * count - originalSavingPrice,
+            addItemsCount: count - 1,
+            size: size,
+            id: id,
+          },
         })
       );
     }
@@ -107,7 +128,7 @@ const CountDown: React.FC<CountDownProps> = ({
             className='rounded-md shadow-md aspect-square p-1 hover:scale-90'
             onClick={add}
           >
-            <FaPlus onClick={add} />
+            <FaPlus  />
           </div>
           <p className='!text-gray-500'>{count}</p>
           <div

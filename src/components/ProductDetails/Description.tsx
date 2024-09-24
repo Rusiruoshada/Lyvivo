@@ -147,6 +147,7 @@ const Description: React.FC<DescriptionProps> = ({
         cartProductAction.getAllDetails({
           cartProductDetails: {
             price: savingPrice * count,
+            originalSavingPrice: savingPrice,
             addItemsCount: count,
             size: size,
             id: id,
@@ -167,6 +168,7 @@ const Description: React.FC<DescriptionProps> = ({
             productName: productName,
             description: description,
             price: savingPrice * count,
+            originalSavingPrice: savingPrice,
             image: image,
             // percentage ,
             size: size,

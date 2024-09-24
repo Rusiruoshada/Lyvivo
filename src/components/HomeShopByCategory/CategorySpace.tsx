@@ -13,7 +13,7 @@ const gridStyle: React.CSSProperties = {
 const CategorySpace: React.FC = () => {
   const dispatch = useDispatch();
 
-  const handleOnCategoryChange = (event: any) => {
+  const handleOnCategoryChange:any = (event: any) => {
     if (event.target.ariaLabel === 'All') {
       dispatch(categorySelectAction.changeCategory({ id: 1, title: 'All' }));
     } else if (event.target.ariaLabel === 'Grocery') {
@@ -41,6 +41,8 @@ const CategorySpace: React.FC = () => {
         </h3>
       }
       className='mt-20 sm:mt-5 md:mt-20 lg:mt-20 p-0 text-center'
+      bordered={false}
+      rootClassName='[&>div]:!border-none'
     >
       <Row gutter={20} justify='center' className='p-0 gap-3'>
         {categories1.map((categoryItem) => (
@@ -59,8 +61,8 @@ const CategorySpace: React.FC = () => {
               <CategoryCard
                 categoryName={categoryItem.value}
                 categoryImg={categoryItem.imgPath}
-                key={categoryItem.value}
                 onCardClick={handleOnCategoryChange}
+                key={categoryItem.value}
               />
             </Card.Grid>
           </Col>

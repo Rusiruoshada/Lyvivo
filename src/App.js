@@ -9,8 +9,10 @@ import ErrorPage from './pages/error/Error.tsx';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Layout from './components/Layout.tsx';
 import AboutUsPage from './pages/aboutUs/AboutUs.tsx';
+import ContactUs from './pages/contactUs/ContactUs.tsx'
 import { ConfigProvider } from 'antd';
 import antdTheme from './styles/antdconfigTheme.ts';
+import FAQ from './pages/faq/FAQ.tsx';
 
 function App() {
   const queryClient = new QueryClient();
@@ -29,6 +31,14 @@ function App() {
         {
           path: '/about-us',
           element: <AboutUsPage />,
+        },
+        {
+          path: '/contact-us',
+          element: <ContactUs />,
+        },
+        {
+          path: '/faq',
+          element: <FAQ />,
         },
         {
           path: '/collection/all',

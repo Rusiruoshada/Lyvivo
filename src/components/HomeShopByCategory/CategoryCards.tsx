@@ -6,11 +6,13 @@ const { Meta } = Card;
 interface CategoryCardProps {
   categoryName: string;
   categoryImg: string;
+  onCardClick: any;
 }
 
 const CategoryCard: React.FC<CategoryCardProps> = ({
   categoryName,
   categoryImg,
+  onCardClick : clickForNowChangeThis,
 }) => {
   const onCardClick = (event: any) => {
     alert(event.target.ariaLabel);
