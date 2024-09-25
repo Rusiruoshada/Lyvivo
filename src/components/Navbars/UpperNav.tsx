@@ -15,9 +15,11 @@ const BasicExample: React.FC = () => {
     setIsModalOpen(true);
   };
 
-  const onModalCancel = () => {
-    setIsModalOpen(false)
+  const onModalCancel = (value: boolean) => {
+    alert(value)
+    setIsModalOpen(value)
   }
+  alert(isModalOpen)
 
   return (
     <Navbar
