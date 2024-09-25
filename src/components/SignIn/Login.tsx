@@ -20,8 +20,7 @@ const Login: React.FC<LoginProps> = ({ isModalOpen, onCancel }) => {
   return (
     <Modal
       open={isModalOpen}
-      onCancel={onCancel}
-      onOk={onCancel}
+      onCancel={()=> onCancel(false)}
       className='[&>div]:!p-0 w-full sm:!w-full md:!w-full lg:!w-[1200px]'
       closable={false}
       footer={''}
