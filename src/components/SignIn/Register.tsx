@@ -22,7 +22,7 @@ interface RegisterProps {
 
 const Register: React.FC<RegisterProps> = ({ isModalOpen, onCancel }) => {
   const [form] = Form.useForm();
-  const [usernameFocused, setUsernameFocused] = useState(false);
+  const [emailFocused, setEmailFocused] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
 
   const onFinish = (values: any) => {
@@ -74,27 +74,27 @@ const Register: React.FC<RegisterProps> = ({ isModalOpen, onCancel }) => {
           <Form
             name='register'
             form={form}
-            initialValues={{ username: '', password: '', phoneNumber: '' }}
+            initialValues={{ email: '', password: '', phoneNumber: '' }}
             onFinish={onFinish}
             className='w-full'
           >
             <div className='relative mb-8'>
               <label
                 className={`absolute left-3 top-0 -z-30 transition-all duration-200 transform ${
-                  usernameFocused || form.isFieldTouched('username')
+                  emailFocused || form.isFieldTouched('username')
                     ? 'visible -translate-y-6 -translate-x-2 scale-100 text-gray-500 !z-10'
                     : 'translate-y-0 scale-100 -z-30'
                 }`}
               >
-                UserName
+                Mobile Number
               </label>
               <Form.Item
-                name='username'
+                name='mobileNumber'
                 rules={[
                   {
                     required: true,
-                    message: 'Please Enter your Username!',
-                    type: 'email',
+                    message: 'Please Enter your email!',
+                    type: 'number',
                     whitespace: true,
                   },
                 ]}
@@ -103,37 +103,35 @@ const Register: React.FC<RegisterProps> = ({ isModalOpen, onCancel }) => {
                 className='!mb-0'
               >
                 <Input
-                  name='username'
+                  name='mobileNumber'
                   prefix={<UserOutlined />}
                   placeholder={`${
-                    usernameFocused || form.getFieldValue('username')
-                      ? ''
-                      : 'UserName'
+                    emailFocused || form.getFieldValue('mobileNumber') ? '' : 'Mobile Number'
                   }`}
-                  type='email'
+                  type='number'
                   size='large'
                   className='!border-0 !border-b-2 gap-1'
-                  onFocus={() => setUsernameFocused(true)}
-                  onBlur={() => setUsernameFocused(false)}
+                  onFocus={() => setEmailFocused(true)}
+                  onBlur={() => setEmailFocused(false)}
                 />
               </Form.Item>
             </div>
             <div className='relative mb-8'>
               <label
                 className={`absolute left-3 top-0 -z-30 transition-all duration-200 transform ${
-                  usernameFocused || form.isFieldTouched('username')
+                  emailFocused || form.isFieldTouched('username')
                     ? 'visible -translate-y-6 -translate-x-2 scale-100 text-gray-500 !z-10'
                     : 'translate-y-0 scale-100 -z-30'
                 }`}
               >
-                UserName
+                E-mail
               </label>
               <Form.Item
-                name='username'
+                name='email'
                 rules={[
                   {
                     required: true,
-                    message: 'Please Enter your Username!',
+                    message: 'Please Enter your email!',
                     type: 'email',
                     whitespace: true,
                   },
@@ -143,18 +141,96 @@ const Register: React.FC<RegisterProps> = ({ isModalOpen, onCancel }) => {
                 className='!mb-0'
               >
                 <Input
-                  name='username'
+                  name='email'
                   prefix={<UserOutlined />}
                   placeholder={`${
-                    usernameFocused || form.getFieldValue('username')
-                      ? ''
-                      : 'UserName'
+                    emailFocused || form.getFieldValue('email') ? '' : 'E-mail'
                   }`}
                   type='email'
                   size='large'
                   className='!border-0 !border-b-2 gap-1'
-                  onFocus={() => setUsernameFocused(true)}
-                  onBlur={() => setUsernameFocused(false)}
+                  onFocus={() => setEmailFocused(true)}
+                  onBlur={() => setEmailFocused(false)}
+                />
+              </Form.Item>
+            </div>
+            <div className='relative mb-8'>
+              <label
+                className={`absolute left-3 top-0 -z-30 transition-all duration-200 transform ${
+                  emailFocused || form.isFieldTouched('firstName')
+                    ? 'visible -translate-y-6 -translate-x-2 scale-100 text-gray-500 !z-10'
+                    : 'translate-y-0 scale-100 -z-30'
+                }`}
+              >
+                First Name
+              </label>
+              <Form.Item
+                name='firstName'
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please Enter your Username!',
+                    type: 'string',
+                    whitespace: true,
+                  },
+                ]}
+                validateDebounce={1000}
+                hasFeedback
+                className='!mb-0'
+              >
+                <Input
+                  name='firstName'
+                  prefix={<UserOutlined />}
+                  placeholder={`${
+                    emailFocused || form.getFieldValue('firstName')
+                      ? ''
+                      : 'First Name'
+                  }`}
+                  type='string'
+                  size='large'
+                  className='!border-0 !border-b-2 gap-1'
+                  onFocus={() => setEmailFocused(true)}
+                  onBlur={() => setEmailFocused(false)}
+                />
+              </Form.Item>
+            </div>
+            <div className='relative mb-8'>
+              <label
+                className={`absolute left-3 top-0 -z-30 transition-all duration-200 transform ${
+                  emailFocused || form.isFieldTouched('firstName')
+                    ? 'visible -translate-y-6 -translate-x-2 scale-100 text-gray-500 !z-10'
+                    : 'translate-y-0 scale-100 -z-30'
+                }`}
+              >
+                Last Name
+              </label>
+              <Form.Item
+                name='lastName'
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please Enter your Username!',
+                    type: 'string',
+                    whitespace: true,
+                  },
+                ]}
+                validateDebounce={1000}
+                hasFeedback
+                className='!mb-0'
+              >
+                <Input
+                  name='lastName'
+                  prefix={<UserOutlined />}
+                  placeholder={`${
+                    emailFocused || form.getFieldValue('lastName')
+                      ? ''
+                      : 'Last Name'
+                  }`}
+                  type='string'
+                  size='large'
+                  className='!border-0 !border-b-2 gap-1'
+                  onFocus={() => setEmailFocused(true)}
+                  onBlur={() => setEmailFocused(false)}
                 />
               </Form.Item>
             </div>
@@ -206,13 +282,42 @@ const Register: React.FC<RegisterProps> = ({ isModalOpen, onCancel }) => {
               </Form.Item>
             </div>
 
-            <Form.Item>
-              <Flex justify='end' align='center'>
-                <Button type='link' className='text-gray-400 p-0'>
-                  Forgot password?
-                </Button>
-              </Flex>
-            </Form.Item>
+            <div className='relative'>
+              <label
+                className={`absolute left-3 top-0 -z-30 transition-all duration-200 transform ${
+                  passwordFocused || form.getFieldValue('password')
+                    ? 'visible -translate-y-6 -translate-x-2 scale-100 text-gray-500 !z-10'
+                    : 'translate-y-0 scale-100 -z-30'
+                }`}
+              >
+                Password
+              </label>
+              <Form.Item
+                              name='confirm'               
+                dependencies={['password']}
+                hasFeedback
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please confirm your password!',
+                  },
+                  ({ getFieldValue }) => ({
+                    validator(_, value) {
+                      if (!value || getFieldValue('password') === value) {
+                        return Promise.resolve();
+                      }
+                      return Promise.reject(
+                        new Error(
+                          'The new password that you entered do not match!'
+                        )
+                      );
+                    },
+                  }),
+                ]}
+              >
+                <Input.Password placeholder='Confirm Password' size='large' />
+              </Form.Item>
+            </div>
 
             <Form.Item>
               <Button
@@ -222,7 +327,7 @@ const Register: React.FC<RegisterProps> = ({ isModalOpen, onCancel }) => {
                 htmlType='submit'
                 size='large'
               >
-                Log in
+                Register
               </Button>
             </Form.Item>
           </Form>
