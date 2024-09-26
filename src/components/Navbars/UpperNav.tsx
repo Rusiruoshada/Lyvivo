@@ -6,20 +6,33 @@ import { Button } from 'antd';
 import { TbTruckDelivery } from 'react-icons/tb';
 import { MdLocalPhone } from 'react-icons/md';
 import Login from '../SignIn/Login.tsx';
+import Register from '../SignIn/Register.tsx';
 
 const BasicExample: React.FC = () => {
 
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<{register:boolean,login:boolean}>({register:false,login:false});
 
-  const showModal = () => {
-    setIsModalOpen(true);
+  const showModal = (event: any): any => {
+    const clickButtonInnerText = event.target.innerText;
+    if (clickButtonInnerText === 'Register') {
+      
+      setIsModalOpen({register:true,login:false});
+    } else if (clickButtonInnerText === 'Login') {
+      
+      setIsModalOpen({register:false,login:true});
+    }
   };
 
-  const onModalCancel = (value: boolean) => {
-    alert(value)
-    setIsModalOpen(value)
+  const onModalCancel = (value:any) => {
+    const getDetailsAboutCloseModal = Object.keys(value);
+    
+    if (getDetailsAboutCloseModal[0] === 'register') {
+      setIsModalOpen({register:false,login:isModalOpen.login});
+    } else if (getDetailsAboutCloseModal[0] === 'login') {
+      setIsModalOpen({register:isModalOpen.register,login:false});
+      
+    }
   }
-  alert(isModalOpen)
 
   return (
     <Navbar
@@ -67,14 +80,17 @@ const BasicExample: React.FC = () => {
                   borderColor: 'var(--primaryColor)',
                   color: 'var(--primaryColor)',
                 }}
+                onClick={showModal}
+
               >
                 Register
               </Button>{' '}
+              <Register isModalOpen={isModalOpen.register} onCancel={onModalCancel} />
               /
               <Button onClick={showModal} style={{ color: 'var(--primaryColor)' }} type='link'>
                 Login
-                <Login isModalOpen={isModalOpen} onCancel={onModalCancel} />
               </Button>
+                <Login isModalOpen={isModalOpen.login} onCancel={onModalCancel} />
             </Nav.Item>
           </Nav>
         </Navbar.Collapse>
