@@ -1,18 +1,13 @@
 import React, { useState } from 'react';
-import { LockOutlined, UserOutlined } from '@ant-design/icons';
+import { LockOutlined, UserOutlined, MailOutlined, FieldNumberOutlined } from '@ant-design/icons';
 import {
   Button,
   Form,
   Input,
-  Flex,
   Modal,
   AutoComplete,
-  Cascader,
   Checkbox,
-  Col,
   InputNumber,
-  Row,
-  Select,
 } from 'antd';
 
 interface RegisterProps {
@@ -22,8 +17,14 @@ interface RegisterProps {
 
 const Register: React.FC<RegisterProps> = ({ isModalOpen, onCancel }) => {
   const [form] = Form.useForm();
-  const [emailFocused, setEmailFocused] = useState(false);
-  const [passwordFocused, setPasswordFocused] = useState(false);
+  const [inputFocused, setInputFocused] = useState({
+    mobileNumber: false,
+    email: false,
+    firstName: false,
+    lastName: false,
+    password: false,
+    confirmPassword: false,
+  });
 
   const onFinish = (values: any) => {
     console.log('Received values of form: ', values);
@@ -52,7 +53,7 @@ const Register: React.FC<RegisterProps> = ({ isModalOpen, onCancel }) => {
               </p>
             </div>
 
-            <div className='h-[500px] relative'>
+            <div className='h-full relative'>
               <div className='absolute top-0 bottom-0 left-0 right-0 h-full !z-[1] opacity-50 rounded-md bg-black' />
               <div
                 style={{
@@ -74,14 +75,14 @@ const Register: React.FC<RegisterProps> = ({ isModalOpen, onCancel }) => {
           <Form
             name='register'
             form={form}
-            initialValues={{ email: '', password: '', phoneNumber: '' }}
             onFinish={onFinish}
             className='w-full'
           >
             <div className='relative mb-8'>
               <label
                 className={`absolute left-3 top-0 -z-30 transition-all duration-200 transform ${
-                  emailFocused || form.isFieldTouched('username')
+                  inputFocused.mobileNumber ||
+                  form.getFieldValue('mobileNumber')
                     ? 'visible -translate-y-6 -translate-x-2 scale-100 text-gray-500 !z-10'
                     : 'translate-y-0 scale-100 -z-30'
                 }`}
@@ -93,33 +94,60 @@ const Register: React.FC<RegisterProps> = ({ isModalOpen, onCancel }) => {
                 rules={[
                   {
                     required: true,
-                    message: 'Please Enter your email!',
+                    message: 'Please Enter your Number!',
                     type: 'number',
-                    whitespace: true,
                   },
+                  ({ getFieldValue }) => ({
+                    validator(_, value) {
+                      if (getFieldValue('mobileNumber').toString().length === 10) {
+                        return Promise.resolve();
+                      }
+                      return Promise.reject(
+                        new Error(
+                          'Mobile number must be 10 digits!'
+                        )
+                      );
+                    },
+                  }),
                 ]}
                 validateDebounce={1000}
                 hasFeedback
                 className='!mb-0'
               >
-                <Input
+                <InputNumber
                   name='mobileNumber'
-                  prefix={<UserOutlined />}
+                  prefix={<FieldNumberOutlined />}
                   placeholder={`${
-                    emailFocused || form.getFieldValue('mobileNumber') ? '' : 'Mobile Number'
+                    inputFocused.mobileNumber ||
+                    form.getFieldValue('mobileNumber')
+                      ? ''
+                      : 'Mobile Number'
                   }`}
-                  type='number'
+                  type='tel'
                   size='large'
-                  className='!border-0 !border-b-2 gap-1'
-                  onFocus={() => setEmailFocused(true)}
-                  onBlur={() => setEmailFocused(false)}
+                  inputMode='tel'
+                  minLength={10}
+                  maxLength={11}
+                  className='!border-0 !border-b-2 gap-1 w-full'
+                  onFocus={() =>
+                    setInputFocused((prev: any) => ({
+                      ...prev,
+                      mobileNumber: true,
+                    }))
+                  }
+                  onBlur={() =>
+                    setInputFocused((prev: any) => ({
+                      ...prev,
+                      mobileNumber: false,
+                    }))
+                  }
                 />
               </Form.Item>
             </div>
             <div className='relative mb-8'>
               <label
                 className={`absolute left-3 top-0 -z-30 transition-all duration-200 transform ${
-                  emailFocused || form.isFieldTouched('username')
+                  inputFocused.email || form.getFieldValue('email')
                     ? 'visible -translate-y-6 -translate-x-2 scale-100 text-gray-500 !z-10'
                     : 'translate-y-0 scale-100 -z-30'
                 }`}
@@ -142,22 +170,28 @@ const Register: React.FC<RegisterProps> = ({ isModalOpen, onCancel }) => {
               >
                 <Input
                   name='email'
-                  prefix={<UserOutlined />}
+                  prefix={<MailOutlined />}
                   placeholder={`${
-                    emailFocused || form.getFieldValue('email') ? '' : 'E-mail'
+                    inputFocused.email || form.getFieldValue('email')
+                      ? ''
+                      : 'E-mail'
                   }`}
                   type='email'
                   size='large'
                   className='!border-0 !border-b-2 gap-1'
-                  onFocus={() => setEmailFocused(true)}
-                  onBlur={() => setEmailFocused(false)}
+                  onFocus={() =>
+                    setInputFocused((prev: any) => ({ ...prev, email: true }))
+                  }
+                  onBlur={() =>
+                    setInputFocused((prev: any) => ({ ...prev, email: false }))
+                  }
                 />
               </Form.Item>
             </div>
             <div className='relative mb-8'>
               <label
                 className={`absolute left-3 top-0 -z-30 transition-all duration-200 transform ${
-                  emailFocused || form.isFieldTouched('firstName')
+                  inputFocused.firstName || form.getFieldValue('firstName')
                     ? 'visible -translate-y-6 -translate-x-2 scale-100 text-gray-500 !z-10'
                     : 'translate-y-0 scale-100 -z-30'
                 }`}
@@ -182,22 +216,32 @@ const Register: React.FC<RegisterProps> = ({ isModalOpen, onCancel }) => {
                   name='firstName'
                   prefix={<UserOutlined />}
                   placeholder={`${
-                    emailFocused || form.getFieldValue('firstName')
+                    inputFocused.firstName || form.getFieldValue('firstName')
                       ? ''
                       : 'First Name'
                   }`}
                   type='string'
                   size='large'
                   className='!border-0 !border-b-2 gap-1'
-                  onFocus={() => setEmailFocused(true)}
-                  onBlur={() => setEmailFocused(false)}
+                  onFocus={() =>
+                    setInputFocused((prev: any) => ({
+                      ...prev,
+                      firstName: true,
+                    }))
+                  }
+                  onBlur={() =>
+                    setInputFocused((prev: any) => ({
+                      ...prev,
+                      firstName: false,
+                    }))
+                  }
                 />
               </Form.Item>
             </div>
             <div className='relative mb-8'>
               <label
                 className={`absolute left-3 top-0 -z-30 transition-all duration-200 transform ${
-                  emailFocused || form.isFieldTouched('firstName')
+                  inputFocused.lastName || form.getFieldValue('lastName')
                     ? 'visible -translate-y-6 -translate-x-2 scale-100 text-gray-500 !z-10'
                     : 'translate-y-0 scale-100 -z-30'
                 }`}
@@ -222,22 +266,32 @@ const Register: React.FC<RegisterProps> = ({ isModalOpen, onCancel }) => {
                   name='lastName'
                   prefix={<UserOutlined />}
                   placeholder={`${
-                    emailFocused || form.getFieldValue('lastName')
+                    inputFocused.lastName || form.getFieldValue('lastName')
                       ? ''
                       : 'Last Name'
                   }`}
                   type='string'
                   size='large'
                   className='!border-0 !border-b-2 gap-1'
-                  onFocus={() => setEmailFocused(true)}
-                  onBlur={() => setEmailFocused(false)}
+                  onFocus={() =>
+                    setInputFocused((prev: any) => ({
+                      ...prev,
+                      lastName: true,
+                    }))
+                  }
+                  onBlur={() =>
+                    setInputFocused((prev: any) => ({
+                      ...prev,
+                      lastName: false,
+                    }))
+                  }
                 />
               </Form.Item>
             </div>
-            <div className='relative'>
+            <div className='relative mb-8'>
               <label
                 className={`absolute left-3 top-0 -z-30 transition-all duration-200 transform ${
-                  passwordFocused || form.getFieldValue('password')
+                  inputFocused.password || form.getFieldValue('password')
                     ? 'visible -translate-y-6 -translate-x-2 scale-100 text-gray-500 !z-10'
                     : 'translate-y-0 scale-100 -z-30'
                 }`}
@@ -263,21 +317,30 @@ const Register: React.FC<RegisterProps> = ({ isModalOpen, onCancel }) => {
                 validateDebounce={1000}
                 hasFeedback
                 className='!mb-0'
-                id='password'
               >
                 <Input.Password
                   name='password'
                   prefix={<LockOutlined />}
                   type='password'
                   placeholder={`${
-                    passwordFocused || form.getFieldValue('password')
+                    inputFocused.password || form.getFieldValue('password')
                       ? ''
                       : 'Password'
                   }`}
                   size='large'
                   className='!border-0 !border-b-2 gap-1'
-                  onFocus={() => setPasswordFocused(true)}
-                  onBlur={() => setPasswordFocused(false)}
+                  onFocus={() =>
+                    setInputFocused((prev: any) => ({
+                      ...prev,
+                      password: true,
+                    }))
+                  }
+                  onBlur={() =>
+                    setInputFocused((prev: any) => ({
+                      ...prev,
+                      password: false,
+                    }))
+                  }
                 />
               </Form.Item>
             </div>
@@ -285,15 +348,16 @@ const Register: React.FC<RegisterProps> = ({ isModalOpen, onCancel }) => {
             <div className='relative'>
               <label
                 className={`absolute left-3 top-0 -z-30 transition-all duration-200 transform ${
-                  passwordFocused || form.getFieldValue('password')
+                  inputFocused.confirmPassword ||
+                  form.getFieldValue('confirmPassword')
                     ? 'visible -translate-y-6 -translate-x-2 scale-100 text-gray-500 !z-10'
                     : 'translate-y-0 scale-100 -z-30'
                 }`}
               >
-                Password
+                Confirm Password
               </label>
               <Form.Item
-                              name='confirm'               
+                name='confirmPassword'
                 dependencies={['password']}
                 hasFeedback
                 rules={[
@@ -315,7 +379,31 @@ const Register: React.FC<RegisterProps> = ({ isModalOpen, onCancel }) => {
                   }),
                 ]}
               >
-                <Input.Password placeholder='Confirm Password' size='large' />
+                <Input.Password
+                  name='confirmPassword'
+                  prefix={<LockOutlined />}
+                  type='password'
+                  placeholder={`${
+                    inputFocused.confirmPassword ||
+                    form.getFieldValue('confirmPassword')
+                      ? ''
+                      : 'Confirm Password'
+                  }`}
+                  size='large'
+                  className='!border-0 !border-b-2 gap-1'
+                  onFocus={() =>
+                    setInputFocused((prev: any) => ({
+                      ...prev,
+                      confirmPassword: true,
+                    }))
+                  }
+                  onBlur={() =>
+                    setInputFocused((prev: any) => ({
+                      ...prev,
+                      confirmPassword: false,
+                    }))
+                  }
+                />
               </Form.Item>
             </div>
 
@@ -332,12 +420,12 @@ const Register: React.FC<RegisterProps> = ({ isModalOpen, onCancel }) => {
             </Form.Item>
           </Form>
           <div className='flex flex-row gap-2'>
-            <p className='!text-[15px]'>Don't have an account? </p>
+            <p className='!text-[15px]'>Already have an Account? </p>
             <Button
               type='link'
               className='p-0 h-fit font-medium text-gray-600 text-[14px]'
             >
-              Sign Up
+              Login In
             </Button>
           </div>
         </div>
