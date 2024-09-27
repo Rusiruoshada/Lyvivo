@@ -9,30 +9,38 @@ import Login from '../SignIn/Login.tsx';
 import Register from '../SignIn/Register.tsx';
 
 const BasicExample: React.FC = () => {
-
-  const [isModalOpen, setIsModalOpen] = useState<{register:boolean,login:boolean}>({register:false,login:false});
+  const [isModalOpen, setIsModalOpen] = useState<{
+    register: boolean;
+    login: boolean;
+  }>({ register: false, login: false });
 
   const showModal = (event: any): any => {
     const clickButtonInnerText = event.target.innerText;
     if (clickButtonInnerText === 'Register') {
-      
-      setIsModalOpen({register:true,login:false});
+      setIsModalOpen({ register: true, login: false });
     } else if (clickButtonInnerText === 'Login') {
-      
-      setIsModalOpen({register:false,login:true});
+      setIsModalOpen({ register: false, login: true });
     }
   };
 
-  const onModalCancel = (value:any) => {
+  const onModalCancel = (value: any) => {
     const getDetailsAboutCloseModal = Object.keys(value);
-    
+
     if (getDetailsAboutCloseModal[0] === 'register') {
-      setIsModalOpen({register:false,login:isModalOpen.login});
+      setIsModalOpen({ register: false, login: isModalOpen.login });
     } else if (getDetailsAboutCloseModal[0] === 'login') {
-      setIsModalOpen({register:isModalOpen.register,login:false});
-      
+      setIsModalOpen({ register: isModalOpen.register, login: false });
     }
-  }
+  };
+
+  const onClickOnSignUpOrLoginHandler = (value: string) => {
+    if (value === 'register') {
+      setIsModalOpen({register: false, login: true})
+    } else if (value === 'login') {
+      
+      setIsModalOpen({ register: true, login:false})
+    }
+  };
 
   return (
     <Navbar
@@ -81,16 +89,27 @@ const BasicExample: React.FC = () => {
                   color: 'var(--primaryColor)',
                 }}
                 onClick={showModal}
-
               >
                 Register
               </Button>{' '}
-              <Register isModalOpen={isModalOpen.register} onCancel={onModalCancel} />
+              <Register
+                isModalOpen={isModalOpen.register}
+                onCancel={onModalCancel}
+                onClickOnSignUpOrLoginHandler={onClickOnSignUpOrLoginHandler}
+              />
               /
-              <Button onClick={showModal} style={{ color: 'var(--primaryColor)' }} type='link'>
+              <Button
+                onClick={showModal}
+                style={{ color: 'var(--primaryColor)' }}
+                type='link'
+              >
                 Login
               </Button>
-                <Login isModalOpen={isModalOpen.login} onCancel={onModalCancel} />
+              <Login
+                isModalOpen={isModalOpen.login}
+                onCancel={onModalCancel}
+                onClickOnSignUpOrLoginHandler={onClickOnSignUpOrLoginHandler}
+              />
             </Nav.Item>
           </Nav>
         </Navbar.Collapse>
