@@ -5,9 +5,10 @@ import { Button, Form, Input, Flex, Modal } from 'antd';
 interface LoginProps {
   isModalOpen: boolean;
   onCancel: any;
+  onClickOnSignUpOrLoginHandler: any;
 }
 
-const Login: React.FC<LoginProps> = ({ isModalOpen, onCancel }) => {
+const Login: React.FC<LoginProps> = ({ isModalOpen, onCancel,onClickOnSignUpOrLoginHandler }) => {
   const [form] = Form.useForm();
   const [usernameFocused, setUsernameFocused] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
@@ -155,6 +156,7 @@ const Login: React.FC<LoginProps> = ({ isModalOpen, onCancel }) => {
             <Button
               type='link'
               className='p-0 h-fit font-medium text-gray-600 text-[14px]'
+              onClick={()=> onClickOnSignUpOrLoginHandler('login')}
             >
               Sign Up
             </Button>
@@ -162,15 +164,14 @@ const Login: React.FC<LoginProps> = ({ isModalOpen, onCancel }) => {
         </div>
         <div className='basis-1/2 p-1 shadow-lg'>
           <div className='h-full text-white relative'>
-            <div className='z-50 absolute top-6 text-center'>
+            <div className='z-50 absolute top-6 w-full  text-center'>
               <h2 className='text-5xl mb-2 font-black '>Welcome back!</h2>
-              <p className='text-2xl font-semibold mx-auto text-wrap w-[95%]'>
-                Welcome to Lyvivo, where exceptional customer care meets top
-                product quality!
+              <p className='text-2xl font-semibold mx-auto text-wrap '>
+                We are here for your every need!
               </p>
             </div>
 
-            <div className='h-[500px] relative'>
+            <div className='h-full relative'>
               <div className='absolute top-0 bottom-0 left-0 right-0 h-full !z-[1] opacity-50 rounded-md bg-black' />
               <div
                 style={{

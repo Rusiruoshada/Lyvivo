@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
-import { LockOutlined, UserOutlined, MailOutlined, FieldNumberOutlined } from '@ant-design/icons';
+import {
+  LockOutlined,
+  UserOutlined,
+  MailOutlined,
+  FieldNumberOutlined,
+} from '@ant-design/icons';
 import {
   Button,
   Form,
@@ -8,14 +13,22 @@ import {
   AutoComplete,
   Checkbox,
   InputNumber,
+  Select,
 } from 'antd';
+import FormItem from 'antd/es/form/FormItem';
+import axios from 'axios';
 
 interface RegisterProps {
   isModalOpen: boolean;
   onCancel: any;
+  onClickOnSignUpOrLoginHandler: any;
 }
 
-const Register: React.FC<RegisterProps> = ({ isModalOpen, onCancel }) => {
+const Register: React.FC<RegisterProps> = ({
+  isModalOpen,
+  onCancel,
+  onClickOnSignUpOrLoginHandler,
+}) => {
   const [form] = Form.useForm();
   const [inputFocused, setInputFocused] = useState({
     mobileNumber: false,
@@ -25,9 +38,20 @@ const Register: React.FC<RegisterProps> = ({ isModalOpen, onCancel }) => {
     password: false,
     confirmPassword: false,
   });
+  const [disable,setDisable] = useState(false)
 
-  const onFinish = (values: any) => {
+  const onFinish = async (values: any) => {
     console.log('Received values of form: ', values);
+    try {
+      await axios.post('http://localhost:5000/api/register', {
+          ...values,
+      })
+      console.log('hello ',values)
+      form.resetFields();
+      setDisable(true);
+    } catch (error) {
+      setDisable(false);
+    }
     form.resetFields();
   };
 
@@ -45,21 +69,23 @@ const Register: React.FC<RegisterProps> = ({ isModalOpen, onCancel }) => {
       <div className='flex flex-row gap-5'>
         <div className='basis-1/2 p-1 shadow-lg'>
           <div className='h-full text-white relative'>
-            <div className='z-50 absolute top-6 text-center'>
-              <h2 className='text-5xl mb-2 font-black '>Welcome back!</h2>
-              <p className='text-2xl font-semibold mx-auto text-wrap w-[95%]'>
+            <div className='z-50 absolute bottom-6 text-center'>
+              <h2 className='text-4xl mb-2 font-black '>
+                One place for everything!
+              </h2>
+              <p className='text-2xl font-medium mx-auto text-wrap w-[95%]'>
                 Welcome to Lyvivo, where exceptional customer care meets top
                 product quality!
               </p>
             </div>
 
             <div className='h-full relative'>
-              <div className='absolute top-0 bottom-0 left-0 right-0 h-full !z-[1] opacity-50 rounded-md bg-black' />
+              <div className='absolute top-0 bottom-0 left-0 right-0 h-full !z-[1] opacity-40 rounded-md bg-black' />
               <div
                 style={{
                   backgroundImage: "url('/images/login/login image2.jpeg')",
                 }}
-                className='absolute top-0 bottom-0 right-2 left-auto h-full w-full bg-cover bg-center z-0 opacity-100 rounded-md scale-105 shadow-lg'
+                className='absolute top-0 bottom-0 right-1 left-auto h-full w-full bg-cover bg-center z-0 opacity-100 rounded-md scale-[1.03] shadow-lg'
               />
             </div>
           </div>
@@ -77,6 +103,7 @@ const Register: React.FC<RegisterProps> = ({ isModalOpen, onCancel }) => {
             form={form}
             onFinish={onFinish}
             className='w-full'
+            disabled={disable}
           >
             <div className='relative mb-8'>
               <label
@@ -99,13 +126,13 @@ const Register: React.FC<RegisterProps> = ({ isModalOpen, onCancel }) => {
                   },
                   ({ getFieldValue }) => ({
                     validator(_, value) {
-                      if (getFieldValue('mobileNumber').toString().length === 10) {
+                      if (
+                        getFieldValue('mobileNumber')?.toString().length === 9
+                      ) {
                         return Promise.resolve();
                       }
                       return Promise.reject(
-                        new Error(
-                          'Mobile number must be 10 digits!'
-                        )
+                        new Error('Mobile number must be 9 digits!, Try without zero in first.')
                       );
                     },
                   }),
@@ -126,8 +153,10 @@ const Register: React.FC<RegisterProps> = ({ isModalOpen, onCancel }) => {
                   type='tel'
                   size='large'
                   inputMode='tel'
-                  minLength={10}
-                  maxLength={11}
+                  minLength={9}
+                  maxLength={10}
+                  upHandler={false}
+                  downHandler={false}
                   className='!border-0 !border-b-2 gap-1 w-full'
                   onFocus={() =>
                     setInputFocused((prev: any) => ({
@@ -345,7 +374,7 @@ const Register: React.FC<RegisterProps> = ({ isModalOpen, onCancel }) => {
               </Form.Item>
             </div>
 
-            <div className='relative'>
+            <div className='relative mb-8'>
               <label
                 className={`absolute left-3 top-0 -z-30 transition-all duration-200 transform ${
                   inputFocused.confirmPassword ||
@@ -407,6 +436,23 @@ const Register: React.FC<RegisterProps> = ({ isModalOpen, onCancel }) => {
               </Form.Item>
             </div>
 
+            <Form.Item
+              name='agreement'
+              valuePropName='checked'
+              rules={[
+                {
+                  validator: (_, value) =>
+                    value
+                      ? Promise.resolve()
+                      : Promise.reject(new Error('Should accept agreement')),
+                },
+              ]}
+            >
+              <Checkbox>
+                I have read the <a href=''>agreement</a>
+              </Checkbox>
+            </Form.Item>
+
             <Form.Item>
               <Button
                 block
@@ -424,8 +470,9 @@ const Register: React.FC<RegisterProps> = ({ isModalOpen, onCancel }) => {
             <Button
               type='link'
               className='p-0 h-fit font-medium text-gray-600 text-[14px]'
+              onClick={() => onClickOnSignUpOrLoginHandler('register')}
             >
-              Login In
+              Log In
             </Button>
           </div>
         </div>
