@@ -4,7 +4,7 @@ import React from 'react';
 const AboutUsPage = () => {
   return (
     <div>
-      <img src='images/about page/about page banner.png' alt='about banner' />
+      <img src='images/about page/about page banner.png' alt='about banner' className="w-full" />
       <div className='mx-10 my-5'>
         <h3 className='font-bold'>Welcome to Lyvivo</h3>
         <div className='mt-4'>
@@ -56,14 +56,14 @@ const AboutUsPage = () => {
           </p>
           <div>
             <h4 className='text-[18px] mb-3'>Recognized for our efforts</h4>
-            <div className='text-[12px] flex flex-col'>
-              <p className="flex gap-2"><GiTrophyCup />Most Valuable Supermarket Brand in 2019 & 2020 by Brand Finance</p>
-              <p className="flex gap-2"><GiTrophyCup />One of the Top 10 Most Valuable Brands in Sri Lanka</p>
-              <p className="flex gap-2"><GiTrophyCup />Service Brand for the year at SLIM awards 2019 - Bronze</p>
-              <p className="flex gap-2"><GiTrophyCup />Innovative Brand of the year at SLIM awards 2019 - Bronze</p>
-              <p className="flex gap-2"><GiTrophyCup />National Business Excellence Awards 2019 - Silver in Trading Category</p>
-              <p className="flex gap-2"><GiTrophyCup />Lyvivo Own Label Packaging Wins a Highly Commended at Transform Awards 2019</p>
-              <p className="flex gap-2"><GiTrophyCup />Lyvivo Own Label Packaging Melbourne Design Awards 2019 - Silver</p>
+            <div className='text-[16px] flex flex-col'>
+              <p className="flex gap-2 items-center"><GiTrophyCup />Most Valuable Supermarket Brand in 2019 & 2020 by Brand Finance</p>
+              <p className="flex gap-2 items-center"><GiTrophyCup />One of the Top 10 Most Valuable Brands in Sri Lanka</p>
+              <p className="flex gap-2 items-center"><GiTrophyCup />Service Brand for the year at SLIM awards 2019 - Bronze</p>
+              <p className="flex gap-2 items-center"><GiTrophyCup />Innovative Brand of the year at SLIM awards 2019 - Bronze</p>
+              <p className="flex gap-2 items-center"><GiTrophyCup />National Business Excellence Awards 2019 - Silver in Trading Category</p>
+              <p className="flex gap-2 items-center "><GiTrophyCup />Lyvivo Own Label Packaging Wins a Highly Commended at Transform Awards 2019</p>
+              <p className="flex gap-2 items-center"><GiTrophyCup />Lyvivo Own Label Packaging Melbourne Design Awards 2019 - Silver</p>
             </div>
           </div>
         </div>
