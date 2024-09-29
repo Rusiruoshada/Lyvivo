@@ -21,7 +21,7 @@ const ContactUs: React.FC = () => {
         <img
           src='images/contact page/contact page.png'
           alt='contact page banner'
-          className='h-52  '
+          className='h-52  w-full'
         />
         <h2 className='absolute mx-10 top-16 text-white'>Your Feedback</h2>
       </div>
