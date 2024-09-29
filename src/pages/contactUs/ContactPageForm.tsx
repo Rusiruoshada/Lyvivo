@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button, Form, Input, InputNumber, Select } from 'antd';
 import { selectOptionsContactPage } from './contactUsPageDropdownOptions.ts';
 import axios from 'axios';
+import openNotification from '../../hooks/notification.ts';
 
 interface ContactPageFormProps {
   dropdownSelect: string;
@@ -28,24 +29,21 @@ const ContactPageForm: React.FC<ContactPageFormProps> = ({
   const onFinish = async (values: any) => {
      // send form data to the backend
     try {
-      const response = await axios.post('http://localhost:5000/api/send-email', {
+      await axios.post('http://localhost:5000/api/send-email', {
           category: dropdownSelect,
           ...values,
       })
-      const data = response.data
-      console.log(data)
+      openNotification({type:'success', description:`E-mail send successfully!`, message:'Successful',role:'status', className:'[&<div]:!top-10'});
       form.resetFields();
       setDisable(true);
     } catch (error) {
-      console.log('error sending email',error)
+      openNotification({type:'error', description:`Error sending E-mail. ${error.message}`, message:'Error',role:'status', className:'[&<div]:!top-10'});
       setDisable(false);
     }
 
   };
 
- 
-
-  
+   
   return (
     <Form
       {...formItemLayout}
@@ -131,6 +129,18 @@ const ContactPageForm: React.FC<ContactPageFormProps> = ({
               message: 'Please input your Contact Number!',
                             
             },
+            ({ getFieldValue }) => ({
+              validator(_, value) {
+                if (
+                  getFieldValue('Contact Number')?.toString().length === 9
+                ) {
+                  return Promise.resolve();
+                }
+                return Promise.reject(
+                  new Error('Mobile number must be 10 digits!')
+                );
+              },
+            }),
           ]}
           validateDebounce={800}
           hasFeedback
