@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Form, Input, Flex, Modal } from 'antd';
+import axios from 'axios';
 
 interface LoginProps {
   isModalOpen: boolean;
@@ -8,15 +9,29 @@ interface LoginProps {
   onClickOnSignUpOrLoginHandler: any;
 }
 
-const Login: React.FC<LoginProps> = ({ isModalOpen, onCancel,onClickOnSignUpOrLoginHandler }) => {
+const Login: React.FC<LoginProps> = ({ isModalOpen, onCancel, onClickOnSignUpOrLoginHandler }) => {
+  
   const [form] = Form.useForm();
   const [usernameFocused, setUsernameFocused] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
+  const [disable, setDisable] = useState(false);
 
-  const onFinish = (values: any) => {
+  const onFinish = async (values: any) => {
     console.log('Received values of form: ', values);    
-    form.resetFields();
+      try {
+        await axios.post('http://localhost:5000/api/login', {
+            ...values,
+        })
+        console.log('login ',values)
+        form.resetFields();
+        setDisable(true);
+      } catch (error) {
+        console.log(error)
+        setDisable(false);
+      }
+      form.resetFields();
   };
+
 
   return (
     <Modal
@@ -44,6 +59,7 @@ const Login: React.FC<LoginProps> = ({ isModalOpen, onCancel,onClickOnSignUpOrLo
             initialValues={{ username: '', password: '' }}
             onFinish={onFinish}
             className='w-full'
+            disabled={disable}
           >
             <div className='relative mb-8'>
               <label
