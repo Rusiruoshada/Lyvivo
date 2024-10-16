@@ -13,6 +13,7 @@ import ContactUs from './pages/contactUs/ContactUs.tsx'
 import { ConfigProvider } from 'antd';
 import antdTheme from './styles/antdconfigTheme.ts';
 import FAQ from './pages/faq/FAQ.tsx';
+import React from 'react';
 
 function App() {
   const queryClient = new QueryClient();
