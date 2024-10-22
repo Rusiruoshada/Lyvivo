@@ -1,7 +1,4 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { addProduct } from "../actions/cartProductActions.ts";
-import  getAllDetails from "../actions/cartProductActions.ts";
-import  {totalPrice} from "../actions/cartProductActions.ts";
 import { CartProductsInitialState } from "../actionTypes/cartActionTypes.ts";
 
 
