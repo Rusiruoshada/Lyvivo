@@ -10,12 +10,9 @@ import {
   Form,
   Input,
   Modal,
-  AutoComplete,
   Checkbox,
   InputNumber,
-  Select,
 } from 'antd';
-import FormItem from 'antd/es/form/FormItem';
 import axios from 'axios';
 
 interface RegisterProps {
@@ -449,7 +446,7 @@ const Register: React.FC<RegisterProps> = ({
               ]}
             >
               <Checkbox>
-                I have read the <a href=''>agreement</a>
+                I have read the <a href='#home'>agreement</a>
               </Checkbox>
             </Form.Item>
 
