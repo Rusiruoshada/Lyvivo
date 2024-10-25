@@ -14,7 +14,10 @@ const Login: React.FC<LoginProps> = ({ isModalOpen, onCancel,onClickOnSignUpOrLo
   const [passwordFocused, setPasswordFocused] = useState(false);
 
   const onFinish = (values: any) => {
-    console.log('Received values of form: ', values);    
+    console.log('Received values of form: ', values);
+
+    try
+
     form.resetFields();
   };
 
