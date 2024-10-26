@@ -16,7 +16,11 @@ const Login: React.FC<LoginProps> = ({ isModalOpen, onCancel,onClickOnSignUpOrLo
   const onFinish = (values: any) => {
     console.log('Received values of form: ', values);
 
-    try
+    try{
+      
+    } catch(error) {
+
+    }
 
     form.resetFields();
   };
