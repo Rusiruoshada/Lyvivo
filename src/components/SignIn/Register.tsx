@@ -43,10 +43,11 @@ const Register: React.FC<RegisterProps> = ({
       await axios.post('http://localhost:5000/api/register', {
           ...values,
       })
-      console.log('hello ',values)
+     
       form.resetFields();
       setDisable(true);
     } catch (error) {
+      console.log('error with register frontend',error)
       setDisable(false);
     }
     form.resetFields();
