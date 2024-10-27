@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Form, Input, Flex, Modal } from 'antd';
+import axios from 'axios';
 
 interface LoginProps {
   isModalOpen: boolean;
@@ -13,13 +14,16 @@ const Login: React.FC<LoginProps> = ({ isModalOpen, onCancel,onClickOnSignUpOrLo
   const [usernameFocused, setUsernameFocused] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
 
-  const onFinish = (values: any) => {
+  const onFinish = async (values: any) => {
     console.log('Received values of form: ', values);
 
     try{
-      
+      await axios.post('https://localhost/api/login', {
+        ...values,
+      })
+      form.resetFields();
     } catch(error) {
-
+      console.log('error with login frontend', error)
     }
 
     form.resetFields();
