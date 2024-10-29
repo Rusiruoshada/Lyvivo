@@ -43,7 +43,6 @@ const Register: React.FC<RegisterProps> = ({
       await axios.post('http://localhost:5000/api/register', {
           ...values,
       })
-     
       form.resetFields();
       setDisable(true);
     } catch (error) {
