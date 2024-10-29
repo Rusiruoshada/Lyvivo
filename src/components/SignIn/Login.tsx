@@ -21,7 +21,6 @@ const Login: React.FC<LoginProps> = ({ isModalOpen, onCancel,onClickOnSignUpOrLo
       await axios.post('https://localhost/api/login', {
         ...values,
       })
-      
       form.resetFields();
     } catch(error) {
       console.log('error with login frontend', error)
