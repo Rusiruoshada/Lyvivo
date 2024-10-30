@@ -18,7 +18,7 @@ const Login: React.FC<LoginProps> = ({ isModalOpen, onCancel,onClickOnSignUpOrLo
     console.log('Received values of form: ', values);
 
     try{
-      await axios.post('https://localhost/api/login', {
+      await axios.post('http://localhost:5000/api/login', {
         ...values,
       })
       form.resetFields();
