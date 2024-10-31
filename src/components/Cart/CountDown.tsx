@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { FaMinus, FaPlus, FaTrash } from 'react-icons/fa';
-import { useDispatch, useSelector } from 'react-redux';
-import { cartProductAction } from '../../store/slices/cartProductSlice.ts';
-import openNotification from '../../hooks/notification.ts';
+import React, { useState } from "react";
+import { FaMinus, FaPlus, FaTrash } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { cartProductAction } from "../../store/slices/cartProductSlice.ts";
+import openNotification from "../../hooks/notification.ts";
 
 interface CountDownProps {
   count: number;
   size?: number;
   productName: string;
-    price: number;
-    originalSavingPrice: number;
+  price: number;
+  originalSavingPrice: number;
   id: string;
 }
 
@@ -17,8 +17,8 @@ const CountDown: React.FC<CountDownProps> = ({
   count: productCount,
   size,
   productName,
-    price: savingPrice,
-    originalSavingPrice,
+  price: savingPrice,
+  originalSavingPrice,
   id,
 }) => {
   const dispatch = useDispatch();
@@ -27,25 +27,25 @@ const CountDown: React.FC<CountDownProps> = ({
   const checkIFProductAddToCart = useSelector(
     (state: any) => state.cartShow.cartProducts
   );
-    
+
   const add = () => {
-    setCount( count + 1);
+    setCount(count + 1);
     dispatch(
       cartProductAction.totalPrice({
         cartProductCount: 1,
-        totalPriceForProduct:  originalSavingPrice + originalSavingPrice * count,
+        totalPriceForProduct: originalSavingPrice + originalSavingPrice * count,
       })
     );
     dispatch(
-        cartProductAction.getAllDetails({
-          cartProductDetails: {
-            price: originalSavingPrice * count + originalSavingPrice,
-            addItemsCount: count + 1,
-            size: size,
-            id: id,
-          },
-        })
-      );
+      cartProductAction.getAllDetails({
+        cartProductDetails: {
+          price: originalSavingPrice * count + originalSavingPrice,
+          addItemsCount: count + 1,
+          size: size,
+          id: id,
+        },
+      })
+    );
   };
 
   const minus = () => {
@@ -57,7 +57,7 @@ const CountDown: React.FC<CountDownProps> = ({
       }
     });
     if (count <= 1) {
-        if (checkIFProductAddToCart.length !== 0) {
+      if (checkIFProductAddToCart.length !== 0) {
         const filterAndRemoveProduct = checkIFProductAddToCart.filter(
           (productId: any) => productId !== id
         );
@@ -68,41 +68,41 @@ const CountDown: React.FC<CountDownProps> = ({
             totalPriceForProduct: savingPrice,
           })
         );
-            
+
         dispatch(
           cartProductAction.addProduct({
             cartProducts: filterAndRemoveProduct,
             productCount: -1, // how many products in cart
           })
         );
-            
+
         dispatch(
           cartProductAction.removeItems({
             removingProductId: id,
           })
         );
 
-
         openNotification({
-          type: 'success',
+          type: "success",
           description: `${productName} remove from cart`,
-          message: 'Successful',
-          role: 'status',
-          className: '[&<div]:!top-10',
+          message: "Successful",
+          role: "status",
+          className: "[&<div]:!top-10",
         });
       } else {
         openNotification({
-          type: 'error',
+          type: "error",
           description: `${productName} not in cart to remove it.`,
-          message: 'Error',
-          role: 'alert',
+          message: "Error",
+          role: "alert",
         });
       }
     } else {
       dispatch(
         cartProductAction.totalPrice({
           cartProductCount: -1,
-          totalPriceForProduct: originalSavingPrice * count - originalSavingPrice,
+          totalPriceForProduct:
+            originalSavingPrice * count - originalSavingPrice,
         })
       );
       dispatch(
@@ -119,20 +119,20 @@ const CountDown: React.FC<CountDownProps> = ({
   };
 
   return (
-    <div className='flex flex-col gap-1 items-center justify-center'>
+    <div className="flex flex-col gap-1 items-center justify-center">
       {size ? (
         <FaTrash onClick={minus} />
       ) : (
         <>
           <div
-            className='rounded-md shadow-md aspect-square p-1 hover:scale-90'
+            className="rounded-md shadow-md aspect-square p-1 hover:scale-90"
             onClick={add}
           >
-            <FaPlus  />
+            <FaPlus />
           </div>
-          <p className='!text-gray-500'>{count}</p>
+          <p className="!text-gray-500">{count}</p>
           <div
-            className='rounded-md shadow-md aspect-square p-1 hover:scale-90'
+            className="rounded-md shadow-md aspect-square p-1 hover:scale-90"
             onClick={minus}
           >
             {count !== 1 ? <FaMinus /> : <FaTrash />}
