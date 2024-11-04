@@ -39,14 +39,14 @@ const Register: React.FC<RegisterProps> = ({
       });
       form.resetFields();
       setDisable(true);
-      
+
       onCancel({register: false})
     } catch (error) {
       openNotification({
         type: "error",
         description: `${
-          error.response.status === 403
-            ? "User already exist"
+          error?.response?.status === 403||404||500
+            ? error.response?.data.message
             : "Invalid Information"
         }`,
         message: "Failed",
