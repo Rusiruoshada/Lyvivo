@@ -13,7 +13,6 @@ interface HomepageProductProps {
   onClickCard?: any;
 }
 
-
 const cardDescription: string = '(Inclusive of all taxes)';
 const badgeRibbonText: string = 'In Stock';
 const badgeColor: string = 'var(--secondaryColor)';
