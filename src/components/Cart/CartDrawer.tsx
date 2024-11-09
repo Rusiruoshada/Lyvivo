@@ -33,7 +33,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
   let filterAndRemoveProductId:string[] ;
 
   const onClickCheckout = () => {
-
+    
 
   };
 
