@@ -31,6 +31,12 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
   }
 
   let filterAndRemoveProductId:string[] ;
+
+  const onClickCheckout = () => {
+
+
+  };
+
   
   const removeProductFC =(id:string) => {
     
@@ -88,7 +94,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
               <span><h6>Items : </h6></span>
               <span><h6>{checkIFProductAddToCart?.length}</h6></span>
           </div>
-          <Button type='primary' className='bg-[var(--primaryColor)] hover:bg-[var(--primaryColor)] w-full' onClick={()=>{alert('click check out')}}>Check Out</Button>
+          <Button type='primary' className='bg-[var(--primaryColor)] hover:bg-[var(--primaryColor)] w-full' onClick={onClickCheckout}>Check Out</Button>
         </div>
       </Drawer>
     </div>
