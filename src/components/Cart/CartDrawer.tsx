@@ -15,7 +15,9 @@ interface CartDrawerProps {
 }
 
 const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
-
+  
+  const stripe = useStripe();
+  const elements = useElements()
   const dispatch = useDispatch()
 
   const checkIFProductAddToCart = useSelector(
