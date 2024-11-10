@@ -4,6 +4,10 @@ import CartProductCard from './ CartProductCard.tsx';
 import { IoIosArrowBack } from 'react-icons/io';
 import { useDispatch, useSelector } from 'react-redux';
 import { cartProductAction } from '../../store/slices/cartProductSlice.ts';
+import { loadStripe, Stripe } from '@stripe/stripe-js';
+import { Elements, CardElement, useStripe, useElements, PaymentElementProps } from '@stripe/react-stripe-js';
+import axios from 'axios';
+
 
 interface CartDrawerProps {
   openCart: boolean;
@@ -30,33 +34,45 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
     cartItemPrice = cartItemPrice + checkIFProductAddToCart[i].price
   }
 
+  
+  
   let filterAndRemoveProductId:string[] ;
-
-  const onClickCheckout = () => {
-    
-
-  };
-
   
   const removeProductFC =(id:string) => {
     
     dispatch(cartProductAction.removeItems({
       removingProductId:id,
     }))
-
+    
     filterAndRemoveProductId = checkIFProductIdExist
-      .filter((productId: any) => productId !== id)
-      
+    .filter((productId: any) => productId !== id)
+    
     dispatch(
-        cartProductAction.addProduct({
-          cartProducts: filterAndRemoveProductId,
-          productCount: -1,
-        })
+      cartProductAction.addProduct({
+        cartProducts: filterAndRemoveProductId,
+        productCount: -1,
+      })
     );
-        
+    
   }
+  
+
+  const onClickCheckout = async (event: React.FormEvent) => {
+    
+    if (!stripe || !elements) return; // stripe.js hasn't loaded yet
+    try {
+      // call backend to create a paymentIntent
+      const { data } = await axios.post('http://localhost:500/api/checkout', {
+        amount: 5000, // amount in cent like $50.00
+      })
 
 
+    } catch (error) {
+      
+    }
+    
+  };
+  
   return (
     <div className='z-[102]'>
       <Drawer
