@@ -55,8 +55,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
     );
     
   }
-  
-  
+
   const onClickCheckout = async (event: React.FormEvent) => {
     
     if (!stripe || !elements) return; // stripe.js hasn't loaded yet
