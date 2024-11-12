@@ -35,8 +35,6 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
   for (let i = 0; i < checkIFProductAddToCart.length; i++) {
     cartItemPrice = cartItemPrice + checkIFProductAddToCart[i].price
   }
-
-  
   
   let filterAndRemoveProductId:string[] ;
   
@@ -58,7 +56,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
     
   }
   
-
+  
   const onClickCheckout = async (event: React.FormEvent) => {
     
     if (!stripe || !elements) return; // stripe.js hasn't loaded yet
