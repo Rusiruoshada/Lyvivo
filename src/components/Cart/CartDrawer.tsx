@@ -1,18 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Drawer } from "antd";
 import CartProductCard from "./ CartProductCard.tsx";
 import { IoIosArrowBack } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { cartProductAction } from "../../store/slices/cartProductSlice.ts";
-import { loadStripe, Stripe } from "@stripe/stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 import {
   Elements,
-  CardElement,
-  useStripe,
-  useElements,
-  PaymentElementProps,
 } from "@stripe/react-stripe-js";
 import axios from "axios";
+import CheckoutForm from "../CheckoutForm/CheckoutForm.tsx";
 
 interface CartDrawerProps {
   openCart: boolean;
@@ -20,7 +17,8 @@ interface CartDrawerProps {
 }
 
 const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
-  // const stripe = useStripe();
+
+  const [clientSecret, setClientSecret] = useState();
 
   const dispatch = useDispatch();
 
@@ -73,14 +71,13 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
       const { data } = await axios.post("http://localhost:5000/api/checkout", {
         amount: parseFloat(cartItemPrice.toFixed(2)), // amount in cent like $50.00
       });
-      console.log(data);
+      setClientSecret(data);
     } catch (error) {
       console.log("frontEnd error in Checkout", error);
     }
   };
 
   return (
-    <Elements stripe={stripePromise}>
       <div className="z-[102]">
         <Drawer
           title="Keep Shopping"
@@ -124,6 +121,9 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
                 <h6>{checkIFProductAddToCart?.length}</h6>
               </span>
             </div>
+            {stripePromise && clientSecret && <Elements stripe={stripePromise} options={clientSecret}>
+              <CheckoutForm isopen={} />
+            </Elements>}
             <Button
               type="primary"
               className="bg-[var(--primaryColor)] hover:bg-[var(--primaryColor)] w-full"
@@ -134,7 +134,6 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
           </div>
         </Drawer>
       </div>
-    </Elements>
   );
 };
 
