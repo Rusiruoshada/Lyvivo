@@ -10,6 +10,7 @@ import {
 } from "@stripe/react-stripe-js";
 import axios from "axios";
 import CheckoutForm from "../CheckoutForm/CheckoutForm.tsx";
+import openNotification from "../../hooks/notification.ts";
 
 interface CartDrawerProps {
   openCart: boolean;
@@ -80,6 +81,17 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
       setOpenCheckout(!openCheckout);
     } catch (error) {
       console.log("frontEnd error in Checkout", error);
+      openNotification({
+        type: "error",
+        description: `${
+          error?.response?.status === 403 || 404 || 500
+            ? error.response?.data.message
+            : "Try add some items"
+        }`,
+        message: "Failed",
+        role: "alert",
+        className: "[&<div]:!top-10",
+      });
     }
   };
 
