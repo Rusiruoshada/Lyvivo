@@ -17,7 +17,8 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({isModalOpen, onCancel}) => {
     <Modal
       open={isModalOpen}
       onCancel={() => onCancel}
-      className="[&>div]:!p-0 w-full sm:!w-full md:!w-full lg:!w-[1200px]"
+          className="[&>div]:!p-0 w-full sm:!w-full md:!w-full lg:!w-[700px] p
+      -10"
       closable={false}
       footer={""}
       okButtonProps={{ hidden: true }}
