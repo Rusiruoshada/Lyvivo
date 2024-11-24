@@ -151,6 +151,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
             type="primary"
             className="bg-[var(--primaryColor)] hover:bg-[var(--primaryColor)] w-full"
             onClick={onClickCheckout}
+            disabled={checkIFProductAddToCart.length>0? false:true}
           >
             Check Out
           </Button>
