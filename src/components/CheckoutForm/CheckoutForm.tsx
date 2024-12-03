@@ -5,7 +5,9 @@ import { Form, Modal } from 'antd';
 
 interface CheckoutFormProps {
   isModalOpen: boolean;
+  
   onCancel: any;
+
 }
 
 
