@@ -1,0 +1,8 @@
+.ant-modal-body{
+    display: flex;
+    flex-direction: column;
+}
+
+.ant-form{
+    padding: 40px;
+}
