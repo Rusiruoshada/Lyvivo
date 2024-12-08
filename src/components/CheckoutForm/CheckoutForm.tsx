@@ -12,29 +12,34 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
   isModalOpen,
   onCancel,
 }) => {
+
+  const [form] = Form.useForm();
   const stripe = useStripe();
   const elements = useElements();
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [isMessage, setIsMessage] = useState<any>('')
 
-  const handleSubmit = async (event: any) => {
+  const onFinish = async (event:any) => {
     event.preventDefault();
     if (!stripe || !elements) return;
 
     setIsProcessing(true);
-
-    const { error } = await stripe.confirmPayment({
-      elements,
-      confirmParams: {
-        return_url: `${window.location.origin}/`
-      }
-    })
-
-    if (error) {
-      setIsMessage(error);
+    try {
+      const { error } = await stripe.confirmPayment({
+        elements,
+        confirmParams: {
+          return_url: `${window.location.origin}/api/checkout`, // create a page for show all cart product show that perches
+        },
+      });
+      if (error) setIsMessage(error.message);
+      
+    } catch (error) {
+      console.log(isMessage);
+      console.log(error);
+      setIsMessage(error.message);
     }
 
-    setIsProcessing(false)
+    setIsProcessing(false);
   };
 
   return (
@@ -49,12 +54,19 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
       cancelButtonProps={{ hidden: true }}
       maskClosable
     >
-      <Form id="payment-form" onSubmitCapture={handleSubmit}>
+      <Form
+        id="payment-form"
+        onFinish={onFinish}
+        form={form}
+        name="checkoutForm"
+      >
         <PaymentElement />
         <Button
-          disabled={isProcessing}
+          disabled={isProcessing || !stripe}
           type="primary"
           className="bg-[var(--primaryColor)] mt-3 w-full"
+          htmlType="submit"
+          onClick={onFinish}
         >
           {isProcessing ? "Processing ..." : "Pay Now"}
         </Button>
