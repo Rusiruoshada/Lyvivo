@@ -22,11 +22,12 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
   const [clientSecret, setClientSecret] = useState();
   const [openCheckout, setOpenCheckout] = useState<boolean>(false);
 
+
   const dispatch = useDispatch();
 
   const stripePromise = loadStripe(
     process.env.STRIPE_PUBLIC_KEY ||
-      "pk_test_51QIEatJtf0tiqep1mCNgI7z4C1YUU6cIo290JyawSVULrpJU9zXFBYICfrlADRRmo2laM1WGHGFyKHi6o11vFsHn00PJmrYIC6"
+    "pk_test_51QIEatJtf0tiqep1mCNgI7z4C1YUU6cIo290JyawSVULrpJU9zXFBYICfrlADRRmo2laM1WGHGFyKHi6o11vFsHn00PJmrYIC6"
   );
 
   const checkIFProductAddToCart = useSelector(
@@ -77,23 +78,25 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
       const { data } = await axios.post("http://localhost:5000/api/checkout", {
         amount: parseFloat(cartItemPrice.toFixed(2)), // amount in cent like $50.00
       });
-      setClientSecret(data);
+      console.log('im form onClickCheckout: ',data.clientSecret)
+      setClientSecret(data.clientSecret);
       setOpenCheckout(!openCheckout);
+
     } catch (error) {
       console.log("frontEnd error in Checkout", error);
       openNotification({
         type: "error",
-        description: `${
-          error?.response?.status === 403 || 404 || 500
+        description: `${error?.response?.status === 403 || 404 || 500
             ? error.response?.data.message
             : "Try add some items"
-        }`,
+          }`,
         message: "Failed",
         role: "alert",
         className: "[&<div]:!top-10",
       });
     }
   };
+
 
   return (
     <div className="z-[102]">
@@ -140,18 +143,23 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
             </span>
           </div>
           {stripePromise && clientSecret && (
-            <Elements stripe={stripePromise} options={clientSecret}>
+            <Elements stripe={stripePromise} options={{clientSecret}}>
               <CheckoutForm
                 isModalOpen={openCheckout}
                 onCancel={onCancelCheckout}
+                onOpenCart={onOpenCart}
               />
             </Elements>
           )}
           <Button
             type="primary"
-            className="bg-[var(--primaryColor)] hover:bg-[var(--primaryColor)] w-full"
+            className={`bg-[var(--primaryColor)]  w-full ${
+              checkIFProductAddToCart.length > 0
+                ? "hover:bg-[var(--primaryColor)]"
+                : ""
+            }`}
             onClick={onClickCheckout}
-            disabled={checkIFProductAddToCart.length>0? false:true}
+            disabled={checkIFProductAddToCart.length > 0 ? false : true}
           >
             Check Out
           </Button>
