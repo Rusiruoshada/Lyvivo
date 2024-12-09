@@ -2,15 +2,18 @@ import React, { useState } from "react";
 import { useStripe, useElements } from "@stripe/react-stripe-js";
 import { PaymentElement } from "@stripe/react-stripe-js";
 import { Button, Form, Modal } from "antd";
+import { useNavigate } from "react-router-dom";
 
 interface CheckoutFormProps {
   isModalOpen: boolean;
   onCancel: any;
+  onOpenCart: any;
 }
 
 const CheckoutForm: React.FC<CheckoutFormProps> = ({
   isModalOpen,
   onCancel,
+  onOpenCart,
 }) => {
 
   const [form] = Form.useForm();
@@ -18,6 +21,8 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
   const elements = useElements();
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [isMessage, setIsMessage] = useState<any>('')
+
+  const navigate = useNavigate()
 
   const onFinish = async (event:any) => {
     event.preventDefault();
@@ -28,7 +33,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
       const { error } = await stripe.confirmPayment({
         elements,
         confirmParams: {
-          return_url: `${window.location.origin}/api/checkout`, // create a page for show all cart product show that perches
+          return_url: `${navigate('/')}`, // create a page for show all cart product show that perches
         },
       });
       if (error) setIsMessage(error.message);
@@ -38,8 +43,9 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
       console.log(error);
       setIsMessage(error.message);
     }
-
     setIsProcessing(false);
+    onCancel()
+    onOpenCart()
   };
 
   return (
