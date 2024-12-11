@@ -13,7 +13,6 @@ const customButton = <Button type="primary" icon={<MdSearch className='text-2xl'
 
 const SearchBar: React.FC = () => (
   <Space direction='vertical' >
-    
     <Search
       placeholder='input search text'
       enterButton={customButton}
