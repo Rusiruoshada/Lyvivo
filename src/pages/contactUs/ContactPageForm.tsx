@@ -29,7 +29,7 @@ const ContactPageForm: React.FC<ContactPageFormProps> = ({
   const onFinish = async (values: any) => {
      // send form data to the backend
     try {
-      await axios.post('http://localhost:5000/api/send-email', {
+      await axios.post('http://localhost:5000/api/send_email', {
           category: dropdownSelect,
           ...values,
       })
