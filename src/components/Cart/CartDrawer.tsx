@@ -58,6 +58,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
     filterAndRemoveProductId = checkIFProductIdExist.filter(
       (productId: any) => productId !== id
     );
+    /
 
     dispatch(
       cartProductAction.addProduct({
@@ -72,7 +73,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
   }
 
   const onClickCheckout = async (event: React.FormEvent) => {
-    // if (!stripe || !elements) return; // stripe.js hasn't loaded yet
+    
     try {
       // call backend to create a paymentIntent
       const { data } = await axios.post("http://localhost:5000/api/checkout", {
@@ -96,6 +97,11 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
       });
     }
   };
+
+  const onClearCart = (value:boolean):any => {
+    if (value === false) return;
+    
+  }
 
 
   return (
@@ -148,6 +154,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
                 isModalOpen={openCheckout}
                 onCancel={onCancelCheckout}
                 onOpenCart={onOpenCart}
+                onClearCart={onClearCart}
               />
             </Elements>
           )}
