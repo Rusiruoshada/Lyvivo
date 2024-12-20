@@ -8,12 +8,14 @@ interface CheckoutFormProps {
   isModalOpen: boolean;
   onCancel: any;
   onOpenCart: any;
+  onClearCart:any
 }
 
 const CheckoutForm: React.FC<CheckoutFormProps> = ({
   isModalOpen,
   onCancel,
   onOpenCart,
+  onClearCart,
 }) => {
 
   const [form] = Form.useForm();
@@ -47,6 +49,8 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
     onCancel()
     onOpenCart()
   };
+
+  onClearCart(isProcessing)
 
   return (
     <Modal
