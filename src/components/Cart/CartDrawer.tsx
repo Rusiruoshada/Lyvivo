@@ -58,8 +58,7 @@ const CartDrawer: React.FC<CartDrawerProps> = ({ openCart, onOpenCart }) => {
     filterAndRemoveProductId = checkIFProductIdExist.filter(
       (productId: any) => productId !== id
     );
-    /
-
+    
     dispatch(
       cartProductAction.addProduct({
         cartProducts: filterAndRemoveProductId,
