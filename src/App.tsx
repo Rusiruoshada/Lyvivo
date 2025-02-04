@@ -14,46 +14,55 @@ import { ConfigProvider } from 'antd';
 import antdTheme from './styles/antdconfigTheme.ts';
 import FAQ from './pages/faq/FAQ.tsx';
 import React from 'react';
+import AdminPage from './pages/admin/AdminPage.tsx';
 
 function App() {
   const queryClient = new QueryClient();
 
   const routers = createBrowserRouter([
     {
-      path: '/',
+      path: "/",
       element: <Layout />,
       errorElement: <ErrorPage />,
       children: [
         {
-          path: '',
+          path: "",
           index: true,
           element: <ClientApp />,
         },
         {
-          path: '/about-us',
+          path: "/about-us",
           element: <AboutUsPage />,
         },
         {
-          path: '/contact-us',
+          path: "/contact-us",
           element: <ContactUs />,
         },
         {
-          path: '/faq',
+          path: "/faq",
           element: <FAQ />,
         },
         {
-          path: '/collection/all',
+          path: "/collection/all",
           element: <AllProduct />,
         },
         {
-          path: '/product/:id',
+          path: "/product/:id",
           element: <SingleProductPage />,
         },
         {
-          path: '*',
+          path: "*",
           element: <ErrorPage />,
         },
       ],
+    },
+    {
+      path: "/admin",
+      element: <AdminPage />,
+      errorElement: <ErrorPage />,
+      children: [
+        
+      ]
     },
   ]);
 
