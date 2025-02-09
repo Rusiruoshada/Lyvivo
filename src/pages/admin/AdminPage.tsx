@@ -1,25 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  NotificationFilled,
-  NotificationOutlined,
-  NotificationTwoTone,
-  SearchOutlined,
-  UserOutlined,
 } from "@ant-design/icons";
 import { IoMdNotificationsOutline } from "react-icons/io";
-import { Avatar, Button, Layout, Menu} from 'antd';
-import DashBoard from '../../components/AdminUI/Dashboard/DashBoard.tsx'
-import items from './items.tsx';
-
+import { Avatar, Button, Layout, Menu } from "antd";
+import items from "./items.tsx";
+import SearchBar from "../../components/SearchBar/SearchBar.tsx";
+import { Outlet, useNavigate } from "react-router-dom";
 
 const AdminPage = () => {
-    
-    const { Header, Sider, Content } = Layout;
-    const [collapsed, setCollapsed] = useState(false);
-  const url = '';
+  const { Header, Sider, Content } = Layout;
+  const [collapsed, setCollapsed] = useState(false);
+  const url = "";
   const name = "hello, world";
+
+  const navigate = useNavigate();
+
+  const clickMenu = (event: any) => {
+    (event.key === 'dashBoard')? navigate('/admin'): navigate(`/admin/${event.key}`)
+  }
 
   return (
     <Layout className="h-screen">
@@ -27,7 +27,7 @@ const AdminPage = () => {
         trigger={null}
         collapsible
         collapsed={collapsed}
-        className="!bg-[var(--AdminPrimaryColor)] flex flex-col"
+        className="!bg-[var(--adminPrimaryColor)] flex flex-col shadow-md"
       >
         <div className="font-mono font-bold text-white my-3 ml-2 text-4xl ">
           {collapsed ? "$" : "Lyvivo"}
@@ -35,12 +35,13 @@ const AdminPage = () => {
         <Menu
           mode="inline"
           defaultSelectedKeys={["1"]}
-          className="bg-transparent font-medium text-gray-700"
+          className="bg-transparent font-medium text-white "
           items={items}
+          onClick={clickMenu}
         />
       </Sider>
       <Layout>
-        <Header className="bg-[var(--AdminPrimaryColor)] !p-0 flex flex-row justify-between ">
+        <Header className="bg-[var(--adminPrimaryColor)] !p-0 flex flex-row justify-between shadow-md">
           <Button
             type="text"
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -51,25 +52,34 @@ const AdminPage = () => {
               height: 64,
             }}
           />
-          <div className="flex flex-row gap-3 mr-6">
-            <SearchOutlined />
-            <IoMdNotificationsOutline/>
-            <div className="flex flex-row gap-1 align-middle">
+          <div className="flex flex-row gap-3 mr-6 text-white">
+            <div className="my-auto cursor-pointer flex justify-center align-middle">
+              <SearchBar
+                position="relative"
+                borderRadius="8px"
+                color="#ffffff"
+                backgroundColor="var(--adminPrimaryColor)"
+                marginLeft="auto"
+                marginRight="auto"
+                className="flex my-auto rounded-md"
+                buttonClassName="hover:!bg-red-400"
+              />
+            </div>
+            <div className="flex align-middle my-auto text-2xl cursor-pointer">
+              <IoMdNotificationsOutline />
+            </div>
+            <div className="flex flex-row gap-1 align-middle cursor-pointer">
               <Avatar src={url} className="my-auto" />
               <span>{name}</span>
             </div>
           </div>
         </Header>
-        <Content
-          style={{
-            padding: 24,
-          }}
-        >
-          <DashBoard />
+        <Content>
+          <Outlet/>
         </Content>
       </Layout>
     </Layout>
   );
-}
+};
 
-export default AdminPage
+export default AdminPage;
