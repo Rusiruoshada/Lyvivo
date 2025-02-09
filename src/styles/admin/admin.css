@@ -1,0 +1,33 @@
+.ant-menu-item{
+    color: #fff!important;
+}
+
+.ant-menu-item:active{
+    color: #059271!important;
+}
+
+.ant-menu-item-selected {
+    font-size: medium;
+    font-weight: 600;
+    color: #059271!important;    
+}
+
+.ant-menu-submenu{
+    div{
+        color: #fff!important;
+    }
+    div:active{
+        color: #059271!important;
+    }
+}
+
+.ant-menu-submenu-selected{
+    background-color: #1f826b!important;
+    div{
+        color: #fff!important;
+    }
+}
+
+.ant-table-filter-dropdown .ant-btn-primary{
+    background-color: var(--adminPrimaryColor);
+}
