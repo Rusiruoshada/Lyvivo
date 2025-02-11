@@ -1,23 +1,18 @@
-import { Space, Table, Tag } from 'antd';
-import React from 'react'
-import { IoArrowDownOutline } from 'react-icons/io5';
-import type { GetProp, RadioChangeEvent, TableProps } from "antd";
+import { Button, Space, Table, Tag } from 'antd';
+import React, { useState } from 'react'
+import type { GetProp, TableProps } from "antd";
 import { MdDelete } from 'react-icons/md';
 import { FaEdit } from 'react-icons/fa';
-import { useForm } from 'antd/es/form/Form';
+import { IoAddCircleOutline } from 'react-icons/io5';
 type ColumnsType<T extends object> = GetProp<TableProps<T>, "columns">;
 
 interface DataType {
   key: number;
   name: string;
   age: number;
-    address: string;
+    address?: string;
     tags: string[];
-  description: string;
-}
-
-interface EditableRowProps{
-    index: number;
+  description?: string;
 }
 
 const ProductList = () => {
@@ -30,7 +25,7 @@ const ProductList = () => {
 
         ],
         onFilter: (value, record) =>
-          record.address.indexOf(value as string) === 0,
+          record.name.indexOf(value as string) === 0,
       },
       {
         title: "Age",
@@ -50,8 +45,8 @@ const ProductList = () => {
             value: "New York",
           },
         ],
-        onFilter: (value, record) =>
-          record.address.indexOf(value as string) === 0,
+        // onFilter: (value, record) =>
+        //   record.address.indexOf(value as string) === 0,
         },
         {
             title: 'Status',
@@ -96,26 +91,47 @@ const ProductList = () => {
       description: `My name is John Brown, I am ${i}2 years old, living in New York No. ${i} Lake Park.`,
     }));
 
-    const [form] = useForm();
+    const [dataSource, setDataSource] = useState([...data])
+  
+  const handleAdd = () => {
+    const newData: DataType = {
+        key: Math.random()*10 +1,
+      name: 'new row',
+        age: 21,
+      address: '',
+        tags:['active']
+    }
+    setDataSource([...dataSource,newData])  
+  }
 
-
-
+  console.log("dataSource",dataSource)
 
   return (
-      <div className=''>
-          
-        <Table
-              bordered={true}
-              size='small'
-              showSorterTooltip={true}
-            tableLayout='auto'
-            pagination={{ position:['none','bottomCenter'] }}
-            columns={tableColumns}
-            dataSource={data}
-            // scroll={scroll}
-        />
+    <div className="p-4">
+      <div className='flex justify-end'>
+        <Button
+          onClick={handleAdd}
+          type="primary"
+          className="bg-[var(--adminPrimaryColor)] flex flex-row items-center gap-1 hover:!bg-[var(--adminPrimaryColorDark)] shadow-md mb-2"
+        >
+          <span className="flex justify-center items-center">
+            <IoAddCircleOutline className="text-[18px]" />
+          </span>{" "}
+          Add new Product
+        </Button>
+      </div>
+      <Table
+        bordered={true}
+        size="small"
+        showSorterTooltip={true}
+        tableLayout="auto"
+        pagination={{ position: ["none", "bottomCenter"] }}
+        columns={tableColumns}
+        dataSource={dataSource}
+        // scroll={scroll}
+      />
     </div>
-  )
+  );
 }
 
 export default ProductList;
