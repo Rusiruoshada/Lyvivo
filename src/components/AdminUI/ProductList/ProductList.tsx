@@ -1,5 +1,5 @@
 import { Button, Space, Table, Tag } from 'antd';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import type { GetProp, TableProps } from "antd";
 import { MdDelete } from 'react-icons/md';
 import { FaEdit } from 'react-icons/fa';
@@ -17,67 +17,90 @@ interface DataType {
 
 const ProductList = () => {
 
-    const columns: ColumnsType<DataType> = [
-      {
-        title: "Name",
-        dataIndex: "name",
-        filters: [
-
-        ],
-        onFilter: (value, record) =>
-          record.name.indexOf(value as string) === 0,
-      },
-      {
-        title: "Age",
-        dataIndex: "age",
-        sorter: (a, b) => a.age - b.age,
-      },
-      {
-        title: "Address",
-        dataIndex: "address",
-        filters: [
-          {
-            text: "London",
-            value: "London",
-          },
-          {
-            text: "New York",
-            value: "New York",
-          },
-        ],
-        // onFilter: (value, record) =>
-        //   record.address.indexOf(value as string) === 0,
+  const columns: ColumnsType<DataType> = [
+    {
+      title: "Name",
+      dataIndex: "name",
+      filters: [
+        {
+          text: 'John',
+          value: 'John'
         },
         {
-            title: 'Status',
-            key: 'tags',
-            dataIndex: 'tags',
-            render: (tags: string[]) => (
-                <span>
-                    {tags.map((tag) => {
-                        let color = tag.toLowerCase() === 'active' ? 'green' : '';
-                    
-                        return (
-                          <Tag color={color} key={tag}>
-                            {tag.toUpperCase()}
-                          </Tag>
-                        );
-                    
-                    })}
-                </span>
-            )
-            
+          text: 'new',
+          value: 'new'
+        }
+      ],
+      onFilter: (value, record) =>
+        record.name.indexOf(value as string) === 0,
+      filterSearch: true,
+    },
+    {
+      title: "Age",
+      dataIndex: "age",
+      sorter: (a, b) => a.age - b.age,
+    },
+    {
+      title: "Address",
+      dataIndex: "address",
+      filters: [
+        {
+          text: "London",
+          value: "London",
         },
-      {
+        {
+          text: "New York",
+          value: "New York",
+        },
+      ],
+      // onFilter: (value, record) =>
+      //   record.address.indexOf(value as string) === 0,
+    },
+    {
+      title: 'Status',
+      key: 'tags',
+      dataIndex: 'tags',
+      render: (tags: string[]) => (
+        <span>
+          {tags.map((tag) => {
+            let color = tag.toLowerCase() === 'active' ? 'green' : '';
+                    
+            return (
+              <Tag color={color} key={tag}>
+                {tag.toUpperCase()}
+              </Tag>
+            );
+                    
+          })}
+        </span>
+      )
+            
+    },
+    {
         
-        key: "action",
-        render: () => (
-          <Space size="middle">
-            <button><FaEdit /></button>|
-            <button><MdDelete /></button>
+      key: "edit",
+      dataIndex: 'edit',
+      render: () => (
+        <Space size="middle">
+          <button><FaEdit /></button>
+        </Space>
+      ),
+      colSpan:2,
+    },
+    {
+      key: 'delete',
+      dataIndex: 'delete',
+      render: ()=> {
+        return (
+          <Space size={"middle"}>
+            <button>
+              <MdDelete />
+            </button>
           </Space>
-        ),
+        );
       },
+      colSpan: 0,
+    }
     ];
 
     const tableColumns = columns.map((item) => ({ ...item }));
@@ -91,7 +114,7 @@ const ProductList = () => {
       description: `My name is John Brown, I am ${i}2 years old, living in New York No. ${i} Lake Park.`,
     }));
 
-    const [dataSource, setDataSource] = useState([...data])
+  const [dataSource, setDataSource] = useState([...data])
   
   const handleAdd = () => {
     const newData: DataType = {
@@ -103,8 +126,6 @@ const ProductList = () => {
     }
     setDataSource([...dataSource,newData])  
   }
-
-  console.log("dataSource",dataSource)
 
   return (
     <div className="p-4">
@@ -125,7 +146,7 @@ const ProductList = () => {
         size="small"
         showSorterTooltip={true}
         tableLayout="auto"
-        pagination={{ position: ["none", "bottomCenter"] }}
+        pagination={{ position: ["none", "bottomCenter"] , current:1,pageSize:14}}
         columns={tableColumns}
         dataSource={dataSource}
         // scroll={scroll}
