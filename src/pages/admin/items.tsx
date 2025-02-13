@@ -25,15 +25,15 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-  getItem("Dashboard", "1", <MdDashboard />),
-  getItem("Sales", "2", <BsCurrencyDollar />),
-  getItem("Products", "sub1", <IoIosCheckbox />, [
-    getItem("Product List", "3"),
-    getItem("Category List", "4"),
+  getItem("Dashboard", "dashBoard", <MdDashboard />),
+  getItem("Sales", "sales", <BsCurrencyDollar />),
+  getItem("Products", "products", <IoIosCheckbox />, [
+    getItem("Product List", "productList"),
+    getItem("Category List", "categoryList"),
   ]),
-  getItem("Customers", "sub2", <TeamOutlined />),
-  getItem("Report", "9", <TbReportAnalytics />),
-  getItem("Settings", "10", <IoSettingsSharp />),
+  getItem("Customers", "customers", <TeamOutlined />),
+  getItem("Report", "report", <TbReportAnalytics />),
+  getItem("Settings", "settings", <IoSettingsSharp />),
 ];
 
 export default items;
