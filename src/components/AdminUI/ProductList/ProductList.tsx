@@ -1,26 +1,28 @@
-import { Button, Space, Table, Tag } from 'antd';
-import React, { useEffect, useState } from 'react'
+import { Button, Popconfirm, Space, Table, Tag } from 'antd';
+import React, { useState } from 'react'
 import type { GetProp, TableProps } from "antd";
-import { MdDelete } from 'react-icons/md';
-import { FaEdit } from 'react-icons/fa';
+import { MdDeleteOutline } from 'react-icons/md';
 import { IoAddCircleOutline } from 'react-icons/io5';
+import { TbEdit } from 'react-icons/tb';
 type ColumnsType<T extends object> = GetProp<TableProps<T>, "columns">;
 
 interface DataType {
   key: number;
-  name: string;
-  age: number;
-    address?: string;
+  productName: string;
+  price: number;
+  category: string;
     tags: string[];
   description?: string;
+  itemCount: number;
 }
 
 const ProductList = () => {
 
   const columns: ColumnsType<DataType> = [
     {
-      title: "Name",
-      dataIndex: "name",
+      key:'productName',
+      title: "Product Name",
+      dataIndex: "productName",
       filters: [
         {
           text: 'John',
@@ -32,17 +34,20 @@ const ProductList = () => {
         }
       ],
       onFilter: (value, record) =>
-        record.name.indexOf(value as string) === 0,
+        record.productName.indexOf(value as string) === 0,
       filterSearch: true,
     },
     {
-      title: "Age",
-      dataIndex: "age",
-      sorter: (a, b) => a.age - b.age,
+      key: 'price',
+      title: "Price",
+      dataIndex: "price",
+      sorter: (a, b) => a.price - b.price,
+      width: '70px'
     },
     {
-      title: "Address",
-      dataIndex: "address",
+      key:'category',
+      title: "Category",
+      dataIndex: "category",
       filters: [
         {
           text: "London",
@@ -53,28 +58,40 @@ const ProductList = () => {
           value: "New York",
         },
       ],
-      // onFilter: (value, record) =>
-      //   record.address.indexOf(value as string) === 0,
+      onFilter: (value, record) =>
+        record.category?.indexOf(value as string) === 0,
+    },
+    {
+      key: 'itemCount',
+      title: 'Item Count',
+      dataIndex: 'itemCount',
+      width: '40px',
     },
     {
       title: 'Status',
       key: 'tags',
       dataIndex: 'tags',
+      width: '50px',
       render: (tags: string[]) => (
         <span>
           {tags.map((tag) => {
-            let color = tag.toLowerCase() === 'active' ? 'green' : '';
+            let color = tag.toLowerCase() === 'active' ? 'green' : 'red';
                     
             return (
-              <Tag color={color} key={tag}>
+              <Tag color={color} key={tag} className='m-0' >
                 {tag.toUpperCase()}
               </Tag>
             );
                     
           })}
         </span>
-      )
-            
+      ),
+      align: 'center',
+      filters: [
+        {text:'Active',value:'active'},{text:'Out of Stock', value:'Out of Stock'}
+      ],
+      onFilter: (value, record) =>
+        record.tags.indexOf(value as string) === 0,
     },
     {
         
@@ -82,34 +99,45 @@ const ProductList = () => {
       dataIndex: 'edit',
       render: () => (
         <Space size="middle">
-          <button><FaEdit /></button>
+          <button className='hover:!scale-110 hover:text-cyan-500'><TbEdit className='text-[18px] shadow-sm' /></button>
         </Space>
       ),
-      colSpan:2,
+      colSpan: 2,
+      align: 'center',
+      width: '40px'
     },
     {
       key: 'delete',
       dataIndex: 'delete',
-      render: ()=> {
+      render: (_, record)=> {
         return (
-          <Space size={"middle"}>
-            <button>
-              <MdDelete />
+          <Popconfirm title='Confirm deleting' okType='danger' showCancel={false}  onConfirm={()=> handleDelete(record.key)}>
+            <button className='hover:!scale-110 hover:text-red-500'>
+              <MdDeleteOutline className='text-[18px] shadow-sm' />
             </button>
-          </Space>
+          </Popconfirm>
         );
       },
       colSpan: 0,
+      align: 'center',
+      width:'40px'
+      
     }
     ];
 
+  const handleDelete = (key: number) => {
+    const newData = dataSource.filter((item) => item.key !== key);
+    setDataSource(newData)
+  };
+  
     const tableColumns = columns.map((item) => ({ ...item }));
     
     const data = Array.from({ length: 10 }).map<DataType>((_, i) => ({
       key: i,
-      name: "John Brown",
-      age: Number(`${i}2`),
-        address: `New York No. ${i} Lake Park`,
+      productName: "John Brown",
+      price: Number(`${i}2`),
+      itemCount: Number({i}),
+      category: `New York No. ${i} Lake Park`,
       tags: ['active'],
       description: `My name is John Brown, I am ${i}2 years old, living in New York No. ${i} Lake Park.`,
     }));
@@ -118,11 +146,12 @@ const ProductList = () => {
   
   const handleAdd = () => {
     const newData: DataType = {
-        key: Math.random()*10 +1,
-      name: 'new row',
-        age: 21,
-      address: '',
-        tags:['active']
+      key: Math.random()*10 +1,
+      productName: 'new row',
+      price: 21,
+      itemCount: 12,
+      category: 'Electric',
+        tags:['Out of Stock']
     }
     setDataSource([...dataSource,newData])  
   }
