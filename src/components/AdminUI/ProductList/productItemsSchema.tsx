@@ -1,7 +1,7 @@
 import React from 'react'
 import { DataType } from '../../../types/productItemListTypes.ts'
 import { MdDeleteOutline } from 'react-icons/md';
-import { Popconfirm, Space, Tag } from 'antd';
+import { Image, Popconfirm, Space, Tag } from 'antd';
 import { TbEdit } from 'react-icons/tb';
 import { ColumnsType } from 'antd/es/table/InternalTable';
 
@@ -30,6 +30,12 @@ export const columns: ColumnsType<DataType> = [
       record.productName.indexOf(value as string) === 0,
     filterSearch: true,
     width: "230px",
+    render: (item:string[]) => (
+      <span className='flex gap-2'>
+        <Image src={item[0]} alt={item[0]+' Product image url'} width={80} preview={false} />
+        <span className='flex items-center'>{item[1]}</span>
+      </span>
+    )
   },
   {
     key: "category",
