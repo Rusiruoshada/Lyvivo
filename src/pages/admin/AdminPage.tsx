@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -21,8 +21,8 @@ const AdminPage = () => {
     (event.key === 'dashBoard')? navigate('/admin'): navigate(`/admin/${event.key}`)
   }
 
-  return (
-    <Layout className="h-screen">
+    return (
+    <Layout className={`min-h-screen`}>
       <Sider
         trigger={null}
         collapsible
@@ -41,7 +41,7 @@ const AdminPage = () => {
         />
       </Sider>
       <Layout>
-        <Header className="bg-[var(--adminPrimaryColor)] !p-0 flex flex-row justify-between shadow-md">
+        <Header className="bg-[var(--adminPrimaryColor)] !p-0 flex flex-row justify-between shadow-md !sticky top-0 left-0 right-0 bottom-auto z-50">
           <Button
             type="text"
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
