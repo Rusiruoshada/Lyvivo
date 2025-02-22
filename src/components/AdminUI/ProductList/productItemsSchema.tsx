@@ -1,54 +1,83 @@
-import React from 'react'
-import { DataType } from '../../../types/productItemListTypes.ts'
-import { MdDeleteOutline } from 'react-icons/md';
-import { Image, Popconfirm, Space, Tag } from 'antd';
-import { TbEdit } from 'react-icons/tb';
-import { ColumnsType } from 'antd/es/table/InternalTable';
+import React from "react";
+import { DataType, ProductDataType } from "../../../types/productItemListTypes.ts";
+import { MdDeleteOutline } from "react-icons/md";
+import { Button, Divider, Image, Input, Popconfirm, Space, Tag } from "antd";
+import { TbEdit } from "react-icons/tb";
+import { ColumnsType } from "antd/es/table/InternalTable";
+import { FilterDropdownProps } from "antd/es/table/interface";
 
 
-export const getData = () => {
-
-}
-
-
-export const columns: ColumnsType<DataType> = [
+export const columnData = [
   {
-    key: "productName",
-    title: "Product Name",
-    dataIndex: "productName",
-    filters: [
-      {
-        text: "John",
-        value: "John",
-      },
-      {
-        text: "new",
-        value: "new",
-      },
-    ],
-    onFilter: (value, record) =>
-      record.productName.indexOf(value as string) === 0,
-    filterSearch: true,
-    width: "230px",
-    render: (item:string[]) => (
-      <span className='flex gap-2'>
-        <Image src={item[0]} alt={item[0]+' Product image url'} width={80} preview={false} />
-        <span className='flex items-center'>{item[1]}</span>
-      </span>
-    )
+    productKey: "productName",
+    productTitle: "Product Name",
+    productDataIndex: "productName",
   },
   {
-    key: "category",
-    title: "Category",
-    dataIndex: "category",
-    filters: [
+    productKey: "category",
+    productTitle: "Category",
+    productDataIndex: "category",
+    productFilters: [
       {
-        text: "London",
-        value: "London",
+        text: "Electronics",
+        value: "Electronics",
       },
       {
-        text: "New York",
-        value: "New York",
+        text: "Food",
+        value: "Food",
+      },
+      {
+        text: "Pharmacy",
+        value: "Pharmacy",
+      },
+      {
+        text: "Grocery",
+        value: "Grocery",
+      },
+    ],
+  },
+];
+
+
+export const columns = [
+  {
+    productKey: "productName",
+    productTitle: "Product Name",
+    productDataIndex: "productName",
+    filterSearch: true,
+    width: "230px",
+    render: (item: string[]) => (
+      <span className="flex gap-2">
+        <Image
+          src={item[0]}
+          alt={item[0] + " Product image url"}
+          width={80}
+          preview={false}
+        />
+        <span className="flex items-center text-wrap">{item[1]}</span>
+      </span>
+    ),
+  },
+  {
+    productKey: "category",
+    productTitle: "Category",
+    productDataIndex: "category",
+    productFilters: [
+      {
+        text: "Electronics",
+        value: "Electronics",
+      },
+      {
+        text: "Food",
+        value: "Food",
+      },
+      {
+        text: "Pharmacy",
+        value: "Pharmacy",
+      },
+      {
+        text: "Grocery",
+        value: "Grocery",
       },
     ],
     onFilter: (value, record) =>
@@ -92,7 +121,7 @@ export const columns: ColumnsType<DataType> = [
       { text: "Active", value: "active" },
       { text: "Out of Stock", value: "Out of Stock" },
     ],
-    onFilter: (value, record) => record.tags.indexOf(value as string) === 0,
+    onFilter: (value, record) => record.tags?.indexOf(value as string) === 0,
   },
   {
     key: "edit",
@@ -117,7 +146,7 @@ export const columns: ColumnsType<DataType> = [
           title="Confirm deleting"
           okType="danger"
           showCancel={false}
-        //   onConfirm={() => handleDelete(record.key)}
+          //   onConfirm={() => handleDelete(record.key)}
         >
           <button className="hover:!scale-110 hover:text-red-500">
             <MdDeleteOutline className="text-[18px] shadow-sm" />
@@ -130,4 +159,3 @@ export const columns: ColumnsType<DataType> = [
     width: "40px",
   },
 ];
-
