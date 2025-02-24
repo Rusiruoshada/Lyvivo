@@ -1,18 +1,20 @@
 import { Button,InputRef,Table, TableColumnType } from 'antd';
 import React, { useEffect, useRef, useState } from 'react'
 import { IoAddCircleOutline, IoSearch, IoSearchOutline } from 'react-icons/io5';
-import { DataType, ProductDataType } from '../../../types/productItemListTypes.ts';
+import { DataType } from '../../../types/productItemListTypes.ts';
 import axios from "axios";
 import { MdDeleteOutline } from "react-icons/md";
-import { Image, Input, Popconfirm, Space, Tag } from "antd";
-import { TbEdit } from "react-icons/tb";
+import { Input, Popconfirm, Space } from "antd";
 import { ColumnsType } from "antd/es/table/InternalTable";
 import { FilterDropdownProps } from "antd/es/table/interface";
+import columnData from './productItemsSchema.tsx';
+import AddNewProduct from '../AddNewProduct/AddNewProduct.tsx';
 
 const ProductList = () => {
   const [dataSource, setDataSource] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(false)
   const searchInput = useRef<InputRef>(null);
+  const [openNewProduct, setOpenNewProduct] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
@@ -22,7 +24,7 @@ const ProductList = () => {
       );
       const data = response.data;
 
-      const formattedData = data.map((dataItems: ProductDataType, i:number) => {
+      const formattedData = data.map((dataItems: any, i:number) => {
         return {
           key: dataItems._id,
           productName: [dataItems.image, dataItems.productName],
@@ -50,6 +52,8 @@ const ProductList = () => {
    const handleReset = (clearFilters: () => void) => {
      clearFilters();
    };
+  
+  const {category,edit,price,productName,status,stock,delete: deleteData} = columnData
 
   const getColumnSearchProps = (
     dataIndex:string
@@ -109,130 +113,79 @@ const ProductList = () => {
   
   const columns: ColumnsType<DataType> = [
     {
-      key: "productName",
-      title: "Product Name",
-      dataIndex: "productName",
-      filterSearch: true,
-      width: "230px",
-      render: (item: string[]) => (
-        <span className="flex gap-2">
-          <Image
-            src={item[0]}
-            alt={item[0] + " Product image url"}
-            width={80}
-            preview={false}
-          />
-          <span className="flex items-center text-wrap">{item[1]}</span>
-        </span>
-      ),
-      ...getColumnSearchProps('productName')
+      key: productName.key,
+      title: productName.title,
+      dataIndex: productName.dataIndex,
+      filterSearch: productName.filterSearch,
+      width: productName.width,
+      render: productName.render,
+      ...getColumnSearchProps("productName"),
     },
     {
-      key: "category",
-      title: "Category",
-      dataIndex: "category",
-      filters: [
-        {
-          text: "Electronics",
-          value: "Electronics",
-        },
-        {
-          text: "Food",
-          value: "Food",
-        },
-        {
-          text: "Pharmacy",
-          value: "Pharmacy",
-        },
-        {
-          text: "Grocery",
-          value: "Grocery",
-        },
-      ],
-      onFilter: (value, record) =>
-        record.category?.indexOf(value as string) === 0,
-      width: "150px",
-      
+      key: category.key,
+      title: category.title,
+      dataIndex: category.dataIndex,
+      filters: category.filters,
+      onFilter: category.onFilter,
+      width: category.width,
     },
     {
-      key: "price",
-      title: "Price",
-      dataIndex: "price",
-      sorter: (a, b) => a.price - b.price,
-      width: "100px",
+      key: price.key,
+      title: price.title,
+      dataIndex: price.dataIndex,
+      sorter: price.sorter,
+      width: price.width,
     },
     {
-      key: "stock",
-      title: "Stock",
-      dataIndex: "stock",
-      width: "40px",
-      align: "center",
+      key: stock.key,
+      title: stock.title,
+      dataIndex: stock.dataIndex,
+      width: stock.width,
+      align: stock.align, 
     },
     {
-      title: "Status",
-      key: "tags",
-      dataIndex: "tags",
-      width: "100px",
-      render: (tags: string[]) => (
-        <span>
-          {tags.map((tag) => {
-            let color = tag.toLowerCase() === "active" ? "green" : "red";
-  
-            return (
-              <Tag color={color} key={tag} className="m-0">
-                {tag.toUpperCase()}
-              </Tag>
-            );
-          })}
-        </span>
-      ),
-      align: "center",
-      filters: [
-        { text: "Active", value: "active" },
-        { text: "Out of Stock", value: "Out of Stock" },
-      ],
-      onFilter: (value, record) => record.tags?.indexOf(value as string) === 0,
+      title: status.title,
+      key: status.key,
+      dataIndex: status.dataIndex,
+      width: status.width,
+      render: status.render,
+      align: status.align,
+      filters: status.filters,
+      onFilter:status.onFilter,
     },
     {
-      key: "edit",
-      dataIndex: "edit",
-      render: () => (
-        <Space size="middle">
-          <button className="hover:!scale-110 hover:text-cyan-500">
-            <TbEdit className="text-[18px] shadow-sm" />
-          </button>
-        </Space>
-      ),
-      colSpan: 2,
-      align: "center",
-      width: "40px",
+      key: edit.key,
+      dataIndex: edit.dataIndex,
+      render: edit.render,
+      colSpan: edit.colSpan,
+      align: edit.align,
+      width:edit.width,
     },
     {
-      key: "delete",
-      dataIndex: "delete",
+      key: deleteData.key,
+      dataIndex: deleteData.dataIndex,
+      colSpan: deleteData.colSpan,
+      align: deleteData.align,
+      width: deleteData.width,
       render: (_, record) => {
-        return (
-          <Popconfirm
-            title="Confirm deleting"
-            okType="danger"
-            showCancel={false}
-              onConfirm={() => handleDelete(record.key!)}
-          >
-            <button className="hover:!scale-110 hover:text-red-500">
-              <MdDeleteOutline className="text-[18px] shadow-sm" />
-            </button>
-          </Popconfirm>
-        );
-      },
-      colSpan: 0,
-      align: "center",
-      width: "40px",
+            return (
+              <Popconfirm
+                title="Confirm deleting"
+                okType="danger"
+                showCancel={false}
+                  onConfirm={() => handleDelete(record.key)}
+              >
+                <button className="hover:!scale-110 hover:text-red-500">
+                  <MdDeleteOutline className="text-[18px] shadow-sm" />
+                </button>
+              </Popconfirm>
+            );
+          },
     },
   ];
   
-  
 
-    const handleDelete = (key: string) => {
+    const handleDelete = (key: string|undefined) => {
       const newData = dataSource.filter((item:any) => item.key !== key);
       setDataSource(newData)
     };
@@ -253,12 +206,14 @@ const ProductList = () => {
       description: '',
       
     };
-    setDataSource([...dataSource,newData])  
+    setDataSource([...dataSource, newData])
+    setOpenNewProduct(!openNewProduct)
   }
 
   return (
     <div className="p-4">
       <div className='flex justify-end'>
+        {openNewProduct && <AddNewProduct /> }
         <Button
           onClick={handleAdd}
           type="primary"
