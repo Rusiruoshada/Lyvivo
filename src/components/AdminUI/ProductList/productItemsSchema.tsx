@@ -1,49 +1,16 @@
 import React from "react";
-import { DataType, ProductDataType } from "../../../types/productItemListTypes.ts";
+import { ColumnDataTypes } from "../../../types/productItemListTypes.ts";
 import { MdDeleteOutline } from "react-icons/md";
-import { Button, Divider, Image, Input, Popconfirm, Space, Tag } from "antd";
+import { Image, Popconfirm, Space, Tag } from "antd";
 import { TbEdit } from "react-icons/tb";
-import { ColumnsType } from "antd/es/table/InternalTable";
-import { FilterDropdownProps } from "antd/es/table/interface";
 
 
-export const columnData = [
-  {
-    productKey: "productName",
-    productTitle: "Product Name",
-    productDataIndex: "productName",
-  },
-  {
-    productKey: "category",
-    productTitle: "Category",
-    productDataIndex: "category",
-    productFilters: [
-      {
-        text: "Electronics",
-        value: "Electronics",
-      },
-      {
-        text: "Food",
-        value: "Food",
-      },
-      {
-        text: "Pharmacy",
-        value: "Pharmacy",
-      },
-      {
-        text: "Grocery",
-        value: "Grocery",
-      },
-    ],
-  },
-];
 
-
-export const columns = [
-  {
-    productKey: "productName",
-    productTitle: "Product Name",
-    productDataIndex: "productName",
+const columnData: ColumnDataTypes = {
+  productName: {
+    key: "productName",
+    title: "Product Name",
+    dataIndex: "productName",
     filterSearch: true,
     width: "230px",
     render: (item: string[]) => (
@@ -58,11 +25,11 @@ export const columns = [
       </span>
     ),
   },
-  {
-    productKey: "category",
-    productTitle: "Category",
-    productDataIndex: "category",
-    productFilters: [
+  category: {
+    key: "category",
+    title: "Category",
+    dataIndex: "category",
+    filters: [
       {
         text: "Electronics",
         value: "Electronics",
@@ -84,21 +51,21 @@ export const columns = [
       record.category?.indexOf(value as string) === 0,
     width: "150px",
   },
-  {
+  price: {
     key: "price",
     title: "Price",
     dataIndex: "price",
-    sorter: (a, b) => a.price - b.price,
     width: "100px",
+    sorter: (a: any, b: any) => a.price - b.price,
   },
-  {
+  stock: {
     key: "stock",
     title: "Stock",
     dataIndex: "stock",
     width: "40px",
     align: "center",
   },
-  {
+  status: {
     title: "Status",
     key: "tags",
     dataIndex: "tags",
@@ -121,9 +88,10 @@ export const columns = [
       { text: "Active", value: "active" },
       { text: "Out of Stock", value: "Out of Stock" },
     ],
-    onFilter: (value, record) => record.tags?.indexOf(value as string) === 0,
+    onFilter: (value, record) =>
+      record.tags?.indexOf(value as string) === 0,
   },
-  {
+  edit: {
     key: "edit",
     dataIndex: "edit",
     render: () => (
@@ -137,7 +105,7 @@ export const columns = [
     align: "center",
     width: "40px",
   },
-  {
+  delete: {
     key: "delete",
     dataIndex: "delete",
     render: (_, record) => {
@@ -158,4 +126,6 @@ export const columns = [
     align: "center",
     width: "40px",
   },
-];
+};
+
+export default columnData;
