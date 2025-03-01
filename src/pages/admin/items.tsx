@@ -1,12 +1,13 @@
 import React from 'react';
 import {TeamOutlined} from '@ant-design/icons';
-import { MdDashboard } from "react-icons/md";
+import { MdAdminPanelSettings, MdDashboard } from "react-icons/md";
 import { IoSettingsSharp } from "react-icons/io5";
 import { TbReportAnalytics } from "react-icons/tb";
 import { BsCurrencyDollar } from "react-icons/bs";
 import { IoIosCheckbox } from "react-icons/io";
 import type { MenuProps } from 'antd';
-
+import MenuItem from 'antd/es/menu/MenuItem';
+import jwt from 'jsonwebtoken';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -24,16 +25,38 @@ function getItem(
   } as MenuItem;
 }
 
-const items: MenuItem[] = [
-  getItem("Dashboard", "1", <MdDashboard />),
-  getItem("Sales", "2", <BsCurrencyDollar />),
-  getItem("Products", "sub1", <IoIosCheckbox />, [
-    getItem("Product List", "3"),
-    getItem("Category List", "4"),
+const token = localStorage.getItem('tokenIsAdmin')
+let items: MenuItem[] = []
+const role = jwt.decode(token!)
+console.log(role)
+
+if (token === null || undefined || '') {
+  items = [
+  getItem("Dashboard", "dashBoard", <MdDashboard />),
+  getItem("Sales", "sales", <BsCurrencyDollar />),
+  getItem("Products", "products", <IoIosCheckbox />, [
+    getItem("Product List", "productList"),
+    getItem("Category List", "categoryList"),
   ]),
-  getItem("Customers", "sub2", <TeamOutlined />),
-  getItem("Report", "9", <TbReportAnalytics />),
-  getItem("Settings", "10", <IoSettingsSharp />),
+  getItem("Customers", "customers", <TeamOutlined />),
+  getItem("Admin", "admin", <MdAdminPanelSettings />),
+  getItem("Report", "report", <TbReportAnalytics />),
+  getItem("Settings", "settings", <IoSettingsSharp />),
 ];
 
+} else {
+
+ items = [
+  getItem("Dashboard", "dashBoard", <MdDashboard />),
+  getItem("Sales", "sales", <BsCurrencyDollar />),
+  getItem("Products", "products", <IoIosCheckbox />, [
+    getItem("Product List", "productList"),
+    getItem("Category List", "categoryList"),
+  ]),
+  getItem("Customers", "customers", <TeamOutlined />),
+  getItem("Admin", "admin", <MdAdminPanelSettings />),
+  getItem("Report", "report", <TbReportAnalytics />),
+  getItem("Settings", "settings", <IoSettingsSharp />),
+];
+}
 export default items;
