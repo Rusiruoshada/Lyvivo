@@ -14,10 +14,10 @@ const AddNewProduct: React.FC<AddNewProductProps> = ({ open, onOpenModal, onSubm
   const [form] = Form.useForm();
 
   const categoryOptions = [
-    { value: "food", label: "Food" },
-    { value: "grocery", label: "Grocery" },
-    { value: "pharmacy", label: "Pharmacy" },
-    { value: "electronics", label: "Electronics" },
+    { value: "Food", label: "Food" },
+    { value: "Grocery", label: "Grocery" },
+    { value: "Pharmacy", label: "Pharmacy" },
+    { value: "Electronics", label: "Electronics" },
   ];
 
   const statusOption = [
@@ -27,9 +27,9 @@ const AddNewProduct: React.FC<AddNewProductProps> = ({ open, onOpenModal, onSubm
 
   const getCategorySelection = (selectItem: string) => {
     if (
-      selectItem === "food" ||
-      selectItem === "grocery" ||
-      selectItem === "pharmacy"
+      selectItem.toLowerCase() === "food" ||
+      selectItem.toLowerCase() === "grocery" ||
+      selectItem.toLowerCase() === "pharmacy"
     ) {
       return setIsFoodOrGrocery(true);
     }
@@ -159,7 +159,7 @@ const AddNewProduct: React.FC<AddNewProductProps> = ({ open, onOpenModal, onSubm
           </Form.Item>
           {isFoodOrGrocery && (
             <Form.Item
-              name={`Weight`}
+              name={`weight`}
               label={`Weight`}
               rules={[
                 {
@@ -200,29 +200,31 @@ const AddNewProduct: React.FC<AddNewProductProps> = ({ open, onOpenModal, onSubm
             ]}
             className="w-full"
           >
-            <Input
-              placeholder="Product Images"
-              variant="outlined"
-              type="url"
-              disabled={showUpload}
-              className={`${showUpload ? "mb-2" : ""}`}
-              suffix={
-                <Button
-                  className="hover:!border-[var(--adminPrimaryColor)] hover:!text-[var(--adminPrimaryColor)]"
-                  type="default"
-                  onClick={onUploadClick}
-                >
-                  Upload from device
-                </Button>
-              }
-            />
-            {showUpload && (
-              <UploadButton
-                disable={!showUpload}
-                name="upload product images"
-                listType="text"
+            <div>
+              <Input
+                placeholder="Product Images"
+                variant="outlined"
+                type="url"
+                disabled={showUpload}
+                className={`${showUpload ? "mb-2" : ""}`}
+                suffix={
+                  <Button
+                    className="hover:!border-[var(--adminPrimaryColor)] hover:!text-[var(--adminPrimaryColor)]"
+                    type="default"
+                    onClick={onUploadClick}
+                  >
+                    Upload from device
+                  </Button>
+                }
               />
-            )}
+              {showUpload && (
+                <UploadButton
+                  disable={!showUpload}
+                  name="upload product images"
+                  listType="text"
+                  />
+                )}
+            </div>
           </Form.Item>
         </div>
         <div className="w-full mb-3">
