@@ -4,12 +4,14 @@ import { TbMoneybag, TbPresentation } from "react-icons/tb";
 import { MdMoney } from "react-icons/md";
 import TopSellingProducts from "./TopSellingProducts.tsx";
 import Calendar from "./Calendar.tsx";
+import decodeJWT from '../../../hooks/decodeJWT.ts'
 
 const DashBoard = () => {
   const [time, setTime] = useState(new Date().toLocaleTimeString());
   const [timeInHour, setTimeInHour] = useState(new Date().getHours());
   const date = new Date().toLocaleDateString();
-  const name = "ROMs";
+  const token = localStorage.getItem('tokenIsAdmin')
+  const name = decodeJWT(token!);
   const quickShow = [{label: "total Sale", amount: "37,890.58", icon: <TbPresentation/>},{label: 'total revenue', amount: '12,890.57', icon:<MdMoney/>}, {label:"total profit", amount: '15,190.59',icon: <TbMoneybag/>}]
 
   const greeting =
@@ -40,7 +42,7 @@ const DashBoard = () => {
     <div className="p-4">
       <div className="flex flex-col">
         <span className="text-[18px] font-bold">
-          Good {greeting}, Mr {name}
+          Good {greeting}, Mr {name.firstName}
         </span>
         <span className="text-[14px] text-gray-500">
           {date} | {time}
