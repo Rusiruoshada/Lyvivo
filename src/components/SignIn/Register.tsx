@@ -34,18 +34,19 @@ const Register: React.FC<RegisterProps> = ({
   const onFinish = async (values: any) => {
     console.log("Received values of form: ", values);
     try {
-      await axios.post("http://localhost:5000/api/register", {
+      const response = await axios.post("http://localhost:8080/api/register", {
         ...values,
       });
+
       form.resetFields();
       setDisable(true);
 
-      onCancel({register: false})
+      onCancel({ register: false });
     } catch (error) {
       openNotification({
         type: "error",
         description: `${
-          error?.response?.status === 403||404||500
+          error?.response?.status === 403 || 404 || 500
             ? error.response?.data.message
             : "Invalid Information"
         }`,
@@ -62,27 +63,27 @@ const Register: React.FC<RegisterProps> = ({
     <Modal
       open={isModalOpen}
       onCancel={() => onCancel({ register: false })}
-      className="[&>div]:!p-0 w-full sm:!w-full md:!w-full lg:!w-[1200px]"
+      className="[&>div]:!p-0 w-full sm:!w-full md:!w-full lg:!w-[800px] xl:!w-[1000px] "
       closable={false}
       footer={""}
       okButtonProps={{ hidden: true }}
       cancelButtonProps={{ hidden: true }}
       maskClosable
     >
-      <div className="flex flex-row gap-5">
+      <div className="flex flex-row gap-4 lg:!w-[800px] xl:!w-full lg:!h-[600px] xl:!h-full">
         <div className="basis-1/2 p-1 shadow-lg">
           <div className="h-full text-white relative">
             <div className="z-50 absolute bottom-6 text-center">
-              <h2 className="text-4xl mb-2 font-black ">
+              <h2 className="text-3xl mb-2 font-black ">
                 One place for everything!
               </h2>
-              <p className="text-2xl font-medium mx-auto text-wrap w-[95%]">
+              <p className="text-1xl xl:!text-2xl font-medium mx-auto text-wrap w-[95%]">
                 Welcome to Lyvivo, where exceptional customer care meets top
                 product quality!
               </p>
             </div>
 
-            <div className="h-full relative">
+            <div className="lg:!h-[600px] xl:!h-full relative">
               <div className="absolute top-0 bottom-0 left-0 right-0 h-full !z-[1] opacity-40 rounded-md bg-black" />
               <div
                 style={{
@@ -94,7 +95,7 @@ const Register: React.FC<RegisterProps> = ({
           </div>
         </div>
         <div className="flex flex-col basis-1/2 py-10 pl-0 pr-10">
-          <div className="flex flex-col mb-8">
+          <div className="flex flex-col mb-3">
             <h1 className="text-4xl font-bold text-[var(--primaryColor)]">
               Register
             </h1>
@@ -105,10 +106,11 @@ const Register: React.FC<RegisterProps> = ({
             name="register"
             form={form}
             onFinish={onFinish}
-            className="w-full"
+            className="w-full !p-0"
             disabled={disable}
+            size="small"
           >
-            <div className="relative mb-8">
+            <div className="relative mb-3">
               <label
                 className={`absolute left-3 top-0 -z-30 transition-all duration-200 transform ${
                   inputFocused.mobileNumber ||
@@ -178,7 +180,7 @@ const Register: React.FC<RegisterProps> = ({
                 />
               </Form.Item>
             </div>
-            <div className="relative mb-8">
+            <div className="relative mb-3">
               <label
                 className={`absolute left-3 top-0 -z-30 transition-all duration-200 transform ${
                   inputFocused.email || form.getFieldValue("email")
@@ -222,7 +224,7 @@ const Register: React.FC<RegisterProps> = ({
                 />
               </Form.Item>
             </div>
-            <div className="relative mb-8">
+            <div className="relative mb-3">
               <label
                 className={`absolute left-3 top-0 -z-30 transition-all duration-200 transform ${
                   inputFocused.firstName || form.getFieldValue("firstName")
@@ -272,7 +274,7 @@ const Register: React.FC<RegisterProps> = ({
                 />
               </Form.Item>
             </div>
-            <div className="relative mb-8">
+            <div className="relative mb-3">
               <label
                 className={`absolute left-3 top-0 -z-30 transition-all duration-200 transform ${
                   inputFocused.lastName || form.getFieldValue("lastName")
@@ -322,7 +324,7 @@ const Register: React.FC<RegisterProps> = ({
                 />
               </Form.Item>
             </div>
-            <div className="relative mb-8">
+            <div className="relative mb-3">
               <label
                 className={`absolute left-3 top-0 -z-30 transition-all duration-200 transform ${
                   inputFocused.password || form.getFieldValue("password")
@@ -379,7 +381,7 @@ const Register: React.FC<RegisterProps> = ({
               </Form.Item>
             </div>
 
-            <div className="relative mb-8">
+            <div className="relative mb-3">
               <label
                 className={`absolute left-3 top-0 -z-30 transition-all duration-200 transform ${
                   inputFocused.confirmPassword ||
@@ -452,6 +454,7 @@ const Register: React.FC<RegisterProps> = ({
                       : Promise.reject(new Error("Should accept agreement")),
                 },
               ]}
+              className=""
             >
               <Checkbox>
                 I have read the <a href="#home">agreement</a>
