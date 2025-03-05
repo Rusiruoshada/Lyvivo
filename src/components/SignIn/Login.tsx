@@ -3,6 +3,8 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Flex, Modal, message } from "antd";
 import axios from "axios";
 import openNotification from "../../hooks/notification.ts";
+import decodeJWT from "../../hooks/decodeJWT.ts";
+import { useNavigate } from "react-router-dom";
 
 interface LoginProps {
   isModalOpen: boolean;
@@ -18,25 +20,32 @@ const Login: React.FC<LoginProps> = ({
   const [form] = Form.useForm();
   const [usernameFocused, setUsernameFocused] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
+  const navigate = useNavigate();
 
   const onFinish = async (values: any) => {
     console.log("Received values of form: ", values);
 
     try {
-      const response = await axios.post("http://localhost:5000/api/login", {
+      const response = await axios.post("http://localhost:8080/api/login", {
         ...values,
       });
       const data = await response.data;
-      localStorage.setItem('token', data.token)
-      
+      const isUser = decodeJWT(data?.token);
+      if (isUser.role === "user") {
+        localStorage.setItem("tokenUser", data.token);
+      } else if (isUser.role === "admin" || "super") {
+        localStorage.setItem("tokenIsAdmin", data.token);
+        navigate("/admin");
+        return;
+      }
+      console.log(data);
       form.resetFields();
       onCancel({ login: false });
     } catch (error) {
-      
       openNotification({
         type: "error",
         description: `${
-          error?.response?.status === 403||404
+          error?.response?.status === 403 || 404
             ? error.response?.data.message
             : "Error while login"
         }`,
@@ -51,7 +60,7 @@ const Login: React.FC<LoginProps> = ({
     <Modal
       open={isModalOpen}
       onCancel={() => onCancel({ login: false })}
-      className="[&>div]:!p-0 w-full sm:!w-full md:!w-full lg:!w-[1200px]"
+      className="[&>div]:!p-0 w-full sm:!w-full md:!w-full lg:!w-[800px] xl:!w-[800px]"
       closable={false}
       footer={""}
       okButtonProps={{ hidden: true }}
@@ -72,7 +81,7 @@ const Login: React.FC<LoginProps> = ({
             form={form}
             initialValues={{ username: "", password: "" }}
             onFinish={onFinish}
-            className="w-full"
+            className="w-full !p-0"
           >
             <div className="relative mb-8">
               <label
@@ -199,7 +208,7 @@ const Login: React.FC<LoginProps> = ({
           <div className="h-full text-white relative">
             <div className="z-50 absolute top-6 w-full  text-center">
               <h2 className="text-5xl mb-2 font-black ">Welcome back!</h2>
-              <p className="text-2xl font-semibold mx-auto text-wrap ">
+              <p className="text-[16px] font-semibold mx-auto text-wrap ">
                 We are here for your every need!
               </p>
             </div>
