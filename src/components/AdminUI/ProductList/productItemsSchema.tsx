@@ -4,8 +4,6 @@ import { MdDeleteOutline } from "react-icons/md";
 import { Image, Popconfirm, Space, Tag } from "antd";
 import { TbEdit } from "react-icons/tb";
 
-
-
 const columnData: ColumnDataTypes = {
   productName: {
     key: "productName",
@@ -14,13 +12,16 @@ const columnData: ColumnDataTypes = {
     filterSearch: true,
     width: "230px",
     render: (item: string[]) => (
-      <span className="flex gap-2">
-        <Image
-          src={item[0]}
-          alt={item[0] + " Product image url"}
-          width={80}
-          preview={false}
-        />
+      <span className="flex gap-2 object-cover">
+        <div>
+          <Image
+            src={item[0]}
+            alt={item[0] + " Product image url"}
+            width={70}
+            height={50}
+            preview={false}
+          />
+        </div>
         <span className="flex items-center text-wrap">{item[1]}</span>
       </span>
     ),
@@ -86,21 +87,14 @@ const columnData: ColumnDataTypes = {
     align: "center",
     filters: [
       { text: "Active", value: "active" },
-      { text: "Out of Stock", value: "Out of Stock" },
+      { text: "Out of Stock", value: "out of stock" },
     ],
-    onFilter: (value, record) =>
-      record.tags?.indexOf(value as string) === 0,
+    onFilter: (value, record) => record.tags?.indexOf(value as string) === 0,
   },
   edit: {
     key: "edit",
     dataIndex: "edit",
-    render: () => (
-      <Space size="middle">
-        <button className="hover:!scale-110 hover:text-cyan-500">
-          <TbEdit className="text-[18px] shadow-sm" />
-        </button>
-      </Space>
-    ),
+    
     colSpan: 2,
     align: "center",
     width: "40px",
