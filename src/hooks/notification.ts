@@ -2,8 +2,6 @@ import React from 'react';
 import { notification } from 'antd';
 import { IconType } from 'antd/es/notification/interface';
 
-type NotificationType = 'success' | 'info' | 'warning' | 'error';
-
 interface OpenNotificationTypes {
   type: IconType;
   message: string;
