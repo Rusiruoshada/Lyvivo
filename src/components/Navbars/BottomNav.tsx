@@ -41,40 +41,42 @@ const BottomNav: React.FC = () => {
   return (
     <Navbar
       collapseOnSelect
-      expand='lg'
-      className='sticky top-0 bottom-auto left-0 right-0 mb-[35px] bg-white shadow-md drop-shadow-sm !z-[100]'
-      sticky='top'
-      style={{ justifyContent: 'center' }}
+      expand="lg"
+      className="sticky top-0 bottom-auto left-0 right-0 mb-[35px] bg-white shadow-md drop-shadow-sm !z-[100]"
+      sticky="top"
+      style={{ justifyContent: "center" }}
     >
-      <Container style={{ padding: 0, margin: '0 2.5rem' }}>
+      <Container style={{ padding: 0, margin: "0 2.5rem" }}>
         <Navbar.Brand
-          href='/'
+          href="/"
           style={{
-            fontWeight: '700',
-            color: 'var(--primaryColor)',
-            fontSize: '2rem',
+            fontWeight: "700",
+            color: "var(--primaryColor)",
+            fontSize: "2rem",
           }}
         >
           Lyvivo
         </Navbar.Brand>
-        <div className='flex gap-3 relative'>
-          <Navbar.Toggle aria-controls='responsive-navbar-nav' />
+        <div className="flex gap-3 relative">
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse
-            id='responsive-navbar-nav'
-            className=' flex justify-end absolute lg:relative top-[3rem] lg:top-0 right-3 lg:right-0 left-auto bg-white lg:bg-transparent shadow-md lg:shadow-none lg:p-0  '
-            style={{ padding: '0.5rem', zIndex: 10 }}
+            id="responsive-navbar-nav"
+            className=" flex justify-end absolute lg:relative top-[3rem] lg:top-0 right-3 lg:right-0 left-auto bg-white lg:bg-transparent shadow-md lg:shadow-none lg:p-0  "
+            style={{ padding: "0.5rem", zIndex: 10 }}
           >
-            <Nav className='flex justify-end '>
+            <Nav className="flex justify-end ">
               <DropDown
                 categories={categories}
                 displayRender={displayRender}
-                placeholderName='Categories'
+                placeholderName="Categories"
               />
               {navLinks.navLinks.map((link) => (
                 <Nav.Link
-                  className='hover:font-medium hover:text-[var(--primaryColor)] hover:border  text-gray-400  transition-all duration-500'
+                  className="hover:font-medium hover:text-[var(--primaryColor)] hover:border  text-gray-400  transition-all duration-500"
                   key={link}
-                  onClick={() => navigation(link.toLowerCase().replace(/\s+/g, '-'))}
+                  onClick={() =>
+                    navigation(link.toLowerCase().replace(/\s+/g, "-"))
+                  }
                 >
                   {link}
                 </Nav.Link>
@@ -82,14 +84,25 @@ const BottomNav: React.FC = () => {
             </Nav>
           </Navbar.Collapse>
           <Nav>
-            <Nav.Link style={{ display: 'flex', alignItems: 'center' }}>
+            <Nav.Link style={{ display: "flex", alignItems: "center" }}>
               <CartBadge onOpenCart={onCartOpen} />
               <CartDrawer openCart={isOpen} onOpenCart={onCartOpen} />
             </Nav.Link>
           </Nav>
         </div>
       </Container>
-      <SearchBar />
+      <SearchBar
+        position="absolute"
+        borderRadius="8px"
+        color="#ffffff"
+        backgroundColor="var(--primaryColor)"
+        marginLeft="auto"
+        marginRight="auto"
+        left="0px"
+        right="0px"
+        bottom="auto"
+        className="w-[95%] sm:w-[95%] md:w-[80%] lg:w-[65%] top-[70px] sm:top-[70px] md:top-[65px] lg:top-[65px]"
+      />
     </Navbar>
   );
 };
