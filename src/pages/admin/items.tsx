@@ -7,7 +7,7 @@ import { BsCurrencyDollar } from "react-icons/bs";
 import { IoIosCheckbox } from "react-icons/io";
 import type { MenuProps } from 'antd';
 import MenuItem from 'antd/es/menu/MenuItem';
-import jwt from 'jsonwebtoken';
+
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -25,38 +25,32 @@ function getItem(
   } as MenuItem;
 }
 
-const token = localStorage.getItem('tokenIsAdmin')
-let items: MenuItem[] = []
-const role = jwt.decode(token!)
-console.log(role)
 
-if (token === null || undefined || '') {
-  items = [
-  getItem("Dashboard", "dashBoard", <MdDashboard />),
-  getItem("Sales", "sales", <BsCurrencyDollar />),
-  getItem("Products", "products", <IoIosCheckbox />, [
-    getItem("Product List", "productList"),
-    getItem("Category List", "categoryList"),
-  ]),
-  getItem("Customers", "customers", <TeamOutlined />),
-  getItem("Admin", "admin", <MdAdminPanelSettings />),
-  getItem("Report", "report", <TbReportAnalytics />),
-  getItem("Settings", "settings", <IoSettingsSharp />),
-];
 
-} else {
 
- items = [
-  getItem("Dashboard", "dashBoard", <MdDashboard />),
-  getItem("Sales", "sales", <BsCurrencyDollar />),
-  getItem("Products", "products", <IoIosCheckbox />, [
-    getItem("Product List", "productList"),
-    getItem("Category List", "categoryList"),
-  ]),
-  getItem("Customers", "customers", <TeamOutlined />),
-  getItem("Admin", "admin", <MdAdminPanelSettings />),
-  getItem("Report", "report", <TbReportAnalytics />),
-  getItem("Settings", "settings", <IoSettingsSharp />),
-];
-}
-export default items;
+
+ export const superAdminItems = [
+    getItem("Dashboard", "dashBoard", <MdDashboard />),
+    getItem("Sales", "sales", <BsCurrencyDollar />),
+    getItem("Products", "products", <IoIosCheckbox />, [
+      getItem("Product List", "productList"),
+      getItem("Category List", "categoryList"),
+    ]),
+    getItem("Customers", "customers", <TeamOutlined />),
+    getItem("Admin", "admin", <MdAdminPanelSettings />),
+    getItem("Report", "report", <TbReportAnalytics />),
+    getItem("Settings", "settings", <IoSettingsSharp />),
+  ];
+
+ export const adminItems = [
+    getItem("Dashboard", "dashBoard", <MdDashboard />),
+    getItem("Sales", "sales", <BsCurrencyDollar />),
+    getItem("Products", "products", <IoIosCheckbox />, [
+      getItem("Product List", "productList"),
+      getItem("Category List", "categoryList"),
+    ]),
+    getItem("Customers", "customers", <TeamOutlined />),
+    getItem("Report", "report", <TbReportAnalytics />),
+    getItem("Settings", "settings", <IoSettingsSharp />),
+  ];
+
