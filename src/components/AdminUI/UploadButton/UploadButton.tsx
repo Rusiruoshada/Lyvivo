@@ -12,12 +12,12 @@ interface UploadButtonProps {
 
 const props: UploadProps = {
   name: "file",
-  action: "https://localhost:8000/api/addNewItem",
+  action: "http://localhost:8080/api/addNewProduct",
   headers: {
-    authorization: localStorage.getItem('isLoginSuccess') || '',
+    authorization: localStorage.getItem("isLoginSuccess") || "",
   },
   beforeUpload: (file) => {
-     const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
+    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
     if (!isJpgOrPng) {
       message.error(`${file.name} is not a png or jpeg file`);
     }
@@ -35,11 +35,21 @@ const props: UploadProps = {
   },
 };
 
-const UploadButton: React.FC<UploadButtonProps> = ({ disable, name , listType }) =>{
-return (
-  <Upload {...props} disabled={disable} name={name} listType={listType}>
-    <Button className="hover:!border-[var(--adminPrimaryColor)] hover:!text-[var(--adminPrimaryColor)]" icon={<UploadOutlined />}>Click to Upload</Button>
-  </Upload>
-)};
+const UploadButton: React.FC<UploadButtonProps> = ({
+  disable,
+  name,
+  listType,
+}) => {
+  return (
+    <Upload {...props} disabled={disable} name={name} listType={listType}>
+      <Button
+        className="hover:!border-[var(--adminPrimaryColor)] hover:!text-[var(--adminPrimaryColor)]"
+        icon={<UploadOutlined />}
+      >
+        Click to Upload
+      </Button>
+    </Upload>
+  );
+};
 
 export default UploadButton;
