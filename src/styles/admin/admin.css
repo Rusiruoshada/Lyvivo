@@ -2,12 +2,20 @@
     color: #fff!important;
 }
 
+ul.ant-menu-vertical > li.ant-menu-item-only-child {
+    color: black!important;
+}
+
+ul.ant-menu-vertical > li.ant-menu-item-selected {
+    color: var(--adminPrimaryColor)!important;    
+}
+
 .ant-menu-item:active{
     color: var(--adminPrimaryColor)!important;
 }
 
 .ant-menu-item-selected {
-    font-size: medium;
+    
     font-weight: 600;
     color: var(--adminPrimaryColor)!important;    
 }
