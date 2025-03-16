@@ -53,7 +53,7 @@ const AdminPage:React.FC = () => {
           <Menu
             mode="inline"
             defaultSelectedKeys={["1"]}
-            className="bg-transparent font-medium text-white "
+            className="bg-transparent font-normal text-white"
             items={menuItemsShowBaseOnRole.role ==='super'? superAdminItems:adminItems}
             onClick={clickMenu}
           />
